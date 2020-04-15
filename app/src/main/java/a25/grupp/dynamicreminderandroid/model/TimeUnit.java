@@ -1,4 +1,4 @@
-package Model;
+package a25.grupp.dynamicreminderandroid.model;
 
 /**
  * TimeUnit is an enum connected to the class TimeSpan.

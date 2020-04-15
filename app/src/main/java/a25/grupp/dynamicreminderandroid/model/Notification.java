@@ -1,10 +1,10 @@
-package Model;
+package a25.grupp.dynamicreminderandroid.model;
 
 import java.util.Date;
 
 /**
  * This class represents a notification
- * @author Minna Röriksson
+ * @author Minna Rï¿½riksson
  * @version 1.0
  */
 public class Notification {

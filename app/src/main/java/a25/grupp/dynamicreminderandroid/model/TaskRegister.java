@@ -1,4 +1,4 @@
-package Model;
+package a25.grupp.dynamicreminderandroid.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class TaskRegister implements Serializable {
     private HashMap<Integer,Task> taskList;
-    private static final long serialVersionUID = 655296850; //gör så att man kan läsa från filen
+    private static final long serialVersionUID = 655296850; //gï¿½r sï¿½ att man kan lï¿½sa frï¿½n filen
 
     private int lastId;
 

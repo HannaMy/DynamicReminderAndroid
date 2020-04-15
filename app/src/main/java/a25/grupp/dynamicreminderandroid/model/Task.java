@@ -1,4 +1,4 @@
-package Model;
+package a25.grupp.dynamicreminderandroid.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -29,7 +29,7 @@ public class Task implements Comparable<Object>, Serializable {
         id= taskId;
     }
 
-    //TODO: Flera konstruktorer eller skicka in null och ?? i parametrarna när vissa val saknas?
+    //TODO: Flera konstruktorer eller skicka in null och ?? i parametrarna nï¿½r vissa val saknas?
     public Task(String title, String info, TimeSpan preferredInterval, TimeSpan maximum, PossibleTime possibleTimeForExecution)
     {
         this.title = title;
@@ -204,7 +204,7 @@ public class Task implements Comparable<Object>, Serializable {
     }
 
     public String toString(){
-        String str = "Task id: " + id + "\nTask title: " + title + "\nTask info: " + info; //todo lägg till mer sen? om vi vill ha det?
+        String str = "Task id: " + id + "\nTask title: " + title + "\nTask info: " + info; //todo lï¿½gg till mer sen? om vi vill ha det?
         return str;
     }
 

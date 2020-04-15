@@ -1,4 +1,4 @@
-package Model;
+package a25.grupp.dynamicreminderandroid.model;
 
 import java.io.Serializable;
 
