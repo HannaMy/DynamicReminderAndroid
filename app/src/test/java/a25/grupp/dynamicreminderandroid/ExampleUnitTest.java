@@ -15,8 +15,4 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
-    public void annisTestMetod()
-    {
-        System.out.println("Detta är ett litet test");
-    }
 }
