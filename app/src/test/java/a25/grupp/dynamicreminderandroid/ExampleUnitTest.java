@@ -17,6 +17,6 @@ public class ExampleUnitTest {
 
     public void annisTestMetod()
     {
-        System.out.println("Detta är ett test");
+        System.out.println("Detta är ett litet test");
     }
 }
