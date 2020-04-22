@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">DynamicReminderAndroid</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <string-array name="available">
+        <item>Always</item>
+        <item>Custom</item>
+    </string-array>
+
+    <string-array name="timeunits">
+        <item>hours</item>
+        <item>days</item>
+        <item>weeks</item>
+        <item>months</item>
+        <item>years</item>
+    </string-array>
 </resources>

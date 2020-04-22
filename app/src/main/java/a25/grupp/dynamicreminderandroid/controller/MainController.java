@@ -45,7 +45,7 @@ public class MainController {
     }
 
 
-    public void buttonPressed(ButtonType button) {
+    public void buttonPressed() {
         /*
         switch (button) {
             case TASKS:
