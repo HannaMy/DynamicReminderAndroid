@@ -28,5 +28,5 @@ public class MainActivity extends AppCompatActivity {
     //Hannamy här!
     //Cornelia kommenterar
     //Hanna kommentar
-    //Anni kommenterar lite mer
+    //Anni kommenterar lite mera
 }
