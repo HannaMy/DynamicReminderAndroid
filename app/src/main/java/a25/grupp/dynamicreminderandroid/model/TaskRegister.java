@@ -11,7 +11,6 @@ import java.util.HashMap;
 public class TaskRegister implements Serializable {
     private HashMap<Integer, Task> taskList;
     private static final long serialVersionUID = 655296850; //g�r s� att man kan l�sa fr�n filen
-
     private int lastId;
     private static final TaskRegister register = new TaskRegister();
 
@@ -22,15 +21,18 @@ public class TaskRegister implements Serializable {
     }
 
     private void loadTaskRegister() {
-
         FileHandler fileHandler = new FileHandler();
         TaskRegister loadedRegister = fileHandler.readFromFile();
         register.setTaskList(loadedRegister.getTaskList());
-
+        register.setLastId(loadedRegister.getBiggestID());
     }
 
     public static TaskRegister getInstance() {
         return register;
+    }
+
+    public void setLastId(int lastId) {
+        this.lastId = lastId;
     }
 
     public void addTask(Task task) {
