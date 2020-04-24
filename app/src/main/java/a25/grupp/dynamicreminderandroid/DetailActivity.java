@@ -95,7 +95,12 @@ public class DetailActivity extends AppCompatActivity {
 
                 switch(dropDownAlways.getSelectedItem().toString())
                 {
-
+                    case "Always":
+                        //todo Fixa detta
+                        break;
+                    case "Custom":
+                        //todo Fixa detta
+                        break;
                 }
 
                 Intent save = new Intent(DetailActivity.this, MainActivity.class);
