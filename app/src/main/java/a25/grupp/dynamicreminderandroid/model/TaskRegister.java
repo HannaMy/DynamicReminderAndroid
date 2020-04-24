@@ -26,7 +26,7 @@ public class TaskRegister implements Serializable {
         FileHandler fileHandler = new FileHandler();
         TaskRegister loadedRegister = fileHandler.readFromFile();
         register.setTaskList(loadedRegister.getTaskList());
-        //TODO här borde vi lägga till kod för att läsa in från filen och sedan överföra hela taskregistern till register variablen.
+
     }
 
     public static TaskRegister getInstance() {
