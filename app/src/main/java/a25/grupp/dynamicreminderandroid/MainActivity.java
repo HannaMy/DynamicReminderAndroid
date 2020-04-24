@@ -1,6 +1,12 @@
 package a25.grupp.dynamicreminderandroid;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,7 +57,41 @@ public class MainActivity extends AppCompatActivity {
 
 
         listView.setAdapter(adapterTaskOverview);
+        addNotification();
 
+    }
+
+    public void addNotification(){
+        Calendar calendar = Calendar.getInstance();
+        //Date date = new Date();
+        long tenSecondsMillis = 1000 * 10;
+
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        //Denna ställer in när notifikationen ska visas
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + tenSecondsMillis, pendingIntent);
+
+        createNotificationChannel();
+
+    }
+
+    private void createNotificationChannel(){
+        //Checks if the device runs on Android 8.0 and above (Oreo)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            String CHANNEL_ID = "channelReminders";
+            CharSequence name = "Reminders channel"; //TODO: flytta till res?
+            String description = "Include all the reminders"; //TODO: flytta till res?
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            notificationChannel.setDescription(description);
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
     }
 
 }
