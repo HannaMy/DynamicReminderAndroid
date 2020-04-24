@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
 
+import a25.grupp.dynamicreminderandroid.model.Task;
+import a25.grupp.dynamicreminderandroid.model.TaskRegister;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -28,27 +31,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//Temporär data
+        initiateAdapter();
+    }
 
-
+    private void initiateAdapter(){
+        //Temporär data
         String[] titles  ={"Water Plants", "Dance", "Clean Bathroom", "Call Hilda"};
         String[] intervalInfos= {"Every 5 days", "Every 3 day", "Every 1 week", "Every 5 weeks"};
         int[] times={4, 2, 1, 4 };
         String[] timeUnits = {"Days left", "Days left", "Weeks left", "Weeks left"};
         int[] taskIds={1,2,3,4};
 
+        TaskRegister taskRegister = TaskRegister.getInstance();
+
+        Task[] taskArray = taskRegister.getTaskArray();
         //Listview
         AdapterTaskOverview adapterTaskOverview = new AdapterTaskOverview(this, titles);
         adapterTaskOverview.updateListData(titles,intervalInfos,times,timeUnits,taskIds);
         ListView listView = findViewById(R.id.listviewOverview);
-
-
-
-
-
-
         listView.setAdapter(adapterTaskOverview);
-
     }
 
 }
