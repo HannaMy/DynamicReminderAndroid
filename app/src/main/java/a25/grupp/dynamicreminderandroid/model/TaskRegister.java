@@ -9,36 +9,41 @@ import java.util.HashMap;
  * @version 1.0
  */
 public class TaskRegister implements Serializable {
-    private HashMap<Integer,Task> taskList;
+    private HashMap<Integer, Task> taskList;
     private static final long serialVersionUID = 655296850; //g�r s� att man kan l�sa fr�n filen
 
     private int lastId;
+    private static final TaskRegister register = new TaskRegister();
 
-    public TaskRegister() {
+    private TaskRegister() {
         taskList = new HashMap();
         lastId = 0;
     }
 
 
-    public void addTask(Task task){
-        if(task!=null) {
+    public static TaskRegister getInstance() {
+        return register;
+    }
+
+    public void addTask(Task task) {
+        if (task != null) {
             int id = generateId();
             task.setID(id);
-            taskList.put(id,task);
+            taskList.put(id, task);
         }
 
     }
 
-    public void removeWithId(int taskId){
+    public void removeWithId(int taskId) {
 
         taskList.remove(taskId);
     }
 
-    public void removeTask(Task task){
+    public void removeTask(Task task) {
         taskList.remove(task);
     }
 
-    public void removeWithIndex(int index){
+    public void removeWithIndex(int index) {
         taskList.remove(index);
     }
 
@@ -47,30 +52,31 @@ public class TaskRegister implements Serializable {
 
     }
 
-public int getBiggestID(){
+    public int getBiggestID() {
         return lastId;
-}
-    public int getSize(){
+    }
+
+    public int getSize() {
         return taskList.size();
     }
 
     public Task getTaskWithId(int id) {
-     Task task =  taskList.get(id);
-     return task;
+        Task task = taskList.get(id);
+        return task;
     }
 
-    private int generateId(){
+    private int generateId() {
         lastId++;
         return lastId;
     }
 
-    public String toString(){
+    public String toString() {
         String str = "";
-        for(int i = 1; i<=taskList.size();i++) {
-           str += taskList.get(i).toString() + "\n";
+        for (int i = 1; i <= taskList.size(); i++) {
+            str += taskList.get(i).toString() + "\n";
             str += "\n--------------------------------";
         }
-        str += "\nLastID: " +lastId;
+        str += "\nLastID: " + lastId;
         str += "\n--------------------------------";
         return str;
     }
