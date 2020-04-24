@@ -20,7 +20,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
     private int[] times;
     private String[] timeUnits;
     private int[] taskIds;
-    Activity mainActivity;
+    private Activity mainActivity;
 
 
     public AdapterTaskOverview(@NonNull Context context, String[] titles) {
