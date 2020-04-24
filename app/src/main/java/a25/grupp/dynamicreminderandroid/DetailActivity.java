@@ -62,8 +62,8 @@ public class DetailActivity extends AppCompatActivity {
                 //TODO här behövs en pop up som bekräftar att användaren vill gå tillbaka utan att spara
             }
         });
-        Button btnSave = findViewById(R.id.btnCancel);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        Button btnSave = findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent save = new Intent(DetailActivity.this, MainActivity.class);
