@@ -18,8 +18,16 @@ public class TaskRegister implements Serializable {
     private TaskRegister() {
         taskList = new HashMap();
         lastId = 0;
+        loadTaskRegister();
     }
 
+    private void loadTaskRegister() {
+
+        FileHandler fileHandler = new FileHandler();
+        TaskRegister loadedRegister = fileHandler.readFromFile();
+        register.setTaskList(loadedRegister.getTaskList());
+        //TODO här borde vi lägga till kod för att läsa in från filen och sedan överföra hela taskregistern till register variablen.
+    }
 
     public static TaskRegister getInstance() {
         return register;
@@ -68,6 +76,14 @@ public class TaskRegister implements Serializable {
     private int generateId() {
         lastId++;
         return lastId;
+    }
+
+    public HashMap<Integer, Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(HashMap<Integer, Task> taskList) {
+        this.taskList = taskList;
     }
 
     public String toString() {
