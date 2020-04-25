@@ -1,7 +1,6 @@
 package a25.grupp.dynamicreminderandroid.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -9,68 +8,107 @@ import java.util.HashMap;
  * @version 1.0
  */
 public class TaskRegister implements Serializable {
-    private HashMap<Integer,Task> taskList;
+    private HashMap<Integer, Task> taskHashMap;
     private static final long serialVersionUID = 655296850; //g�r s� att man kan l�sa fr�n filen
-
     private int lastId;
+    private static final TaskRegister register = new TaskRegister();
 
-    public TaskRegister() {
-        taskList = new HashMap();
+    private TaskRegister() {
+        taskHashMap = new HashMap();
         lastId = 0;
+        //loadTaskRegister();
+
     }
 
+    private void loadTaskRegister() {
+        FileHandler fileHandler = new FileHandler();
+        TaskRegister loadedRegister = fileHandler.readFromFile();
+        register.setTaskHashMap(loadedRegister.getTaskHashMap());
+        register.setLastId(loadedRegister.getBiggestID());
+    }
 
-    public void addTask(Task task){
-        if(task!=null) {
+    public static TaskRegister getInstance() {
+        return register;
+    }
+
+    public void setLastId(int lastId) {
+        this.lastId = lastId;
+    }
+
+    public void addTask(Task task) {
+        if (task != null) {
             int id = generateId();
             task.setID(id);
-            taskList.put(id,task);
+            taskHashMap.put(id, task);
         }
 
     }
 
-    public void removeWithId(int taskId){
+    public void removeWithId(int taskId) {
 
-        taskList.remove(taskId);
+        taskHashMap.remove(taskId);
     }
 
-    public void removeTask(Task task){
-        taskList.remove(task);
+    public void removeTask(Task task) {
+        taskHashMap.remove(task);
     }
 
-    public void removeWithIndex(int index){
-        taskList.remove(index);
+    public void removeWithIndex(int index) {
+        taskHashMap.remove(index);
     }
 
     public Task getTaskWithIndex(int index) {
-        return taskList.get(index);
+        return taskHashMap.get(index);
 
     }
 
-public int getBiggestID(){
+    public int getBiggestID() {
         return lastId;
-}
-    public int getSize(){
-        return taskList.size();
+    }
+
+    public int getSize() {
+        return taskHashMap.size();
     }
 
     public Task getTaskWithId(int id) {
-     Task task =  taskList.get(id);
-     return task;
+        Task task = taskHashMap.get(id);
+        return task;
     }
 
-    private int generateId(){
+    private int generateId() {
         lastId++;
         return lastId;
     }
 
-    public String toString(){
+    public HashMap<Integer, Task> getTaskHashMap() {
+        return taskHashMap;
+    }
+
+    public void setTaskHashMap(HashMap<Integer, Task> taskHashMap) {
+        this.taskHashMap = taskHashMap;
+    }
+
+    public Task[] getTaskArray() {
+
+        Task[] taskArray = new Task[taskHashMap.size()];
+        for (int i = 1; i <= lastId; i++) {
+            Task task = getTaskWithId(i);
+            if (task != null) {
+                taskArray[i] = task;
+
+            }
+        }
+        return taskArray;
+    }
+
+
+    public String toString() {
         String str = "";
-        for(int i = 1; i<=taskList.size();i++) {
-           str += taskList.get(i).toString() + "\n";
+        for (int i = 1; i <= taskHashMap.size(); i++) {
+            str += taskHashMap.get(i).toString() + "\n";
             str += "\n--------------------------------";
         }
-        str += "\nLastID: " +lastId;
+        str += "\nLastID: " + lastId;
         str += "\n--------------------------------";
         return str;
     }

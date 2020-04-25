@@ -1,14 +1,19 @@
 package a25.grupp.dynamicreminderandroid.controller;
 
+import android.content.Intent;
+
 import java.time.LocalTime;
 import java.util.Date;
 
+import a25.grupp.dynamicreminderandroid.DetailActivity;
+import a25.grupp.dynamicreminderandroid.MainActivity;
 import a25.grupp.dynamicreminderandroid.controller.MainController;
 import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
 public class ViewController {
 
     private MainController mainController;
+
 
     public ViewController(MainController mainController)
     {
@@ -17,7 +22,7 @@ public class ViewController {
 
 
     public void showDetails(){
-        //TODO;
+
     }
 
     public void showDetails(int taskId){

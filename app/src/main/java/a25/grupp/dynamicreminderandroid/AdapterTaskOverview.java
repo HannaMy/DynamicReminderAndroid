@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import a25.grupp.dynamicreminderandroid.model.Task;
+
 public class AdapterTaskOverview extends ArrayAdapter {
 
     private String[] titles;
@@ -20,7 +22,8 @@ public class AdapterTaskOverview extends ArrayAdapter {
     private int[] times;
     private String[] timeUnits;
     private int[] taskIds;
-    Activity mainActivity;
+    private Activity mainActivity;
+    private Task[] taskArray;
 
 
     public AdapterTaskOverview(@NonNull Context context, String[] titles) {
@@ -38,6 +41,10 @@ public class AdapterTaskOverview extends ArrayAdapter {
         this.timeUnits = timeUnits;
     }
 
+    public void setTaskArray(Task[] taskArray) {
+        this.taskArray = taskArray;
+    }
+
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -51,20 +58,42 @@ public class AdapterTaskOverview extends ArrayAdapter {
         TextView tvTimeUnit = taskListItem.findViewById(R.id.tvTimeUnit);
         TextView tvTitle = taskListItem.findViewById(R.id.tvTitle);
         TextView tvInterval = taskListItem.findViewById(R.id.tvInterval);
-        System.out.println("Adapter: getView " + position);
-        tvAmountTime.setText(String.valueOf(times[position]));
-        tvInterval.setText(intervalInfos[position]);
-        tvTitle.setText(titles[position]);
-        tvTimeUnit.setText(timeUnits[position]);
 
-                btnDetails.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent detail = new Intent(mainActivity, DetailActivity.class);
-                        detail.putExtra("taskId", taskIds[position]);
-                        mainActivity.startActivity(detail);
-                    }
-                });
+       if(taskArray != null){
+
+           tvAmountTime.setText(String.valueOf(taskArray[position].getTimeUntil()));
+           tvInterval.setText(taskArray[position].getPreferredInterval().toString());
+           tvTitle.setText(taskArray[position].getTitle());
+           tvTimeUnit.setText(taskArray[position].getPreferredInterval().getTimeUnit().toString());
+
+           btnDetails.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent detail = new Intent(mainActivity, DetailActivity.class);
+                   detail.putExtra("taskId", taskArray[position].getId());
+                   mainActivity.startActivity(detail);
+               }
+           });
+
+
+       }else{
+           System.out.println("Adapter: getView " + position);
+           tvAmountTime.setText(String.valueOf(times[position]));
+           tvInterval.setText(intervalInfos[position]);
+           tvTitle.setText(titles[position]);
+           tvTimeUnit.setText(timeUnits[position]);
+
+           btnDetails.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent detail = new Intent(mainActivity, DetailActivity.class);
+                   detail.putExtra("taskId", taskIds[position]);
+                   mainActivity.startActivity(detail);
+               }
+           });
+
+       }
+
 
 
         return taskListItem;
