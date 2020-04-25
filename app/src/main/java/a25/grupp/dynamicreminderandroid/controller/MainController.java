@@ -1,5 +1,8 @@
 package a25.grupp.dynamicreminderandroid.controller;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import java.util.Date;
 
 import a25.grupp.dynamicreminderandroid.model.FileHandler;
@@ -21,6 +24,7 @@ public class MainController {
         viewController = new ViewController(this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void loadApp() {
         /*
         fileHandler = new FileHandler();
@@ -35,6 +39,7 @@ public class MainController {
 
         System.out.println("Controller: filehandler created");
         loadTasksToGUI();
+
 
         UpdateThread updateThread = new UpdateThread(this);
         updateThread.start();

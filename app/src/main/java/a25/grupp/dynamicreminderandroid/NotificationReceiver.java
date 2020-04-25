@@ -11,6 +11,10 @@ import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
+/**
+ * @author Cornelia Sköld
+ * @version 1.0
+ */
 public class NotificationReceiver extends BroadcastReceiver {
     private final String CHANNEL_ID = "channelReminders";
     private final int NOTIFICATION_ID = 001;
@@ -21,8 +25,11 @@ public class NotificationReceiver extends BroadcastReceiver {
     private PendingIntent yesEarlierPendingIntent;
     private PendingIntent noPendingIntent;
 
-
-
+    /**
+     * This method creates a notification that it will broadcast at a given time
+     * @param context the context from where the notification is called
+     * @param intent is the intent of this broadcast receiver (the notification)
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
@@ -57,19 +64,21 @@ public class NotificationReceiver extends BroadcastReceiver {
         notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
     }
 
-
+    /**
+     * This method creates the pending intent of the buttons in the notification
+     */
     public void createButtonIntents(){
-        //Yes button
+        //Yes button (DetailActivity.class är landing activity just nu)
         Intent yesIntent = new Intent(context, DetailActivity.class);
         yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         yesPendingIntent = PendingIntent.getActivity(context, 0, yesIntent, PendingIntent.FLAG_ONE_SHOT);
 
-        //Yes earlier button
+        //Yes earlier button (DetailActivity.class är landing activity just nu)
         Intent yesEarlierIntent = new Intent(context, DetailActivity.class);
         yesEarlierIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         yesEarlierPendingIntent = PendingIntent.getActivity(context, 0, yesEarlierIntent, PendingIntent.FLAG_ONE_SHOT);
 
-        //No button
+        //No button (DetailActivity.class är landing activity just nu)
         Intent noIntent = new Intent(context, DetailActivity.class);
         noIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         noPendingIntent = PendingIntent.getActivity(context, 0, noIntent, PendingIntent.FLAG_ONE_SHOT);
