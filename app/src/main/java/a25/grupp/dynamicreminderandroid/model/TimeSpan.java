@@ -61,8 +61,8 @@ public class TimeSpan implements Serializable {
     }
 
     public String toString() {
-        return "";
+        return "Every " + time + " " + timeUnit;
 
-        //TODO
+        //TODO vad skriver man på engelska istället för e i "var 3e dag"?
     }
 }

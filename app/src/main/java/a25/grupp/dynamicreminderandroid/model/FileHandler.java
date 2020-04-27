@@ -1,5 +1,8 @@
 package a25.grupp.dynamicreminderandroid.model;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import java.io.*;
 
 
@@ -10,6 +13,7 @@ public class FileHandler {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void saveToFile(TaskRegister taskRegister){
         try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("files/taskregister")))){
             oos.writeObject(taskRegister);
@@ -24,6 +28,7 @@ public class FileHandler {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public TaskRegister readFromFile(){
         try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("files/taskregister")))){
             taskRegister =  (TaskRegister)ois.readObject();
