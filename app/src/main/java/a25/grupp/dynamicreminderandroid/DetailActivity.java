@@ -10,6 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import a25.grupp.dynamicreminderandroid.model.PossibleTime;
+import a25.grupp.dynamicreminderandroid.model.Task;
+import a25.grupp.dynamicreminderandroid.model.TaskRegister;
+import a25.grupp.dynamicreminderandroid.model.TimeSpan;
 import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
 public class DetailActivity extends AppCompatActivity {
@@ -66,10 +70,23 @@ public class DetailActivity extends AppCompatActivity {
         });
         Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
+                Task task = null;
+                int selectedTaskId = 0;  //Todo Fixa task-id!
+
                 String title = findViewById(R.id.editText).toString();
-                int intervalNbr = Integer.parseInt(findViewById(R.id.editText2).toString());  //Tänker jag rätt med siffra här?
+
+                //preferredIntervall
+                int intervalAmount = 0;
+                try {
+                    intervalAmount = Integer.parseInt(findViewById(R.id.editText2).toString());
+                } catch (Exception e) {
+                   //Todo Felmeddelande med texten "You need to add a preferred interval as a number"
+
+                }
 
                 // Get the correct TimeUnit from dropdown menu.
                 TimeUnit timeUnit = null;
@@ -93,6 +110,10 @@ public class DetailActivity extends AppCompatActivity {
 
                 String info = findViewById(R.id.editText4).toString();
 
+                TimeSpan preferredInterval = new TimeSpan(intervalAmount, timeUnit);
+
+                // Handles possibleTime depending on choice in dropdown menu
+                PossibleTime possibleTime = new PossibleTime();
                 switch(dropDownAlways.getSelectedItem().toString())
                 {
                     case "Always":
@@ -100,12 +121,33 @@ public class DetailActivity extends AppCompatActivity {
                         break;
                     case "Custom":
                         //todo Fixa detta
+
+                      //  possibleTime.setPossibleWeekDays(frame.getPossibleWeekdays()); //Todo
+                      //  possibleTime.setPossibleDates(frame.getPossibleDates());        //Todo
+                      //  LocalTime[] localTimes = frame.getPossibleHours();              //Todo
+                      //  possibleTime.setPossibleHours(localTimes[0], localTimes[1]);
+
                         break;
                 }
 
-                Intent save = new Intent(DetailActivity.this, MainActivity.class);
-                startActivity(save);
-                //TODO här behövs det att tasken sparas
+                if (selectedTaskId <= 0) {
+                    task = new Task(title, info, preferredInterval);
+                    task.setPossibleTimeForExecution(possibleTime);
+                    TaskRegister.getInstance().addTask(task);
+                    //Todo Fixa ett intent som hoppar tillbaka till MainActivity och visar den nya tasken
+                   // frame.addTask(task.getTitle(), task.getTimeUntil(), task.getTimeUnit(), task.getId());
+                    Intent save = new Intent(DetailActivity.this, MainActivity.class);
+                    startActivity(save);
+
+                } else {
+                    task = TaskRegister.getInstance().getTaskWithId(selectedTaskId);
+                    task.setInfo(info);
+                    task.setTitle(title);
+                    task.setPreferredInterval(preferredInterval);
+                    task.setPossibleTimeForExecution(possibleTime);
+
+                }
+
             }
         });
 
