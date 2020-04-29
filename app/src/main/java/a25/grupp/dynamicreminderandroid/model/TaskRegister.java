@@ -1,7 +1,14 @@
 package a25.grupp.dynamicreminderandroid.model;
 
+import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import java.io.Serializable;
 import java.util.HashMap;
+
+import a25.grupp.dynamicreminderandroid.DetailActivity;
+import a25.grupp.dynamicreminderandroid.MainActivity;
 
 /**
  * @author Hanna My Jansson
@@ -20,8 +27,9 @@ public class TaskRegister implements Serializable {
 
     }
 
-    private void loadTaskRegister() {
-        FileHandler fileHandler = new FileHandler();
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void loadTaskRegister(Context context) {
+        FileHandler fileHandler = new FileHandler(context);
         TaskRegister loadedRegister = fileHandler.readFromFile();
         register.setTaskHashMap(loadedRegister.getTaskHashMap());
         register.setLastId(loadedRegister.getBiggestID());
