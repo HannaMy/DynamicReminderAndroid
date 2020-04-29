@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import a25.grupp.dynamicreminderandroid.model.PossibleTime;
 import a25.grupp.dynamicreminderandroid.model.Task;
@@ -100,7 +101,11 @@ public class DetailActivity extends AppCompatActivity {
                 // Get the correct TimeUnit from dropdown menu.
                 Spinner dropDownTU = findViewById(R.id.dropDown_timeUnit);
                 TimeUnit timeUnit = TimeUnit.hour;
-                switch (dropDownTU.getSelectedItem().toString()) {
+
+                TextView textView = (TextView)dropDownTU.getSelectedView();
+                String result = textView.getText().toString();
+
+                switch (result) {
                     case "hour":
                         timeUnit = TimeUnit.hour;
                         break;
