@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import java.util.Calendar;
 
+import a25.grupp.dynamicreminderandroid.model.Notification;
 import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
 
@@ -40,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initiateAdapter();
-        addNotification();
+
+        //testar notifikation
+        //Task task = new Task();
+        //addNotification(this, task.generateNotification()); //TODO: flytta till korrekt ställe
     }
 
 /*
@@ -107,18 +111,16 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method creates an intent for a scheduled notification, using a Calendar object
      */
-    public void addNotification(){
-        Calendar calendar = Calendar.getInstance();
-        //Date date = new Date();
-        long tenSecondsMillis = 1000 * 10;
-
-        Intent intent = new Intent(this, NotificationReceiver.class);
+    public void addNotification(Context context, Notification notification){
+        Calendar nextNotification = notification.getCalendarTimeForNotification();
+        Intent intent = new Intent(context, NotificationReceiver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //intent.setMessage(notification.getMessage());
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         //Denna ställer in när notifikationen ska visas
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + tenSecondsMillis, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, nextNotification.getTimeInMillis(), pendingIntent);
         createNotificationChannel();
     }
 
