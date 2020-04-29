@@ -24,24 +24,34 @@ public class TaskRegister implements Serializable {
     private int lastId;
     private static TaskRegister register;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private TaskRegister() {
         taskHashMap = new HashMap();
         lastId = 0;
-        //loadTaskRegister();
+
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void loadTaskRegister(Context context) {
-        FileHandler fileHandler = new FileHandler(context);
-        TaskRegister loadedRegister = fileHandler.readFromFile();
-        register.setTaskHashMap(loadedRegister.getTaskHashMap());
-        register.setLastId(loadedRegister.getBiggestID());
+        try {
+            FileHandler fileHandler = new FileHandler(context);
+            TaskRegister loadedRegister = fileHandler.readFromFile();
+            register.setTaskHashMap(loadedRegister.getTaskHashMap());
+            register.setLastId(loadedRegister.getBiggestID());
+        }catch(Exception e){e.printStackTrace();}
+
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static TaskRegister getInstance(Context context) {
-        if(register == null){
-        //    register =  new TaskRegister(context);
+        System.out.println("getInstance oooooooooo");
+        if(register == null) {
+            register = new TaskRegister();
+            System.out.println("getInstance() register: " + register);
+            register.loadTaskRegister(context);
         }
+
         return register;
     }
 
@@ -49,11 +59,16 @@ public class TaskRegister implements Serializable {
         this.lastId = lastId;
     }
 
-    public void addTask(Task task) {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void addTask(Task task, Context context) {
         if (task != null) {
+            FileHandler fileHandler = new FileHandler(context);
             int id = generateId();
-            task.setID(id);
-            taskHashMap.put(id, task);
+            if(task.getId()==0) {
+                task.setID(id);
+            }
+            taskHashMap.put(task.getId(), task);
+            fileHandler.saveToFile(this);
         }
 
     }
@@ -108,7 +123,7 @@ public class TaskRegister implements Serializable {
         for (int i = 1; i <= lastId; i++) {
             Task task = getTaskWithId(i);
             if (task != null) {
-                taskArray[i-1] = task;          // TODO Ändrade detta från i till i-1 då det gav index out of bounds, kolla så det inte blir fel
+                taskArray[i-1] = task;
 
             }
         }

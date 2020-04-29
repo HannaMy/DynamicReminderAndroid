@@ -1,7 +1,9 @@
 package a25.grupp.dynamicreminderandroid;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -77,6 +79,7 @@ public class DetailActivity extends AppCompatActivity {
         Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
 
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
 
@@ -147,18 +150,20 @@ public class DetailActivity extends AppCompatActivity {
                 if (selectedTaskId <= 0) {
                     task = new Task(title, info, preferredInterval);
                     task.setPossibleTimeForExecution(possibleTime);
-                    TaskRegister.getInstance().addTask(task);
-                    int id = task.getId();
-
+                    TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
+                    //Todo Fixa ett intent som hoppar tillbaka till MainActivity och visar den nya tasken
+                   // frame.addTask(task.getTitle(), task.getTimeUntil(), task.getTimeUnit(), task.getId());
+                    Intent save = new Intent(DetailActivity.this, MainActivity.class);
+                    startActivity(save);
 
                 } else {
-                    task = TaskRegister.getInstance().getTaskWithId(selectedTaskId);
+                    task = TaskRegister.getInstance(getBaseContext()).getTaskWithId(selectedTaskId);
                     task.setInfo(info);
                     task.setTitle(title);
                     task.setPreferredInterval(preferredInterval);
                     task.setPossibleTimeForExecution(possibleTime);
 
-                    Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance().getSize());
+                    Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());
                 }
 
                 //Todo Fixa ett intent som hoppar tillbaka till MainActivity och visar den nya tasken
