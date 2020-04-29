@@ -18,10 +18,11 @@ public class FileHandler {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void saveToFile(TaskRegister taskRegister){ //Eventuellt måste en lägga till en Context också
         try{
-            FileOutputStream fos = context.openFileOutput("taskRegister", Context.MODE_PRIVATE);
+            FileOutputStream fos = context.openFileOutput("taskRegisterFile", Context.MODE_PRIVATE);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
             ObjectOutputStream oos = new ObjectOutputStream(bos);
             oos.writeObject(taskRegister);
+
             oos.close();
             fos.close();
            // System.out.println("FileHandler: taskregister written: " + taskRegister.toString());
@@ -54,7 +55,7 @@ public class FileHandler {
     public TaskRegister readFromFile(){
         try
         {
-            FileInputStream fis = context.openFileInput("taskRegister");
+            FileInputStream fis = context.openFileInput("taskRegisterFile");
             BufferedInputStream bis = new BufferedInputStream(fis);
             ObjectInputStream ois = new ObjectInputStream(bis);
             taskRegister =  (TaskRegister)ois.readObject();
