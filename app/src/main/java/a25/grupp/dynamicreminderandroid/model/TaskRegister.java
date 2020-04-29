@@ -4,8 +4,15 @@ import android.content.Context;
 
 import android.util.Log;
 
+import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import java.io.Serializable;
 import java.util.HashMap;
+
+import a25.grupp.dynamicreminderandroid.DetailActivity;
+import a25.grupp.dynamicreminderandroid.MainActivity;
 
 /**
  * @author Hanna My Jansson
@@ -23,11 +30,12 @@ public class TaskRegister implements Serializable {
         //loadTaskRegister();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void loadTaskRegister(Context context) {
-       // FileHandler fileHandler = new FileHandler(context);
-        //TaskRegister loadedRegister = fileHandler.readFromFile();
-        //register.setTaskHashMap(loadedRegister.getTaskHashMap());
-     //   register.setLastId(loadedRegister.getBiggestID());
+        FileHandler fileHandler = new FileHandler(context);
+        TaskRegister loadedRegister = fileHandler.readFromFile();
+        register.setTaskHashMap(loadedRegister.getTaskHashMap());
+        register.setLastId(loadedRegister.getBiggestID());
     }
 
     public static TaskRegister getInstance(Context context) {
