@@ -22,7 +22,26 @@ public class FileHandler {
             BufferedOutputStream bos = new BufferedOutputStream(fos);
             ObjectOutputStream oos = new ObjectOutputStream(bos);
             oos.writeObject(taskRegister);
-            System.out.println("FileHandler: taskregister written: " + taskRegister.toString());
+            oos.close();
+            fos.close();
+           // System.out.println("FileHandler: taskregister written: " + taskRegister.toString());
+        }catch(FileNotFoundException e){
+            System.out.println("FileHandler: File not found");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void saveToFileString(String string){ //Eventuellt måste en lägga till en Context också
+        try{
+            FileOutputStream fos = context.openFileOutput("str", Context.MODE_APPEND);
+            //BufferedOutputStream bos = new BufferedOutputStream(fos);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(string);
+            oos.close();
+            System.out.println("Oos: "+ oos + ", string: " + string);
+            // System.out.println("FileHandler: taskregister written: " + taskRegister.toString());
         }catch(FileNotFoundException e){
             System.out.println("FileHandler: File not found");
             e.printStackTrace();
@@ -40,6 +59,8 @@ public class FileHandler {
             ObjectInputStream ois = new ObjectInputStream(bis);
             taskRegister =  (TaskRegister)ois.readObject();
             System.out.println("FileHandler: Task read: " + taskRegister.toString());
+            fis.close();
+            ois.close();
         }catch(FileNotFoundException e){
             System.out.println("FileHandler: File not found");
             e.printStackTrace();
@@ -48,4 +69,31 @@ public class FileHandler {
         }
         return taskRegister;
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public String readFromFileString(){
+        System.out.println("read from file");
+        String string = "";
+        try
+        {
+            FileInputStream fis = context.openFileInput("str");
+            System.out.println("fis: " + fis);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            System.out.println("ois: " + ois);
+            string =  (String)ois.readObject();
+            System.out.println("ois: " + ois + " , string: " + string);
+            //System.out.println("FileHandler: Task read: " + taskRegister.toString());
+            fis.close();
+            ois.close();
+        }catch(FileNotFoundException e){
+            System.out.println("FileHandler: File not found");
+            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return string;
+    }
+
 }

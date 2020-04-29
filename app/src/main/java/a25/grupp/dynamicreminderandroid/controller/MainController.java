@@ -52,6 +52,7 @@ public class MainController {
     }
 
     // Add a new task when clicking SAVE-button in the detailed view
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void addTask()
     {
         Task task = null;
@@ -82,7 +83,7 @@ public class MainController {
         if (selectedTaskId <= 0) {
             task = new Task(title, info, preferredInterval);
             task.setPossibleTimeForExecution(possibleTime);
-            taskRegister.addTask(task);
+           // taskRegister.addTask(task);
             viewController.addTask(task.getTitle(), task.getTimeUntil(), task.getTimeUnit(), task.getId());
 
         } else {
