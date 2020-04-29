@@ -20,6 +20,7 @@ import java.util.Calendar;
 import a25.grupp.dynamicreminderandroid.model.FileHandler;
 import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
+import a25.grupp.dynamicreminderandroid.model.TimeSpan;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,12 +70,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         TaskRegister taskRegister = TaskRegister.getInstance(this);
+        /*
         System.out.println("ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ task test: "+taskRegister.getTaskWithId(30));
         Task task1 = new Task();
         task1.setTitle("test 30");
         taskRegister.addTask(task1, this);
 
         System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖ task test: "+taskRegister.getTaskWithId(30));
+
+         */
 
 
 
@@ -95,9 +99,14 @@ public class MainActivity extends AppCompatActivity {
                 Task task = taskArray[i];
                 System.out.println("ÖÖ task: " + task + " i: " + i);
                 titles[i] = task.getTitle();
-                intervalInfos[i] = task.getPreferredInterval().toString();
-                times[i] = task.getTimeUntil();
-                timeUnits[i] = "time unit";         //TODO fixa rätt timeunit
+                TimeSpan timeSpan = task.getPreferredInterval();
+                if(timeSpan!= null) {
+                    intervalInfos[i] = task.getPreferredInterval().toString();
+                    times[i] = task.getTimeUntil();
+                    timeUnits[i] = "time unit";
+                }
+
+                         //TODO fixa rätt timeunit
                 taskIds[i] = task.getId();
             }
 

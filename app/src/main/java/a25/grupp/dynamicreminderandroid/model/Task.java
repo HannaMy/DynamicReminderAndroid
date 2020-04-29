@@ -137,7 +137,9 @@ public class Task implements Comparable<Object>, Serializable {
     }
 
     public int getTimeUntil(){
-        int time = preferredInterval.getTime();
+
+            int time = preferredInterval.getTime();
+
         int timeUntil = -5;
 
         //If the task is not yet done, return the preferred interval
