@@ -60,6 +60,7 @@ public class TimeSpan implements Serializable {
         this.timeUnit = timeUnit;
     }
 
+    @Override
     public String toString() {
         return "Every " + time + " " + timeUnit;
 

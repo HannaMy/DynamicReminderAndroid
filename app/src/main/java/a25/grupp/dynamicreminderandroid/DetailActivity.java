@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import a25.grupp.dynamicreminderandroid.model.PossibleTime;
@@ -22,10 +24,13 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        start();
+
+        int taskId = getTaskId();
+        Log.i("DetailActivity", "taskID = " + "" + taskId);
+        start(taskId);
     }
 
-    private void start() {
+    private void start(final int taskId) {
         ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
         constraintLayout.setVisibility(View.GONE);
 
@@ -75,22 +80,27 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Task task = null;
-                int selectedTaskId = 0;  //Todo Fixa task-id!
+                int selectedTaskId = taskId;  //Todo Fixa task-id! Skickas med intent både från add-knappen och från AdapterTaskOverview-knapp
 
-                String title = findViewById(R.id.editText).toString();
+                EditText editTextTitle = findViewById(R.id.editText);
+                String title = editTextTitle.getText().toString();
+                Log.i("DetailActivity", "The title of the task is: " + title);
 
                 //preferredIntervall
-                int intervalAmount = 0;
+                int intervalAmount = 5;
                 try {
-                    intervalAmount = Integer.parseInt(findViewById(R.id.editText2).toString());
+                    EditText editTextInterval = findViewById(R.id.editText2);
+                    intervalAmount = Integer.parseInt(editTextInterval.getText().toString());
+                    Log.i("DetailActivity", "The preferred interval is: " + "" + intervalAmount);
                 } catch (Exception e) {
                    //Todo Felmeddelande med texten "You need to add a preferred interval as a number"
 
                 }
 
                 // Get the correct TimeUnit from dropdown menu.
-                TimeUnit timeUnit = null;
-                switch (dropDownTimeUnit.getSelectedItem().toString()) {
+                Spinner dropDownTU = findViewById(R.id.dropDown_timeUnit);
+                TimeUnit timeUnit = TimeUnit.hour;
+                switch (dropDownTU.getSelectedItem().toString()) {
                     case "hour":
                         timeUnit = TimeUnit.hour;
                         break;
@@ -126,7 +136,6 @@ public class DetailActivity extends AppCompatActivity {
                       //  possibleTime.setPossibleDates(frame.getPossibleDates());        //Todo
                       //  LocalTime[] localTimes = frame.getPossibleHours();              //Todo
                       //  possibleTime.setPossibleHours(localTimes[0], localTimes[1]);
-
                         break;
                 }
 
@@ -134,10 +143,8 @@ public class DetailActivity extends AppCompatActivity {
                     task = new Task(title, info, preferredInterval);
                     task.setPossibleTimeForExecution(possibleTime);
                     TaskRegister.getInstance().addTask(task);
-                    //Todo Fixa ett intent som hoppar tillbaka till MainActivity och visar den nya tasken
-                   // frame.addTask(task.getTitle(), task.getTimeUntil(), task.getTimeUnit(), task.getId());
-                    Intent save = new Intent(DetailActivity.this, MainActivity.class);
-                    startActivity(save);
+                    int id = task.getId();
+
 
                 } else {
                     task = TaskRegister.getInstance().getTaskWithId(selectedTaskId);
@@ -146,10 +153,29 @@ public class DetailActivity extends AppCompatActivity {
                     task.setPreferredInterval(preferredInterval);
                     task.setPossibleTimeForExecution(possibleTime);
 
+                    Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance().getSize());
                 }
+
+                //Todo Fixa ett intent som hoppar tillbaka till MainActivity och visar den nya tasken
+
+                // frame.addTask(task.getTitle(), task.getTimeUntil(), task.getTimeUnit(), task.getId());
+                Intent save = new Intent(DetailActivity.this, MainActivity.class);
+                startActivity(save);
 
             }
         });
 
+    }
+
+    //TODO Få fram taskId om det skickats från MainActivity, annars returnera 0
+    public int getTaskId()
+    {
+        Intent intent = getIntent();
+        int taskId = intent.getIntExtra("taskID",0 );
+
+        Log.i("tag", "Here is the taskId" + "" + taskId);
+
+
+        return taskId;
     }
 }
