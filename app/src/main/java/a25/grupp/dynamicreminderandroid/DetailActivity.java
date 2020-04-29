@@ -263,5 +263,10 @@ public class DetailActivity extends AppCompatActivity {
                 break;
         }
 
+        EditText editTextInfo = findViewById(R.id.editText4);
+        editTextInfo.setText(task.getInfo());
+
+
+
     }
 }
