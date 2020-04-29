@@ -26,8 +26,8 @@ public class TaskRegister implements Serializable {
     private void loadTaskRegister(Context context) {
        // FileHandler fileHandler = new FileHandler(context);
         //TaskRegister loadedRegister = fileHandler.readFromFile();
-        register.setTaskHashMap(loadedRegister.getTaskHashMap());
-        register.setLastId(loadedRegister.getBiggestID());
+        //register.setTaskHashMap(loadedRegister.getTaskHashMap());
+     //   register.setLastId(loadedRegister.getBiggestID());
     }
 
     public static TaskRegister getInstance(Context context) {
