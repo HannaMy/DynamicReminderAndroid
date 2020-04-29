@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -87,7 +86,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
                @Override
                public void onClick(View v) {
                    Intent detail = new Intent(mainActivity, DetailActivity.class);
-                   detail.putExtra("taskId", taskIds[position]);
+                   detail.putExtra("taskId", taskIds[position+1]);
                    mainActivity.startActivity(detail);
                }
            });
