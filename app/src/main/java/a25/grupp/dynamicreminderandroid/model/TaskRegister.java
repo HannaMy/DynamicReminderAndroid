@@ -1,5 +1,7 @@
 package a25.grupp.dynamicreminderandroid.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -94,10 +96,13 @@ public class TaskRegister implements Serializable {
         for (int i = 1; i <= lastId; i++) {
             Task task = getTaskWithId(i);
             if (task != null) {
-                taskArray[i] = task;
+                taskArray[i-1] = task;          // TODO Ändrade detta från i till i-1 då det gav index out of bounds, kolla så det inte blir fel
 
             }
         }
+
+        Log.i("TaskRegister", "Size of taskArray = " + "" + taskArray.length);
+
         return taskArray;
     }
 

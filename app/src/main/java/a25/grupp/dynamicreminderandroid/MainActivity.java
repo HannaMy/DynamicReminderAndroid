@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -35,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 Intent detail = new Intent(MainActivity.this, DetailActivity.class);
+                detail.putExtra("taskId", 0);
                 startActivity(detail);
             }
         });
@@ -42,6 +42,18 @@ public class MainActivity extends AppCompatActivity {
         initiateAdapter();
         addNotification();
     }
+
+/*
+    // Anni testar lite
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        initiateAdapter();
+    }
+    //-------------------
+
+ */
 
     private void initiateAdapter(){
         //Temporär data
@@ -54,11 +66,41 @@ public class MainActivity extends AppCompatActivity {
         TaskRegister taskRegister = TaskRegister.getInstance();
 
         Task[] taskArray = taskRegister.getTaskArray();
-        //Listview
-        AdapterTaskOverview adapterTaskOverview = new AdapterTaskOverview(this, titles);
-        adapterTaskOverview.updateListData(titles,intervalInfos,times,timeUnits,taskIds);
-        ListView listView = findViewById(R.id.listviewOverview);
-        listView.setAdapter(adapterTaskOverview);
+
+        if(taskArray.length > 0) {
+
+            int size = taskArray.length;
+            titles = new String[size];
+            intervalInfos = new String[size];
+            times = new int[size];
+            timeUnits = new String[size];
+            taskIds = new int[size];
+
+            for (int i = 0; i < taskArray.length; i++)
+            {
+                Task task = taskArray[i];
+                titles[i] = task.getTitle();
+                intervalInfos[i] = task.getPreferredInterval().toString();
+                times[i] = task.getTimeUntil();
+                timeUnits[i] = "time unit";         //TODO fixa rätt timeunit
+                taskIds[i] = task.getId();
+            }
+
+            //Listview
+            AdapterTaskOverview adapterTaskOverview = new AdapterTaskOverview(this, titles);
+            adapterTaskOverview.updateListData(titles,intervalInfos,times,timeUnits,taskIds);
+            ListView listView = findViewById(R.id.listviewOverview);
+            listView.setAdapter(adapterTaskOverview);
+        }
+        else
+        {
+            //Listview
+            AdapterTaskOverview adapterTaskOverview = new AdapterTaskOverview(this, titles);
+            adapterTaskOverview.updateListData(titles,intervalInfos,times,timeUnits,taskIds);
+            ListView listView = findViewById(R.id.listviewOverview);
+            listView.setAdapter(adapterTaskOverview);
+        }
+
     }
 
 
