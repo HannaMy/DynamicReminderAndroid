@@ -1,5 +1,7 @@
 package a25.grupp.dynamicreminderandroid;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +12,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
+
+import java.util.Calendar;
 
 import a25.grupp.dynamicreminderandroid.model.PossibleTime;
 import a25.grupp.dynamicreminderandroid.model.Task;
@@ -172,43 +178,43 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+
         // If the tasks exists fill in the task information in fields
         if(taskId > 0)
         {
-            TaskRegister taskregister = TaskRegister.getInstance();
-            Task task = taskregister.getTaskWithId(taskId);
-
-            //Sets the title text
-            EditText editTextSetTitle = findViewById(R.id.editText);
-            editTextSetTitle.setText(task.getTitle());
-
-            //Sets the interval number
-            EditText editTextSetInterval = findViewById(R.id.editText2);
-            editTextSetInterval.setText(String.format("%d", task.getId()));
-
-            //Sets the interval time unit
-            Spinner intervalTimeUnit = findViewById(R.id.dropDown_timeUnit);
-            TimeUnit timeUnit = task.getPreferredInterval().getTimeUnit();
-            switch (timeUnit) {
-                case hour:
-                    intervalTimeUnit.setSelection(0);
-                    break;
-                case day:
-                    intervalTimeUnit.setSelection(1);
-                    break;
-                case week:
-                    intervalTimeUnit.setSelection(2);
-                    break;
-                case month:
-                    intervalTimeUnit.setSelection(3);
-                    break;
-                case year:
-                    intervalTimeUnit.setSelection(4);
-                    break;
-            }
+            setTaskInfo(taskId);
         }
+        final Button btnCalendar = findViewById(R.id.btnCalendar);
+        btnCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+                final int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                final int minute = calendar.get(Calendar.MINUTE);
 
+                DatePickerDialog datePickerDialog = new DatePickerDialog(DetailActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, final int year, final int month, final int dayOfMonth) {
+                        btnCalendar.setText(dayOfMonth + "/" + month + "/" + year);
+
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(DetailActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                btnCalendar.setText(dayOfMonth + "/" + month + "/" + year + "\n" + hourOfDay + ":" + minute);
+                            }
+                        }, hour, minute, android.text.format.DateFormat.is24HourFormat(DetailActivity.this));
+                        timePickerDialog.show();
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
     }
+
+
 
     //TODO Få fram taskId om det skickats från MainActivity, annars returnera 0
     public int getTaskId()
@@ -220,5 +226,42 @@ public class DetailActivity extends AppCompatActivity {
 
 
         return taskId;
+    }
+
+    // If the tasks exists fill in the task information in fields
+    public void setTaskInfo(int taskId)
+    {
+        TaskRegister taskregister = TaskRegister.getInstance();
+        Task task = taskregister.getTaskWithId(taskId);
+
+        //Sets the title text
+        EditText editTextSetTitle = findViewById(R.id.editText);
+        editTextSetTitle.setText(task.getTitle());
+
+        //Sets the interval number
+        EditText editTextSetInterval = findViewById(R.id.editText2);
+        editTextSetInterval.setText(String.format("%d", task.getId()));
+
+        //Sets the interval time unit
+        Spinner intervalTimeUnit = findViewById(R.id.dropDown_timeUnit);
+        TimeUnit timeUnit = task.getPreferredInterval().getTimeUnit();
+        switch (timeUnit) {
+            case hour:
+                intervalTimeUnit.setSelection(0);
+                break;
+            case day:
+                intervalTimeUnit.setSelection(1);
+                break;
+            case week:
+                intervalTimeUnit.setSelection(2);
+                break;
+            case month:
+                intervalTimeUnit.setSelection(3);
+                break;
+            case year:
+                intervalTimeUnit.setSelection(4);
+                break;
+        }
+
     }
 }
