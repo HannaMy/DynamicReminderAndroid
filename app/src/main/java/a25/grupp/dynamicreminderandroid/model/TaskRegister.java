@@ -1,5 +1,7 @@
 package a25.grupp.dynamicreminderandroid.model;
 
+import android.content.Context;
+
 import android.util.Log;
 
 import java.io.Serializable;
@@ -13,23 +15,25 @@ public class TaskRegister implements Serializable {
     private HashMap<Integer, Task> taskHashMap;
     private static final long serialVersionUID = 655296850; //g�r s� att man kan l�sa fr�n filen
     private int lastId;
-    private static final TaskRegister register = new TaskRegister();
+    private static TaskRegister register;
 
     private TaskRegister() {
         taskHashMap = new HashMap();
         lastId = 0;
         //loadTaskRegister();
-
     }
 
-    private void loadTaskRegister() {
-        FileHandler fileHandler = new FileHandler();
-        TaskRegister loadedRegister = fileHandler.readFromFile();
+    private void loadTaskRegister(Context context) {
+       // FileHandler fileHandler = new FileHandler(context);
+        //TaskRegister loadedRegister = fileHandler.readFromFile();
         register.setTaskHashMap(loadedRegister.getTaskHashMap());
         register.setLastId(loadedRegister.getBiggestID());
     }
 
-    public static TaskRegister getInstance() {
+    public static TaskRegister getInstance(Context context) {
+        if(register == null){
+        //    register =  new TaskRegister(context);
+        }
         return register;
     }
 
