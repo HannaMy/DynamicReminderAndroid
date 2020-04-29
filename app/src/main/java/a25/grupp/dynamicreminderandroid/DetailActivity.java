@@ -1,5 +1,6 @@
 package a25.grupp.dynamicreminderandroid;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -31,6 +32,7 @@ public class DetailActivity extends AppCompatActivity {
         start(taskId);
     }
 
+    @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
         ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
         constraintLayout.setVisibility(View.GONE);
@@ -175,13 +177,35 @@ public class DetailActivity extends AppCompatActivity {
         {
             TaskRegister taskregister = TaskRegister.getInstance();
             Task task = taskregister.getTaskWithId(taskId);
+
+            //Sets the title text
             EditText editTextSetTitle = findViewById(R.id.editText);
             editTextSetTitle.setText(task.getTitle());
 
+            //Sets the interval number
             EditText editTextSetInterval = findViewById(R.id.editText2);
-            editTextSetInterval.setText(Integer.toString(task.getId()));
+            editTextSetInterval.setText(String.format("%d", task.getId()));
 
-
+            //Sets the interval time unit
+            Spinner intervalTimeUnit = findViewById(R.id.dropDown_timeUnit);
+            TimeUnit timeUnit = task.getPreferredInterval().getTimeUnit();
+            switch (timeUnit) {
+                case hour:
+                    intervalTimeUnit.setSelection(0);
+                    break;
+                case day:
+                    intervalTimeUnit.setSelection(1);
+                    break;
+                case week:
+                    intervalTimeUnit.setSelection(2);
+                    break;
+                case month:
+                    intervalTimeUnit.setSelection(3);
+                    break;
+                case year:
+                    intervalTimeUnit.setSelection(4);
+                    break;
+            }
         }
 
     }
