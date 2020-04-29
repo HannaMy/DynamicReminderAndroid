@@ -106,19 +106,19 @@ public class DetailActivity extends AppCompatActivity {
                 String result = textView.getText().toString();
 
                 switch (result) {
-                    case "hour":
+                    case "hours":
                         timeUnit = TimeUnit.hour;
                         break;
-                    case "day":
+                    case "days":
                         timeUnit = TimeUnit.day;
                         break;
-                    case "week":
+                    case "weeks":
                         timeUnit = TimeUnit.week;
                         break;
-                    case "month":
+                    case "months":
                         timeUnit = TimeUnit.month;
                         break;
-                    case "year":
+                    case "years":
                         timeUnit = TimeUnit.year;
                         break;
                 }
@@ -129,7 +129,9 @@ public class DetailActivity extends AppCompatActivity {
 
                 // Handles possibleTime depending on choice in dropdown menu
                 PossibleTime possibleTime = new PossibleTime();
-                switch(dropDownAlways.getSelectedItem().toString())
+                TextView textView1 = (TextView)dropDownAlways.getSelectedView();
+                String result1 = textView1.getText().toString();
+                switch(result1)
                 {
                     case "Always":
                         //todo Fixa detta
@@ -161,14 +163,26 @@ public class DetailActivity extends AppCompatActivity {
                     Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance().getSize());
                 }
 
-                //Todo Fixa ett intent som hoppar tillbaka till MainActivity och visar den nya tasken
-
-                // frame.addTask(task.getTitle(), task.getTimeUntil(), task.getTimeUnit(), task.getId());
+                // Jumps back to MainActivity and shows the new task in the list
                 Intent save = new Intent(DetailActivity.this, MainActivity.class);
                 startActivity(save);
 
             }
         });
+
+        // If the tasks exists fill in the task information in fields
+        if(taskId > 0)
+        {
+            TaskRegister taskregister = TaskRegister.getInstance();
+            Task task = taskregister.getTaskWithId(taskId);
+            EditText editTextSetTitle = findViewById(R.id.editText);
+            editTextSetTitle.setText(task.getTitle());
+
+            EditText editTextSetInterval = findViewById(R.id.editText2);
+            editTextSetInterval.setText(Integer.toString(task.getId()));
+
+
+        }
 
     }
 
