@@ -1,6 +1,10 @@
 package a25.grupp.dynamicreminderandroid.model;
 
 import android.content.Context;
+
+import android.util.Log;
+
+import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
@@ -18,13 +22,12 @@ public class TaskRegister implements Serializable {
     private HashMap<Integer, Task> taskHashMap;
     private static final long serialVersionUID = 655296850; //g�r s� att man kan l�sa fr�n filen
     private int lastId;
-    private static final TaskRegister register = new TaskRegister();
+    private static TaskRegister register;
 
     private TaskRegister() {
         taskHashMap = new HashMap();
         lastId = 0;
         //loadTaskRegister();
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -35,7 +38,10 @@ public class TaskRegister implements Serializable {
         register.setLastId(loadedRegister.getBiggestID());
     }
 
-    public static TaskRegister getInstance() {
+    public static TaskRegister getInstance(Context context) {
+        if(register == null){
+        //    register =  new TaskRegister(context);
+        }
         return register;
     }
 
@@ -102,10 +108,13 @@ public class TaskRegister implements Serializable {
         for (int i = 1; i <= lastId; i++) {
             Task task = getTaskWithId(i);
             if (task != null) {
-                taskArray[i] = task;
+                taskArray[i-1] = task;          // TODO Ändrade detta från i till i-1 då det gav index out of bounds, kolla så det inte blir fel
 
             }
         }
+
+        Log.i("TaskRegister", "Size of taskArray = " + "" + taskArray.length);
+
         return taskArray;
     }
 
