@@ -182,37 +182,7 @@ public class DetailActivity extends AppCompatActivity {
         // If the tasks exists fill in the task information in fields
         if(taskId > 0)
         {
-            TaskRegister taskregister = TaskRegister.getInstance();
-            Task task = taskregister.getTaskWithId(taskId);
-
-            //Sets the title text
-            EditText editTextSetTitle = findViewById(R.id.editText);
-            editTextSetTitle.setText(task.getTitle());
-
-            //Sets the interval number
-            EditText editTextSetInterval = findViewById(R.id.editText2);
-            editTextSetInterval.setText(String.format("%d", task.getId()));
-
-            //Sets the interval time unit
-            Spinner intervalTimeUnit = findViewById(R.id.dropDown_timeUnit);
-            TimeUnit timeUnit = task.getPreferredInterval().getTimeUnit();
-            switch (timeUnit) {
-                case hour:
-                    intervalTimeUnit.setSelection(0);
-                    break;
-                case day:
-                    intervalTimeUnit.setSelection(1);
-                    break;
-                case week:
-                    intervalTimeUnit.setSelection(2);
-                    break;
-                case month:
-                    intervalTimeUnit.setSelection(3);
-                    break;
-                case year:
-                    intervalTimeUnit.setSelection(4);
-                    break;
-            }
+            setTaskInfo(taskId);
         }
         final Button btnCalendar = findViewById(R.id.btnCalendar);
         btnCalendar.setOnClickListener(new View.OnClickListener() {
@@ -256,5 +226,42 @@ public class DetailActivity extends AppCompatActivity {
 
 
         return taskId;
+    }
+
+    // If the tasks exists fill in the task information in fields
+    public void setTaskInfo(int taskId)
+    {
+        TaskRegister taskregister = TaskRegister.getInstance();
+        Task task = taskregister.getTaskWithId(taskId);
+
+        //Sets the title text
+        EditText editTextSetTitle = findViewById(R.id.editText);
+        editTextSetTitle.setText(task.getTitle());
+
+        //Sets the interval number
+        EditText editTextSetInterval = findViewById(R.id.editText2);
+        editTextSetInterval.setText(String.format("%d", task.getId()));
+
+        //Sets the interval time unit
+        Spinner intervalTimeUnit = findViewById(R.id.dropDown_timeUnit);
+        TimeUnit timeUnit = task.getPreferredInterval().getTimeUnit();
+        switch (timeUnit) {
+            case hour:
+                intervalTimeUnit.setSelection(0);
+                break;
+            case day:
+                intervalTimeUnit.setSelection(1);
+                break;
+            case week:
+                intervalTimeUnit.setSelection(2);
+                break;
+            case month:
+                intervalTimeUnit.setSelection(3);
+                break;
+            case year:
+                intervalTimeUnit.setSelection(4);
+                break;
+        }
+
     }
 }
