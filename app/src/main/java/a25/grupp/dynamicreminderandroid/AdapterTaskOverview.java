@@ -70,6 +70,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
                public void onClick(View v) {
                    Intent detail = new Intent(mainActivity, DetailActivity.class);
                    detail.putExtra("taskId", taskArray[position].getId());
+                   System.out.println("put extra taskid " + taskArray[position].getId());
                    mainActivity.startActivity(detail);
                }
            });
@@ -86,7 +87,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
                @Override
                public void onClick(View v) {
                    Intent detail = new Intent(mainActivity, DetailActivity.class);
-                   detail.putExtra("taskId", taskIds[position+1]);
+                   detail.putExtra("taskId", taskIds[position]);
                    mainActivity.startActivity(detail);
                }
            });

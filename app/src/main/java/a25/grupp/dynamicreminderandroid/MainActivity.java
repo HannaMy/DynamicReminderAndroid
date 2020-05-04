@@ -87,10 +87,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         Task[] taskArray = taskRegister.getTaskArray();
+        System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÄÄÄÄÄÄÄÄÄÄÄÄÅÅÅÅÅÅÅÅÅÅÅ: taskArray: " + taskArray);
 
-        if(taskArray.length > 0) {
+     if(taskArray.length > 0) {
 
-            int size = taskArray.length;
+           int size = taskArray.length;
             titles = new String[size];
             intervalInfos = new String[size];
             times = new int[size];
@@ -114,11 +115,17 @@ public class MainActivity extends AppCompatActivity {
                 taskIds[i] = task.getId();
             }
 
+
+
             //Listview
             AdapterTaskOverview adapterTaskOverview = new AdapterTaskOverview(this, titles);
-            adapterTaskOverview.updateListData(titles,intervalInfos,times,timeUnits,taskIds);
+            adapterTaskOverview.setTaskArray(taskArray);
+
+            //adapterTaskOverview.updateListData(titles,intervalInfos,times,timeUnits,taskIds);
             ListView listView = findViewById(R.id.listviewOverview);
             listView.setAdapter(adapterTaskOverview);
+
+
         }
         else
         {

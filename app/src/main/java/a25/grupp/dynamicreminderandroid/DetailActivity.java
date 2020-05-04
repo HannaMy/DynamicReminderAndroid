@@ -142,8 +142,8 @@ public class DetailActivity extends AppCompatActivity {
                         break;
                 }
 
-                String info = findViewById(R.id.editText4).toString();
-
+               EditText editTextInfo  = findViewById(R.id.editText4);
+                String info = editTextInfo.getText().toString();
                 TimeSpan preferredInterval = new TimeSpan(intervalAmount, timeUnit);
 
                 // Handles possibleTime depending on choice in dropdown menu
@@ -235,9 +235,9 @@ public class DetailActivity extends AppCompatActivity {
     public int getTaskId()
     {
         Intent intent = getIntent();
-        int taskId = intent.getIntExtra("taskID",0 );
+        int taskId = intent.getIntExtra("taskId",0 );
 
-        Log.i("tag", "Here is the taskId" + "" + taskId);
+        Log.i("tag", "Here is the taskId" + " " + taskId);
 
 
         return taskId;
