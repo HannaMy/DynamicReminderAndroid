@@ -1,5 +1,8 @@
 package a25.grupp.dynamicreminderandroid.model;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,7 +41,7 @@ public class Task implements Comparable<Object>, Serializable {
         this.maximum = maximum;
         this.possibleTimeForExecution = possibleTimeForExecution;
         markAsDoneNow();
-
+        nextNotification = generateNotification();
 
 
     }
@@ -47,6 +50,7 @@ public class Task implements Comparable<Object>, Serializable {
         this.title = title;
         this.info = info;
         this.preferredInterval = preferredInterval;
+        nextNotification = generateNotification();
         markAsDoneNow();
 
     }
@@ -60,11 +64,22 @@ public class Task implements Comparable<Object>, Serializable {
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
         lastPerformed = dateNow;
+        //TODO: skriva metod som avbryter nästa notifikation och skapar en ny
     }
 
-    public Notification generateNotification()
-    {
-        return null;
+    public Notification generateNotification(){
+        Date timeForNotification = new Date();
+        String randomPhase = "Did you remember to ";//TODO: hämta en random fråga
+        String message = randomPhase + title + "?";
+
+        //TODO: kontrollera om det finns custom possible time
+        if (possibleTimeForExecution != null){
+            //kod som anpassar timeForNotification så att det stämmer överens med possible time
+        }
+
+        timeForNotification.setTime(getTimeUntil());
+        nextNotification = new Notification(this, timeForNotification, message);
+        return nextNotification;
     }
 
     public String getTitle() {
@@ -200,6 +215,7 @@ public class Task implements Comparable<Object>, Serializable {
         this.id = id;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public int compareTo(Object o) {
         Task t = (Task) o;
         return Integer.compare(id,t.getId());

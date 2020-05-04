@@ -33,8 +33,8 @@ public class NotificationReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
-        title = "TestTitle"; //metod för att hämta titel
-        message = "This is a test message"; //metod för att hämta meddelande
+        title = "Hey you"; //metod för att hämta titel
+        message = intent.getStringExtra("message");
 
         //Large icon
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.cockatiel);
@@ -82,5 +82,9 @@ public class NotificationReceiver extends BroadcastReceiver {
         Intent noIntent = new Intent(context, DetailActivity.class);
         noIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         noPendingIntent = PendingIntent.getActivity(context, 0, noIntent, PendingIntent.FLAG_ONE_SHOT);
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
