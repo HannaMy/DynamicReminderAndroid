@@ -170,11 +170,7 @@ public class DetailActivity extends AppCompatActivity {
                     task.setPossibleTimeForExecution(possibleTime);
                     TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
                     System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ task sparad" );
-                    //Todo Fixa ett intent som hoppar tillbaka till MainActivity och visar den nya tasken
-                   // frame.addTask(task.getTitle(), task.getTimeUntil(), task.getTimeUnit(), task.getId());
-                    Intent save = new Intent(DetailActivity.this, MainActivity.class);
-                    startActivity(save);
-                    int id = task.getId();
+                    int id = task.getId();  //Todo den bör kunna tas bort?
                     addNotification(getApplicationContext(), task.getNextNotification());
 
                 } else {
