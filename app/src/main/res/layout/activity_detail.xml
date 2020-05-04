@@ -206,13 +206,24 @@
                     android:background="#F4F2F2">
 
                     <CheckBox
+                        android:id="@+id/checkBox7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Su"
+                        app:layout_constraintStart_toEndOf="@+id/checkBox6"
+                        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+
+                    <CheckBox
                         android:id="@+id/checkBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="Mon"
+                        android:text="Mo"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
@@ -220,10 +231,10 @@
                         android:id="@+id/checkBox2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
                         android:layout_marginTop="16dp"
-                        android:text="Tue"
+                        android:text="Tu"
                         app:layout_constraintStart_toEndOf="@+id/checkBox"
                         app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
@@ -231,10 +242,10 @@
                         android:id="@+id/checkBox3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
                         android:layout_marginTop="16dp"
-                        android:text="Wed"
+                        android:text="We"
                         app:layout_constraintStart_toEndOf="@+id/checkBox2"
                         app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
@@ -242,10 +253,10 @@
                         android:id="@+id/checkBox4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
                         android:layout_marginTop="16dp"
-                        android:text="Thu"
+                        android:text="Th"
                         app:layout_constraintStart_toEndOf="@+id/checkBox3"
                         app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
@@ -253,10 +264,10 @@
                         android:id="@+id/checkBox5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
                         android:layout_marginTop="16dp"
-                        android:text="Fri"
+                        android:text="Fr"
                         app:layout_constraintStart_toEndOf="@+id/checkBox4"
                         app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
@@ -264,10 +275,10 @@
                         android:id="@+id/checkBox6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
                         android:layout_marginTop="16dp"
-                        android:text="Sat"
+                        android:text="Sa"
                         app:layout_constraintStart_toEndOf="@+id/checkBox5"
                         app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
