@@ -41,7 +41,7 @@ public class Task implements Comparable<Object>, Serializable {
         this.maximum = maximum;
         this.possibleTimeForExecution = possibleTimeForExecution;
         markAsDoneNow();
-
+        nextNotification = generateNotification();
 
 
     }
@@ -50,6 +50,7 @@ public class Task implements Comparable<Object>, Serializable {
         this.title = title;
         this.info = info;
         this.preferredInterval = preferredInterval;
+        nextNotification = generateNotification();
         markAsDoneNow();
 
     }
@@ -63,6 +64,7 @@ public class Task implements Comparable<Object>, Serializable {
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
         lastPerformed = dateNow;
+        //TODO: skriva metod som avbryter nästa notifikation och skapar en ny
     }
 
     public Notification generateNotification(){

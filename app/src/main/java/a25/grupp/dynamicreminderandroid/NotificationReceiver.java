@@ -34,7 +34,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         this.context = context;
         title = "Hey you"; //metod för att hämta titel
-        message = "This is a test message"; //metod för att hämta meddelande
+        message = intent.getStringExtra("message");
 
         //Large icon
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.cockatiel);
