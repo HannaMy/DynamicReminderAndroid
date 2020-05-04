@@ -47,7 +47,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         createButtonIntents();
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.cockatiel)
+                .setSmallIcon(R.mipmap.small_cockatiel)
                 .setLargeIcon(largeIcon)
                 .setContentTitle(title)
                 .setContentText(message)
@@ -56,9 +56,9 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setContentIntent(landingPendingIntent)
                 .setAutoCancel(true)
-                .addAction(R.mipmap.cockatiel, "Yes", yesPendingIntent)
-                .addAction(R.mipmap.cockatiel, "Yes, earlier", yesEarlierPendingIntent)
-                .addAction(R.mipmap.cockatiel, "No", noPendingIntent);
+                .addAction(R.mipmap.small_cockatiel, "Yes", yesPendingIntent)
+                .addAction(R.mipmap.small_cockatiel, "Yes, earlier", yesEarlierPendingIntent)
+                .addAction(R.mipmap.small_cockatiel, "No", noPendingIntent);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
         notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
