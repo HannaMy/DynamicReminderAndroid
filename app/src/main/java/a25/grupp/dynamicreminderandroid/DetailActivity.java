@@ -36,7 +36,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
 public class DetailActivity extends AppCompatActivity {
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         start(taskId);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
         ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
@@ -95,7 +95,7 @@ public class DetailActivity extends AppCompatActivity {
         Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
 
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
             @Override
             public void onClick(View v) {
 
@@ -183,11 +183,9 @@ public class DetailActivity extends AppCompatActivity {
                     taskRegister.saveRegister(DetailActivity.this);
                     Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());
                 }
-
                 // Jumps back to MainActivity and shows the new task in the list
                 Intent save = new Intent(DetailActivity.this, MainActivity.class);
                 startActivity(save);
-
             }
         });
 
@@ -237,7 +235,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     // If the tasks exists fill in the task information in fields
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public void setTaskInfo(int taskId) {
         TaskRegister taskregister = TaskRegister.getInstance(this.getBaseContext());
         Task task = taskregister.getTaskWithId(taskId);

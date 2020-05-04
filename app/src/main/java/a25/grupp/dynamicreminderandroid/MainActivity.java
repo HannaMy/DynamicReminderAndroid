@@ -25,7 +25,6 @@ import a25.grupp.dynamicreminderandroid.model.TimeSpan;
 
 public class MainActivity extends AppCompatActivity {
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         //addNotification(this, task.generateNotification()); //TODO: flytta till korrekt ställe
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     private void initiateAdapter(){
 
        /* FileHandler fh =  new FileHandler(this);

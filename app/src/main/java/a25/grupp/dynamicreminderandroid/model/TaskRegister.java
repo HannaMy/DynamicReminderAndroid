@@ -24,7 +24,7 @@ public class TaskRegister implements Serializable {
     private int lastId;
     private static TaskRegister register;
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     private TaskRegister() {
         taskHashMap = new HashMap();
         lastId = 0;
@@ -32,7 +32,7 @@ public class TaskRegister implements Serializable {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     private void loadTaskRegister(Context context) {
         try {
             FileHandler fileHandler = new FileHandler(context);
@@ -43,7 +43,7 @@ public class TaskRegister implements Serializable {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public static TaskRegister getInstance(Context context) {
         System.out.println("getInstance oooooooooo");
         if(register == null) {
@@ -59,7 +59,7 @@ public class TaskRegister implements Serializable {
         this.lastId = lastId;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public void addTask(Task task, Context context) {
         if (task != null) {
             FileHandler fileHandler = new FileHandler(context);
@@ -90,7 +90,7 @@ public class TaskRegister implements Serializable {
         return taskHashMap.get(index);
 
     }
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public void saveRegister(Context context){
         FileHandler fileHandler = new FileHandler(context);
         fileHandler.saveToFile(this);

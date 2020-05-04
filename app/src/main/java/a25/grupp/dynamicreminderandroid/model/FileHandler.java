@@ -15,7 +15,7 @@ public class FileHandler {
         this.context = context;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public void saveToFile(TaskRegister taskRegister){ //Eventuellt måste en lägga till en Context också
         try{
             FileOutputStream fos = context.openFileOutput("taskRegisterFile", Context.MODE_PRIVATE);
@@ -33,7 +33,6 @@ public class FileHandler {
             e.printStackTrace();
         }
     }
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void saveToFileString(String string){ //Eventuellt måste en lägga till en Context också
         try{
             FileOutputStream fos = context.openFileOutput("str", Context.MODE_APPEND);
@@ -51,7 +50,7 @@ public class FileHandler {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public TaskRegister readFromFile(){
         try
         {
@@ -72,7 +71,7 @@ public class FileHandler {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public String readFromFileString(){
         System.out.println("read from file");
         String string = "";
