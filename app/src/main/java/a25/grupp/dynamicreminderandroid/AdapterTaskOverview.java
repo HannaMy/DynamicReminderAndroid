@@ -53,7 +53,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) mainActivity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View taskListItem = layoutInflater.inflate(R.layout.task_list_item,parent, false);
 
-        Button btnDetails = taskListItem.findViewById(R.id.btnDetails);
+        Button btnDetails = taskListItem.findViewById(R.id.btnExpand);
         TextView tvAmountTime = taskListItem.findViewById(R.id.tvNbrTimeLeft);
         TextView tvTimeUnit = taskListItem.findViewById(R.id.tvTimeUnit);
         TextView tvTitle = taskListItem.findViewById(R.id.tvTitle);
