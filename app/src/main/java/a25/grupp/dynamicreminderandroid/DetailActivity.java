@@ -78,7 +78,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
         final Spinner dropDownTimeUnit = findViewById(R.id.dropDown_timeUnit);
-        ArrayAdapter<CharSequence> adapterTimeUnit = ArrayAdapter.createFromResource(this,R.array.timeunits,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterTimeUnit = ArrayAdapter.createFromResource(this, R.array.timeunits, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropDownTimeUnit.setAdapter(adapterTimeUnit);
 
@@ -113,7 +113,7 @@ public class DetailActivity extends AppCompatActivity {
                     intervalAmount = Integer.parseInt(editTextInterval.getText().toString());
                     Log.i("DetailActivity", "The preferred interval is: " + "" + intervalAmount);
                 } catch (Exception e) {
-                   //Todo Felmeddelande med texten "You need to add a preferred interval as a number"
+                    //Todo Felmeddelande med texten "You need to add a preferred interval as a number"
 
                 }
 
@@ -121,7 +121,7 @@ public class DetailActivity extends AppCompatActivity {
                 Spinner dropDownTU = findViewById(R.id.dropDown_timeUnit);
                 TimeUnit timeUnit = TimeUnit.hour;
 
-                TextView textView = (TextView)dropDownTU.getSelectedView();
+                TextView textView = (TextView) dropDownTU.getSelectedView();
                 String result = textView.getText().toString();
 
                 switch (result) {
@@ -142,26 +142,25 @@ public class DetailActivity extends AppCompatActivity {
                         break;
                 }
 
-               EditText editTextInfo  = findViewById(R.id.editText4);
+                EditText editTextInfo = findViewById(R.id.editText4);
                 String info = editTextInfo.getText().toString();
                 TimeSpan preferredInterval = new TimeSpan(intervalAmount, timeUnit);
 
                 // Handles possibleTime depending on choice in dropdown menu
                 PossibleTime possibleTime = new PossibleTime();
-                TextView textView1 = (TextView)dropDownAlways.getSelectedView();
+                TextView textView1 = (TextView) dropDownAlways.getSelectedView();
                 String result1 = textView1.getText().toString();
-                switch(result1)
-                {
+                switch (result1) {
                     case "Always":
                         //todo Fixa detta
                         break;
                     case "Custom":
                         //todo Fixa detta
 
-                      //  possibleTime.setPossibleWeekDays(frame.getPossibleWeekdays()); //Todo
-                      //  possibleTime.setPossibleDates(frame.getPossibleDates());        //Todo
-                      //  LocalTime[] localTimes = frame.getPossibleHours();              //Todo
-                      //  possibleTime.setPossibleHours(localTimes[0], localTimes[1]);
+                        //  possibleTime.setPossibleWeekDays(frame.getPossibleWeekdays()); //Todo
+                        //  possibleTime.setPossibleDates(frame.getPossibleDates());        //Todo
+                        //  LocalTime[] localTimes = frame.getPossibleHours();              //Todo
+                        //  possibleTime.setPossibleHours(localTimes[0], localTimes[1]);
                         break;
                 }
 
@@ -169,18 +168,19 @@ public class DetailActivity extends AppCompatActivity {
                     task = new Task(title, info, preferredInterval);
                     task.setPossibleTimeForExecution(possibleTime);
                     TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
-                    System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ task sparad" );
+                    System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ task sparad");
                     int id = task.getId();  //Todo den bör kunna tas bort?
                     addNotification(getApplicationContext(), task.getNextNotification());
 
                 } else {
-                    task = TaskRegister.getInstance(getBaseContext()).getTaskWithId(selectedTaskId);
+                    TaskRegister taskRegister = TaskRegister.getInstance(getBaseContext());
+                    task = taskRegister.getTaskWithId(selectedTaskId);
                     task.setInfo(info);
                     task.setTitle(title);
                     task.setPreferredInterval(preferredInterval);
                     task.setPossibleTimeForExecution(possibleTime);
                     addNotification(getApplicationContext(), task.getNextNotification());
-
+                    taskRegister.saveRegister(DetailActivity.this);
                     Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());
                 }
 
@@ -193,8 +193,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
         // If the tasks exists fill in the task information in fields
-        if(taskId > 0)
-        {
+        if (taskId > 0) {
             setTaskInfo(taskId);
         }
         final Button btnCalendar = findViewById(R.id.btnCalendar);
@@ -226,12 +225,10 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
-
     //TODO Få fram taskId om det skickats från MainActivity, annars returnera 0
-    public int getTaskId()
-    {
+    public int getTaskId() {
         Intent intent = getIntent();
-        int taskId = intent.getIntExtra("taskId",0 );
+        int taskId = intent.getIntExtra("taskId", 0);
 
         Log.i("tag", "Here is the taskId" + " " + taskId);
 
@@ -241,8 +238,7 @@ public class DetailActivity extends AppCompatActivity {
 
     // If the tasks exists fill in the task information in fields
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void setTaskInfo(int taskId)
-    {
+    public void setTaskInfo(int taskId) {
         TaskRegister taskregister = TaskRegister.getInstance(this.getBaseContext());
         Task task = taskregister.getTaskWithId(taskId);
 
@@ -279,13 +275,12 @@ public class DetailActivity extends AppCompatActivity {
         editTextInfo.setText(task.getInfo());
 
 
-
     }
 
     /**
      * This method creates an intent for a scheduled notification, using a Calendar object
      */
-    public void addNotification(Context context, Notification notification){
+    public void addNotification(Context context, Notification notification) {
         Calendar nextNotification = notification.getCalendarTimeForNotification();
         Intent intent = new Intent(context, NotificationReceiver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -301,9 +296,9 @@ public class DetailActivity extends AppCompatActivity {
     /**
      * This method creates the notification channel for the notifications in the category of reminders
      */
-    private void createNotificationChannel(){
+    private void createNotificationChannel() {
         //Checks if the device runs on Android 8.0 and above (Oreo)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String CHANNEL_ID = "channelReminders";
             CharSequence name = "Reminders channel"; //TODO: flytta till res?
             String description = "Includes all the reminders"; //TODO: flytta till res?

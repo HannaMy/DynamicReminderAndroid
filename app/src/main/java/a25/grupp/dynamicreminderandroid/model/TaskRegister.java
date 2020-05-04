@@ -90,6 +90,11 @@ public class TaskRegister implements Serializable {
         return taskHashMap.get(index);
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void saveRegister(Context context){
+        FileHandler fileHandler = new FileHandler(context);
+        fileHandler.saveToFile(this);
+    }
 
     public int getBiggestID() {
         return lastId;
