@@ -46,6 +46,7 @@ public class DetailActivity extends AppCompatActivity {
         start(taskId);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
         ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
