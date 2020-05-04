@@ -1,6 +1,5 @@
 package a25.grupp.dynamicreminderandroid.model;
 
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -13,16 +12,12 @@ public class Notification {
     private Date timeForNotification;
     private String message;
     private String buttonTitles;
-    private Calendar calendarTimeForNotification;
 
-
-    public Notification(Task task, Date timeForNotification, String message){ //TODO: tog bort buttonTitles från konstruktorn
+    public Notification(Task task, Date timeForNotification, String message, String buttonTitles){
         this.task = task;
         this.timeForNotification = timeForNotification;
         this.message = message;
-        calendarTimeForNotification = Calendar.getInstance();
-        calendarTimeForNotification.setTime(timeForNotification);
-        //this.buttonTitles = buttonTitles;
+        this.buttonTitles = buttonTitles;
     }
 
     public void setTimeForNotification(Date timeForNotification){
@@ -31,22 +26,6 @@ public class Notification {
 
     public Date getTimeForNotification() {
         return timeForNotification;
-    }
-
-    public void setMessage(String message){
-
-    }
-
-    public String getMessage(){
-        return message;
-    }
-
-    public Calendar getCalendarTimeForNotification() {
-        return calendarTimeForNotification;
-    }
-
-    public void setCalendarTimeForNotification(Calendar calendarTimeForNotification) {
-        this.calendarTimeForNotification = calendarTimeForNotification;
     }
 
     public int getNbrOfButtons(){

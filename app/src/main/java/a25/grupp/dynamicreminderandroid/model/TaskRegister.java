@@ -1,9 +1,18 @@
 package a25.grupp.dynamicreminderandroid.model;
 
+import android.content.Context;
+
 import android.util.Log;
+
+import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import java.io.Serializable;
 import java.util.HashMap;
+
+import a25.grupp.dynamicreminderandroid.DetailActivity;
+import a25.grupp.dynamicreminderandroid.MainActivity;
 
 /**
  * @author Hanna My Jansson
@@ -13,23 +22,36 @@ public class TaskRegister implements Serializable {
     private HashMap<Integer, Task> taskHashMap;
     private static final long serialVersionUID = 655296850; //g�r s� att man kan l�sa fr�n filen
     private int lastId;
-    private static final TaskRegister register = new TaskRegister();
+    private static TaskRegister register;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private TaskRegister() {
         taskHashMap = new HashMap();
         lastId = 0;
-        //loadTaskRegister();
+
 
     }
 
-    private void loadTaskRegister() {
-        FileHandler fileHandler = new FileHandler();
-        TaskRegister loadedRegister = fileHandler.readFromFile();
-        register.setTaskHashMap(loadedRegister.getTaskHashMap());
-        register.setLastId(loadedRegister.getBiggestID());
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void loadTaskRegister(Context context) {
+        try {
+            FileHandler fileHandler = new FileHandler(context);
+            TaskRegister loadedRegister = fileHandler.readFromFile();
+            register.setTaskHashMap(loadedRegister.getTaskHashMap());
+            register.setLastId(loadedRegister.getBiggestID());
+        }catch(Exception e){e.printStackTrace();}
+
     }
 
-    public static TaskRegister getInstance() {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static TaskRegister getInstance(Context context) {
+        System.out.println("getInstance oooooooooo");
+        if(register == null) {
+            register = new TaskRegister();
+            System.out.println("getInstance() register: " + register);
+            register.loadTaskRegister(context);
+        }
+
         return register;
     }
 
@@ -37,11 +59,16 @@ public class TaskRegister implements Serializable {
         this.lastId = lastId;
     }
 
-    public void addTask(Task task) {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void addTask(Task task, Context context) {
         if (task != null) {
+            FileHandler fileHandler = new FileHandler(context);
             int id = generateId();
-            task.setID(id);
-            taskHashMap.put(id, task);
+            if(task.getId()==0) {
+                task.setID(id);
+            }
+            taskHashMap.put(task.getId(), task);
+            fileHandler.saveToFile(this);
         }
 
     }
@@ -96,7 +123,7 @@ public class TaskRegister implements Serializable {
         for (int i = 1; i <= lastId; i++) {
             Task task = getTaskWithId(i);
             if (task != null) {
-                taskArray[i-1] = task;          // TODO Ändrade detta från i till i-1 då det gav index out of bounds, kolla så det inte blir fel
+                taskArray[i-1] = task;
 
             }
         }

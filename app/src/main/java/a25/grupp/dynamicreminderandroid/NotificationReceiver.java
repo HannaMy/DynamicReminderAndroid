@@ -33,11 +33,11 @@ public class NotificationReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
-        title = "TestTitle"; //metod för att hämta titel
-        message = "This is a test message"; //metod för att hämta meddelande
+        title = "Hey you"; //metod för att hämta titel
+        message = intent.getStringExtra("message");
 
         //Large icon
-        Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_ant_full);
+        Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.cockatiel);
 
         //What happens when the user clicks on the notification
         Intent landingIntent = new Intent(context, DetailActivity.class);
@@ -47,7 +47,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         createButtonIntents();
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_ant_head)
+                .setSmallIcon(R.mipmap.cockatiel)
                 .setLargeIcon(largeIcon)
                 .setContentTitle(title)
                 .setContentText(message)
@@ -56,9 +56,9 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setContentIntent(landingPendingIntent)
                 .setAutoCancel(true)
-                .addAction(R.mipmap.ic_ant_head, "Yes", yesPendingIntent)
-                .addAction(R.mipmap.ic_ant_head, "Yes, earlier", yesEarlierPendingIntent)
-                .addAction(R.mipmap.ic_ant_head, "No", noPendingIntent);
+                .addAction(R.mipmap.cockatiel, "Yes", yesPendingIntent)
+                .addAction(R.mipmap.cockatiel, "Yes, earlier", yesEarlierPendingIntent)
+                .addAction(R.mipmap.cockatiel, "No", noPendingIntent);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
         notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
@@ -82,5 +82,9 @@ public class NotificationReceiver extends BroadcastReceiver {
         Intent noIntent = new Intent(context, DetailActivity.class);
         noIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         noPendingIntent = PendingIntent.getActivity(context, 0, noIntent, PendingIntent.FLAG_ONE_SHOT);
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

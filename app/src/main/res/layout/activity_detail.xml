@@ -45,7 +45,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/btnCalendar"
                     android:layout_width="116dp"
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,11 +17,15 @@ import android.widget.ListView;
 
 import java.util.Calendar;
 
+import a25.grupp.dynamicreminderandroid.model.FileHandler;
+import a25.grupp.dynamicreminderandroid.model.Notification;
 import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
+import a25.grupp.dynamicreminderandroid.model.TimeSpan;
 
 public class MainActivity extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,22 +45,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initiateAdapter();
-        addNotification();
+
+        //testar notifikation
+        //Task task = new Task();
+        //addNotification(this, task.generateNotification()); //TODO: flytta till korrekt ställe
     }
 
-/*
-    // Anni testar lite
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        initiateAdapter();
-    }
-    //-------------------
-
- */
-
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void initiateAdapter(){
+
+       /* FileHandler fh =  new FileHandler(this);
+        fh.saveToFileString("Test30");
+        String s = fh.readFromFileString();
+        System.out.println("Test save file on string: " + s);
+
+        */
+
+
+
+
+
         //Temporär data
         String[] titles  ={"Water Plants", "Dance", "Clean Bathroom", "Call Hilda"};
         String[] intervalInfos= {"Every 5 days", "Every 3 day", "Every 1 week", "Every 5 weeks"};
@@ -63,7 +72,19 @@ public class MainActivity extends AppCompatActivity {
         String[] timeUnits = {"Days left", "Days left", "Weeks left", "Weeks left"};
         int[] taskIds={1,2,3,4};
 
-        TaskRegister taskRegister = TaskRegister.getInstance();
+
+        TaskRegister taskRegister = TaskRegister.getInstance(this);
+        /*
+        System.out.println("ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ task test: "+taskRegister.getTaskWithId(30));
+        Task task1 = new Task();
+        task1.setTitle("test 30");
+        taskRegister.addTask(task1, this);
+
+        System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖ task test: "+taskRegister.getTaskWithId(30));
+
+         */
+
+
 
         Task[] taskArray = taskRegister.getTaskArray();
 
@@ -78,11 +99,18 @@ public class MainActivity extends AppCompatActivity {
 
             for (int i = 0; i < taskArray.length; i++)
             {
+
                 Task task = taskArray[i];
+                System.out.println("ÖÖ task: " + task + " i: " + i);
                 titles[i] = task.getTitle();
-                intervalInfos[i] = task.getPreferredInterval().toString();
-                times[i] = task.getTimeUntil();
-                timeUnits[i] = "time unit";         //TODO fixa rätt timeunit
+                TimeSpan timeSpan = task.getPreferredInterval();
+                if(timeSpan!= null) {
+                    intervalInfos[i] = task.getPreferredInterval().toString();
+                    times[i] = task.getTimeUntil();
+                    timeUnits[i] = "time unit";
+                }
+
+                         //TODO fixa rätt timeunit
                 taskIds[i] = task.getId();
             }
 
@@ -107,18 +135,15 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method creates an intent for a scheduled notification, using a Calendar object
      */
-    public void addNotification(){
-        Calendar calendar = Calendar.getInstance();
-        //Date date = new Date();
-        long tenSecondsMillis = 1000 * 10;
-
-        Intent intent = new Intent(this, NotificationReceiver.class);
+    public void addNotification(Context context, Notification notification){
+        Calendar nextNotification = notification.getCalendarTimeForNotification();
+        Intent intent = new Intent(context, NotificationReceiver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        intent.putExtra("message", notification.getMessage());        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         //Denna ställer in när notifikationen ska visas
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + tenSecondsMillis, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, nextNotification.getTimeInMillis(), pendingIntent);
         createNotificationChannel();
     }
 

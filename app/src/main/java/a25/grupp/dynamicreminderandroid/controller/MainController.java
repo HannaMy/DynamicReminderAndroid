@@ -1,5 +1,9 @@
 package a25.grupp.dynamicreminderandroid.controller;
 
+import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -26,9 +30,10 @@ public class MainController {
     }
 
     // Loading saved data from file to the app
-    public void loadApp() {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void loadApp(Context context) {
 
-        fileHandler = new FileHandler();
+        fileHandler = new FileHandler(context);
         TaskRegister loadedRegister = null;
         try {
             loadedRegister = fileHandler.readFromFile();
@@ -47,6 +52,7 @@ public class MainController {
     }
 
     // Add a new task when clicking SAVE-button in the detailed view
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void addTask()
     {
         Task task = null;
@@ -77,7 +83,7 @@ public class MainController {
         if (selectedTaskId <= 0) {
             task = new Task(title, info, preferredInterval);
             task.setPossibleTimeForExecution(possibleTime);
-            taskRegister.addTask(task);
+           // taskRegister.addTask(task);
             viewController.addTask(task.getTitle(), task.getTimeUntil(), task.getTimeUnit(), task.getId());
 
         } else {
