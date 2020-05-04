@@ -36,6 +36,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
 public class DetailActivity extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,6 +169,7 @@ public class DetailActivity extends AppCompatActivity {
                     task = new Task(title, info, preferredInterval);
                     task.setPossibleTimeForExecution(possibleTime);
                     TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
+                    System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ task sparad" );
                     //Todo Fixa ett intent som hoppar tillbaka till MainActivity och visar den nya tasken
                    // frame.addTask(task.getTitle(), task.getTimeUntil(), task.getTimeUnit(), task.getId());
                     Intent save = new Intent(DetailActivity.this, MainActivity.class);

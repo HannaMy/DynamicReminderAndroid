@@ -56,8 +56,8 @@ public class FileHandler {
         try
         {
             FileInputStream fis = context.openFileInput("taskRegisterFile");
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            ObjectInputStream ois = new ObjectInputStream(bis);
+            //BufferedInputStream bis = new BufferedInputStream(fis);
+            ObjectInputStream ois = new ObjectInputStream(fis);
             taskRegister =  (TaskRegister)ois.readObject();
             System.out.println("FileHandler: Task read: " + taskRegister.toString());
             fis.close();
