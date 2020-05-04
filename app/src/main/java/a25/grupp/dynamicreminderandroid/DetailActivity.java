@@ -232,9 +232,10 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     // If the tasks exists fill in the task information in fields
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void setTaskInfo(int taskId)
     {
-        TaskRegister taskregister = TaskRegister.getInstance();
+        TaskRegister taskregister = TaskRegister.getInstance(this.getBaseContext());
         Task task = taskregister.getTaskWithId(taskId);
 
         //Sets the title text
