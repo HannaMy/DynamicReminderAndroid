@@ -29,292 +29,298 @@
             android:layout_marginBottom="4dp"
             android:text="Save" />
 
-        <ScrollView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnSave"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="-1dp"
+        android:background="#F6F4F4"
+        android:layout_alignParentLeft="true">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/btnSave"
-            android:background="#F6F4F4"
-            >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/btnCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="YY-MM-DD hh:mm"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView5"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutHideable" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#FFFFFF"
+                android:ems="10"
+                android:hint="Water plants"
+                android:inputType="textPersonName"
+                android:textColor="#222121"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="44dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:background="#FFFFFF"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="5"
+                android:inputType="number"
+                android:textColor="#222121"
+                android:textSize="16dp"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+            <EditText
+                android:id="@+id/editText4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#FFFFFF"
+                android:ems="10"
+                android:gravity="top"
+                android:hint="Notes"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:singleLine="false"
+                android:textColor="#222121"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+            <Spinner
+                android:id="@+id/dropDown_timeUnit"
+                android:layout_width="135dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:background="#FFFFFF"
+                app:layout_constraintStart_toEndOf="@+id/editText2"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+            <Spinner
+                android:id="@+id/dropDownAlways"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#FFFFFF"
+                android:minHeight="26dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView3"
+                app:layout_constraintTop_toBottomOf="@+id/editText4" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="I would like to be reminded to ..."
+                android:textColor="#2E2C2C"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="53dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="Every"
+                android:textColor="#2E2C2C"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:minHeight="26dp"
+                android:text="Im available for this task: "
+                android:textColor="#2E2C2C"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText4" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Last time i did this"
+                android:textColor="#2E2C2C"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutHideable" />
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/constraintLayout2"
-                android:layout_width="409dp"
+                android:id="@+id/constraintLayoutHideable"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:background="#F4F2F2"
+                android:textSize="16dp"
                 android:visibility="visible"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dropDownAlways">
 
-                <Button
-                    android:id="@+id/btnCalendar"
-                    android:layout_width="116dp"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="8dp"
-                    android:text="YY-MM-DD hh:mm"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-                <EditText
-                    android:id="@+id/editText"
-                    android:layout_width="0dp"
+                <CheckBox
+                    android:id="@+id/checkBoxMo"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="#FFFFFF"
-                    android:ems="10"
-                    android:hint="Water plants"
-                    android:inputType="textPersonName"
-                    android:textColor="#222121"
-                    android:textSize="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Mo"
+                    app:layout_constraintEnd_toStartOf="@id/checkBoxTu"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
-                <EditText
-                    android:id="@+id/editText2"
-                    android:layout_width="44dp"
-                    android:layout_height="26dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="20dp"
-                    android:background="#FFFFFF"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:hint="5"
-                    android:inputType="number"
-                    android:textColor="#222121"
-                    android:textSize="16dp"
-                    app:layout_constraintStart_toEndOf="@+id/textView2"
-                    app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-                <EditText
-                    android:id="@+id/editText4"
-                    android:layout_width="0dp"
+                <CheckBox
+                    android:id="@+id/checkBoxWe"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="20dp"
+                    android:text="We"
+                    app:layout_constraintEnd_toStartOf="@id/checkBoxTh"
+                    app:layout_constraintStart_toEndOf="@+id/checkBoxTu"
+                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxTh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Th"
+                    app:layout_constraintEnd_toStartOf="@id/checkBoxFr"
+                    app:layout_constraintStart_toEndOf="@+id/checkBoxWe"
+                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxFr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fr"
+                    app:layout_constraintEnd_toStartOf="@id/checkBoxSa"
+                    app:layout_constraintStart_toEndOf="@+id/checkBoxTh"
+                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxSa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sa"
+                    app:layout_constraintEnd_toStartOf="@id/checkBoxSu"
+                    app:layout_constraintStart_toEndOf="@+id/checkBoxFr"
+                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxSu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:background="#FFFFFF"
-                    android:ems="10"
-                    android:gravity="top"
-                    android:hint="Notes"
-                    android:inputType="textMultiLine"
-                    android:lines="5"
-                    android:singleLine="false"
-                    android:textColor="#222121"
-                    android:textSize="16dp"
+                    android:text="Su"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText2" />
+                    app:layout_constraintStart_toEndOf="@+id/checkBoxSa"
+                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
-                <Spinner
-                    android:id="@+id/dropDown_timeUnit"
-                    android:layout_width="135dp"
-                    android:layout_height="26dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="20dp"
-                    android:background="#FFFFFF"
-                    app:layout_constraintStart_toEndOf="@+id/editText2"
-                    app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-                <Spinner
-                    android:id="@+id/dropDownAlways"
-                    android:layout_width="147dp"
+                <CheckBox
+                    android:id="@+id/checkBoxTu"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minHeight="26dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="20dp"
-                    android:background="#FFFFFF"
-                    android:spinnerMode="dropdown"
-                    app:layout_constraintStart_toEndOf="@+id/textView3"
-                    app:layout_constraintTop_toBottomOf="@+id/editText4" />
+                    android:text="Tu"
+                    app:layout_constraintEnd_toStartOf="@id/checkBoxWe"
+                    app:layout_constraintStart_toEndOf="@+id/checkBoxMo"
+                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
-                <TextView
-                    android:id="@+id/textView"
+                <EditText
+                    android:id="@+id/editText6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="I would like to be reminded to ..."
-                    android:textColor="#2E2C2C"
+                    android:ems="9"
+                    android:hint="from date"
+                    android:inputType="time"
+                    android:textColor="#222121"
                     android:textSize="16dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="53dp"
-                    android:layout_height="26dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Every"
-                    android:textColor="#2E2C2C"
-                    android:textSize="16dp"
-                    android:gravity="center_vertical"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-
-                <TextView
-                    android:id="@+id/textView3"
+                <EditText
+                    android:id="@+id/editText7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minHeight="26dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Im available for this task: "
-                    android:textColor="#2E2C2C"
-                    android:textSize="16dp"
-                    android:gravity="center_vertical"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText4" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Last time i did this"
-                    android:textColor="#2E2C2C"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:ems="9"
+                    android:hint="to date"
+                    android:inputType="time"
+                    android:textColor="#222121"
                     android:textSize="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayoutHideable" />
-
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/constraintLayoutHideable"
-                    android:layout_width="409dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:visibility="visible"
-                    android:textSize="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dropDownAlways"
-                    android:background="#F4F2F2">
-
-                    <CheckBox
-                        android:id="@+id/checkBox7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Su"
-                        app:layout_constraintStart_toEndOf="@+id/checkBox6"
-                        app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                    <CheckBox
-                        android:id="@+id/checkBox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Mo"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                    <CheckBox
-                        android:id="@+id/checkBox2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Tu"
-                        app:layout_constraintStart_toEndOf="@+id/checkBox"
-                        app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                    <CheckBox
-                        android:id="@+id/checkBox3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="16dp"
-                        android:text="We"
-                        app:layout_constraintStart_toEndOf="@+id/checkBox2"
-                        app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                    <CheckBox
-                        android:id="@+id/checkBox4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Th"
-                        app:layout_constraintStart_toEndOf="@+id/checkBox3"
-                        app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                    <CheckBox
-                        android:id="@+id/checkBox5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Fr"
-                        app:layout_constraintStart_toEndOf="@+id/checkBox4"
-                        app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                    <CheckBox
-                        android:id="@+id/checkBox6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Sa"
-                        app:layout_constraintStart_toEndOf="@+id/checkBox5"
-                        app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                    <EditText
-                        android:id="@+id/editText6"
-                        android:layout_width="182dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:ems="10"
-                        android:hint="start time"
-                        android:inputType="time"
-                        android:textColor="#222121"
-                        android:textSize="16dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <EditText
-                        android:id="@+id/editText7"
-                        android:layout_width="188dp"
-                        android:layout_height="47dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="16dp"
-                        android:ems="10"
-                        android:hint="endtime"
-                        android:inputType="time"
-                        android:textColor="#222121"
-                        android:textSize="16dp"
-                        app:layout_constraintStart_toEndOf="@+id/editText6"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </android.support.constraint.ConstraintLayout>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.483"
+                    app:layout_constraintStart_toEndOf="@+id/editText6"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
-        </ScrollView>
 
-    </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</RelativeLayout>
