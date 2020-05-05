@@ -5,7 +5,11 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import java.io.*;
-
+/**
+ * Stores the data on file
+ * @author Minna Röriksson, Hanna My Jansson
+ * @version 1.1
+ */
 
 public class FileHandler {
     private TaskRegister taskRegister;
@@ -15,7 +19,7 @@ public class FileHandler {
         this.context = context;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public void saveToFile(TaskRegister taskRegister){ //Eventuellt måste en lägga till en Context också
         try{
             FileOutputStream fos = context.openFileOutput("taskRegisterFile", Context.MODE_PRIVATE);
@@ -33,7 +37,6 @@ public class FileHandler {
             e.printStackTrace();
         }
     }
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void saveToFileString(String string){ //Eventuellt måste en lägga till en Context också
         try{
             FileOutputStream fos = context.openFileOutput("str", Context.MODE_APPEND);
@@ -51,13 +54,13 @@ public class FileHandler {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public TaskRegister readFromFile(){
         try
         {
             FileInputStream fis = context.openFileInput("taskRegisterFile");
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            ObjectInputStream ois = new ObjectInputStream(bis);
+            //BufferedInputStream bis = new BufferedInputStream(fis);
+            ObjectInputStream ois = new ObjectInputStream(fis);
             taskRegister =  (TaskRegister)ois.readObject();
             System.out.println("FileHandler: Task read: " + taskRegister.toString());
             fis.close();
@@ -72,7 +75,7 @@ public class FileHandler {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public String readFromFileString(){
         System.out.println("read from file");
         String string = "";

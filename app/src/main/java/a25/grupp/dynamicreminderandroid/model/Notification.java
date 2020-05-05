@@ -1,5 +1,6 @@
 package a25.grupp.dynamicreminderandroid.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,7 +9,7 @@ import java.util.Date;
  * @author Minna R�riksson
  * @version 1.0
  */
-public class Notification {
+public class Notification implements Serializable {
     private Task task;
     private Date timeForNotification;
     private String message;

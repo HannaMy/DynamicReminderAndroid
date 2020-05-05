@@ -9,10 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import a25.grupp.dynamicreminderandroid.model.Task;
+
+/**
+ * Adapts the data in to tle list view in the overview in mainActivity
+ * @author Hanna My Jansson
+ * @version 1.0
+ */
 
 public class AdapterTaskOverview extends ArrayAdapter {
 
@@ -24,26 +31,49 @@ public class AdapterTaskOverview extends ArrayAdapter {
     private Activity mainActivity;
     private Task[] taskArray;
 
-
+    /**
+     * Constructor
+     * @param context the context from where the constructor is called
+     * @param titles teh titles of the tasks
+     */
     public AdapterTaskOverview(@NonNull Context context, String[] titles) {
         super(context, R.layout.task_list_item,R.id.tvTitle, titles);
         System.out.println("adaper: construct");
         this.mainActivity =(MainActivity) context;
     }
 
-    public void updateListData(String[] titles, String[] intervalInfos, int[] times, String[] timeUnits, int[] taskIds) {
+    /**
+     * Updates the list with data
+     * @param titles of the tasks
+     * @param intervalInfo of the tasks
+     * @param times of the tasks
+     * @param timeUnits of the tasks
+     * @param taskIds of the tasks
+     */
+    public void updateListData(String[] titles, String[] intervalInfo, int[] times, String[] timeUnits, int[] taskIds) {
         System.out.println("Adapter: update");
         this.titles = titles;
-        this.intervalInfos = intervalInfos;
+        this.intervalInfos = intervalInfo;
         this.times = times;
         this.taskIds = taskIds;
         this.timeUnits = timeUnits;
     }
 
+    /**
+     * Sets the array with tasks
+     * @param taskArray the array with tasks
+     */
     public void setTaskArray(Task[] taskArray) {
         this.taskArray = taskArray;
     }
 
+    /**
+     * Generates a view item for the list
+     * @param position of the view
+     * @param convertView not used
+     * @param parent not used
+     * @return the view generated
+     */
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -52,7 +82,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) mainActivity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View taskListItem = layoutInflater.inflate(R.layout.task_list_item,parent, false);
 
-        ImageButton btnDetails = taskListItem.findViewById(R.id.btnDetails);
+        Button btnDetails = taskListItem.findViewById(R.id.btnExpand);
         TextView tvAmountTime = taskListItem.findViewById(R.id.tvNbrTimeLeft);
         TextView tvTimeUnit = taskListItem.findViewById(R.id.tvTimeUnit);
         TextView tvTitle = taskListItem.findViewById(R.id.tvTitle);
@@ -70,6 +100,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
                public void onClick(View v) {
                    Intent detail = new Intent(mainActivity, DetailActivity.class);
                    detail.putExtra("taskId", taskArray[position].getId());
+                   System.out.println("put extra taskid " + taskArray[position].getId());
                    mainActivity.startActivity(detail);
                }
            });
@@ -86,7 +117,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
                @Override
                public void onClick(View v) {
                    Intent detail = new Intent(mainActivity, DetailActivity.class);
-                   detail.putExtra("taskId", taskIds[position+1]);
+                   detail.putExtra("taskId", taskIds[position]);
                    mainActivity.startActivity(detail);
                }
            });
