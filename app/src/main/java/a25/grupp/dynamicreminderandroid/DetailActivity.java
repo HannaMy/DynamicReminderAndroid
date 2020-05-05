@@ -43,7 +43,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
 public class DetailActivity extends AppCompatActivity {
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     /**
      * Method is called to when activity is created
      * @param savedInstanceState
@@ -58,7 +58,7 @@ public class DetailActivity extends AppCompatActivity {
         start(taskId);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     /**
      * Starts the Activity
      * @param taskId the id of the task presented in the view
@@ -261,11 +261,6 @@ public class DetailActivity extends AppCompatActivity {
         startActivity(cancel);
     }
 
-
-    /**
-     * what happens when cancel is pressed, a popup asking you if you want to cancel is shown and a intent is started to open main activity
-     */
-    private void cancel(){ }
 
     /**
      * the task is saved with all the data from the detailsview
