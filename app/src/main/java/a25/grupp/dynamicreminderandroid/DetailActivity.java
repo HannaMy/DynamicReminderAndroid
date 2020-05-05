@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -54,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
         constraintLayout.setVisibility(View.GONE);
 
 
-        final Spinner dropDownAlways = findViewById(R.id.dropDownAlways);
+        final Spinner dropDownAlways = findViewById(R.id.ddAvailability);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.available, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropDownAlways.setAdapter(adapter);
@@ -102,14 +101,14 @@ public class DetailActivity extends AppCompatActivity {
                 Task task = null;
                 int selectedTaskId = taskId;  //Todo Fixa task-id! Skickas med intent både från add-knappen och från AdapterTaskOverview-knapp
 
-                EditText editTextTitle = findViewById(R.id.editText);
+                EditText editTextTitle = findViewById(R.id.etTitle);
                 String title = editTextTitle.getText().toString();
                 Log.i("DetailActivity", "The title of the task is: " + title);
 
                 //preferredIntervall
                 int intervalAmount = 5;
                 try {
-                    EditText editTextInterval = findViewById(R.id.editText2);
+                    EditText editTextInterval = findViewById(R.id.etTimeInterval);
                     intervalAmount = Integer.parseInt(editTextInterval.getText().toString());
                     Log.i("DetailActivity", "The preferred interval is: " + "" + intervalAmount);
                 } catch (Exception e) {
@@ -142,7 +141,7 @@ public class DetailActivity extends AppCompatActivity {
                         break;
                 }
 
-                EditText editTextInfo = findViewById(R.id.editText4);
+                EditText editTextInfo = findViewById(R.id.etNotes);
                 String info = editTextInfo.getText().toString();
                 TimeSpan preferredInterval = new TimeSpan(intervalAmount, timeUnit);
 
@@ -194,7 +193,7 @@ public class DetailActivity extends AppCompatActivity {
         if (taskId > 0) {
             setTaskInfo(taskId);
         }
-        final Button btnCalendar = findViewById(R.id.btnCalendar);
+        final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,11 +240,11 @@ public class DetailActivity extends AppCompatActivity {
         Task task = taskregister.getTaskWithId(taskId);
 
         //Sets the title text
-        EditText editTextSetTitle = findViewById(R.id.editText);
+        EditText editTextSetTitle = findViewById(R.id.etTitle);
         editTextSetTitle.setText(task.getTitle());
 
         //Sets the interval number
-        EditText editTextSetInterval = findViewById(R.id.editText2);
+        EditText editTextSetInterval = findViewById(R.id.etTimeInterval);
         editTextSetInterval.setText(String.format("%d", task.getId()));
 
         //Sets the interval time unit
@@ -269,7 +268,7 @@ public class DetailActivity extends AppCompatActivity {
                 break;
         }
 
-        EditText editTextInfo = findViewById(R.id.editText4);
+        EditText editTextInfo = findViewById(R.id.etNotes);
         editTextInfo.setText(task.getInfo());
 
 

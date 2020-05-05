@@ -5,7 +5,11 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import java.io.*;
-
+/**
+ * Stores the data on file
+ * @author Minna Röriksson, Hanna My Jansson
+ * @version 1.1
+ */
 
 public class FileHandler {
     private TaskRegister taskRegister;

@@ -90,8 +90,8 @@
         <Button
             android:id="@+id/btnExpand"
             style="@android:style/Widget.DeviceDefault.Light.Button"
-            android:layout_width="50dp"
-            android:layout_height="80dp"
+            android:layout_width="36dp"
+            android:layout_height="81dp"
             android:background="#C8B9B9"
             android:drawableStart="@drawable/ic_chevron_right_black_24dp"
             android:drawableLeft="@drawable/ic_chevron_right_black_24dp"
