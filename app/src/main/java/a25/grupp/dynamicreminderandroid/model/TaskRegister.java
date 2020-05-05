@@ -24,7 +24,9 @@ public class TaskRegister implements Serializable {
     private int lastId;
     private static TaskRegister register;
 
-
+    /**
+     * Private Constructor of the TaskRegister, creates a hashmap and sets the lastId to 0
+     */
     private TaskRegister() {
         taskHashMap = new HashMap();
         lastId = 0;
@@ -32,6 +34,10 @@ public class TaskRegister implements Serializable {
 
     }
 
+    /**
+     * loads the taskregister from file
+     * @param context
+     */
 
     private void loadTaskRegister(Context context) {
         try {
@@ -39,11 +45,15 @@ public class TaskRegister implements Serializable {
             TaskRegister loadedRegister = fileHandler.readFromFile();
             register.setTaskHashMap(loadedRegister.getTaskHashMap());
             register.setLastId(loadedRegister.getBiggestID());
-        }catch(Exception e){e.printStackTrace();}
+        }catch(Exception e){}
 
     }
 
-
+    /**
+     * Creates a new task register if one does not already exist and returns it
+     * @param context the context of the activity calling the method
+     * @return the task register
+     */
     public static TaskRegister getInstance(Context context) {
         System.out.println("getInstance oooooooooo");
         if(register == null) {
@@ -55,11 +65,23 @@ public class TaskRegister implements Serializable {
         return register;
     }
 
+
+    /**
+     * Sets the lasId witch keeps track of witch ids has been used
+     * only used when loading a saved file
+     * @param lastId the value it is to be set to
+     */
     public void setLastId(int lastId) {
         this.lastId = lastId;
     }
 
-
+    /**
+     * Adds the task to the task register
+     * it only adds the task if it is not null
+     * also saves the taskregister to file
+     * @param task the task that is to be added
+     * @param context the context of the activity that adds the task
+     */
     public void addTask(Task task, Context context) {
         if (task != null) {
             FileHandler fileHandler = new FileHandler(context);
@@ -73,55 +95,88 @@ public class TaskRegister implements Serializable {
 
     }
 
+    /**
+     * removes the task with the task id
+     * @param taskId tha id of the task that is to be removed
+     */
     public void removeWithId(int taskId) {
 
         taskHashMap.remove(taskId);
     }
 
+    /**
+     * Removes the task
+     * @param task the task that is to be removed
+     */
     public void removeTask(Task task) {
         taskHashMap.remove(task);
     }
 
-    public void removeWithIndex(int index) {
-        taskHashMap.remove(index);
-    }
-
-    public Task getTaskWithIndex(int index) {
-        return taskHashMap.get(index);
-
-    }
-
+    /**
+     * saves the taskRegister to file
+     * @param context the context of the activity calling for the save
+     */
     public void saveRegister(Context context){
         FileHandler fileHandler = new FileHandler(context);
         fileHandler.saveToFile(this);
     }
 
+
+    /**
+     * Returns the highest value of a id generated
+     * @return the highest value of a id used in any task
+     */
     public int getBiggestID() {
         return lastId;
     }
 
+    /**
+     * Returns the size of the taskregister
+     * @return the sise of the taskregister
+     */
     public int getSize() {
         return taskHashMap.size();
     }
 
-    public Task getTaskWithId(int id) {
-        Task task = taskHashMap.get(id);
+    /**
+     * finds the task with that id in tha hashmap and returnes it
+     * @param taskId the id of the task
+     * @return the task with that task id, returns null if the task could not be found
+     */
+    public Task getTaskWithId(int taskId) {
+        Task task = taskHashMap.get(taskId);
         return task;
     }
 
+    /**
+     * returns the next id and adds 1 to the lastId variable
+     * @return a id that has not been used yet
+     */
     private int generateId() {
         lastId++;
         return lastId;
     }
 
+    /**
+     * Returns the hashmap of the taskregister
+     * @return the hashmap of the taskregister
+     */
     public HashMap<Integer, Task> getTaskHashMap() {
         return taskHashMap;
     }
 
+    /**
+     * Sets the hashmap of the taskregister
+     * @param taskHashMap the hashMap that is to be set to the register
+     */
     public void setTaskHashMap(HashMap<Integer, Task> taskHashMap) {
         this.taskHashMap = taskHashMap;
     }
 
+    /**
+     * creates an array with all task in
+     * @return the array with all tasks
+     */
     public Task[] getTaskArray() {
 
         Task[] taskArray = new Task[taskHashMap.size()];
@@ -129,16 +184,16 @@ public class TaskRegister implements Serializable {
             Task task = getTaskWithId(i);
             if (task != null) {
                 taskArray[i-1] = task;
-
             }
         }
-
         Log.i("TaskRegister", "Size of taskArray = " + "" + taskArray.length);
-
         return taskArray;
     }
 
-
+    /**
+     *  Creates a string with all tasks
+     * @return the string with all tasks
+     */
     public String toString() {
         String str = "";
         for (int i = 1; i <= taskHashMap.size(); i++) {

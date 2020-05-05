@@ -42,13 +42,16 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
 public class DetailActivity extends AppCompatActivity {
 
-
+    /**
+     * Method is called to when activity is created
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        int taskId = getTaskId();
+        int taskId = getTaskID();
         Log.i("DetailActivity", "taskID = " + "" + taskId);
         start(taskId);
     }
@@ -231,23 +234,44 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * connects the gui components to the logic
+     */
+    private void createGuiComponents(){ }
 
-    //TODO Få fram taskId om det skickats från MainActivity, annars returnera 0
-    public int getTaskId() {
+    /**
+     * Creates the listview adapter and puts the data in the listview
+     */
+    private void createListViewAdapter(){ }
+
+    /**
+     * what happens when cancel is pressed, a popup asking you if you want to cancel is shown and a intent is started to open main activity
+     */
+    private void cancel(){ }
+
+    /**
+     * the task is saved with all the data from the detailsview
+     */
+    private void saveTask(){
+
+}
+
+    /**
+     * Gets the task id from the intent and retunrs it
+     * @return the id of the task
+     */
+    private int getTaskID() {
         Intent intent = getIntent();
         int taskId = intent.getIntExtra("taskId", 0);
-
         Log.i("tag", "Here is the taskId" + " " + taskId);
-
-
         return taskId;
     }
 
-    //If the tasks exists fill in the task information in fields
+
 
     /**
-     *
-     * @param taskId
+     *If the tasks exists fill in the task information in fields
+     * @param taskId the id of the task presented in the view
      */
 
     public void setTaskInfo(int taskId) {
