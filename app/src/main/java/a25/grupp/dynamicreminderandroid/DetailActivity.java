@@ -33,6 +33,13 @@ import a25.grupp.dynamicreminderandroid.model.TaskRegister;
 import a25.grupp.dynamicreminderandroid.model.TimeSpan;
 import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
+/**
+ * The activity that shows the details of the tasks, also the activity to use when adding a new task
+ * @author Hanna My Jansson, Anni Johansson, Cornelia
+ * @version 1.0
+ */
+
+
 public class DetailActivity extends AppCompatActivity {
 
 
@@ -46,7 +53,10 @@ public class DetailActivity extends AppCompatActivity {
         start(taskId);
     }
 
-
+    /**
+     * Starts the Activity
+     * @param taskId the id of the task presented in the view
+     */
     @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
         ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
@@ -233,7 +243,12 @@ public class DetailActivity extends AppCompatActivity {
         return taskId;
     }
 
-    // If the tasks exists fill in the task information in fields
+    //If the tasks exists fill in the task information in fields
+
+    /**
+     *
+     * @param taskId
+     */
 
     public void setTaskInfo(int taskId) {
         TaskRegister taskregister = TaskRegister.getInstance(this.getBaseContext());

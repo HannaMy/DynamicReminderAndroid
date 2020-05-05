@@ -25,6 +25,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeSpan;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
                          //TODO fixa rätt timeunit
                 taskIds[i] = task.getId();
             }
-
 
 
             //Listview
