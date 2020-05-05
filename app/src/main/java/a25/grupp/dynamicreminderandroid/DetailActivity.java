@@ -230,6 +230,7 @@ public class DetailActivity extends AppCompatActivity {
         TaskRegister taskRegister = TaskRegister.getInstance(this);
 
         taskRegister.removeWithId(taskId);
+        taskRegister.saveRegister(this);
 
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(delete);
