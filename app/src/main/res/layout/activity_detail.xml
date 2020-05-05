@@ -84,7 +84,7 @@
                     android:background="#FFFFFF"
                     android:ems="10"
                     android:gravity="center"
-                    android:hint="5"
+                    android:hint="0"
                     android:inputType="number"
                     android:textColor="#222121"
                     android:textSize="16dp"

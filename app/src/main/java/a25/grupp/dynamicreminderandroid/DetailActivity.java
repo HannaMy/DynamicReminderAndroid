@@ -36,6 +36,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
 public class DetailActivity extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         start(taskId);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
         ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
@@ -85,9 +87,9 @@ public class DetailActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cancel = new Intent(DetailActivity.this, MainActivity.class);
-                startActivity(cancel);
-                //TODO här behövs en pop up som bekräftar att användaren vill gå tillbaka utan att spara
+                PopUp popUp = new PopUp();
+                //Shows a pop-up dialog asking if the user wants to return without saving
+                popUp.returnWithoutSaving(DetailActivity.this, DetailActivity.this);
             }
         });
         Button btnSave = findViewById(R.id.btnSave);
@@ -105,14 +107,21 @@ public class DetailActivity extends AppCompatActivity {
                 Log.i("DetailActivity", "The title of the task is: " + title);
 
                 //preferredIntervall
-                int intervalAmount = 5;
+                int intervalAmount = 0;
                 try {
                     EditText editTextInterval = findViewById(R.id.editText2);
                     intervalAmount = Integer.parseInt(editTextInterval.getText().toString());
-                    Log.i("DetailActivity", "The preferred interval is: " + "" + intervalAmount);
+                    System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + intervalAmount);
                 } catch (Exception e) {
                    //Todo Felmeddelande med texten "You need to add a preferred interval as a number"
 
+                }
+                if(intervalAmount != 0){
+
+                    Log.i("DetailActivity", "The preferred interval is: " + "" + intervalAmount);
+                } else if(intervalAmount == 0){
+                    PopUp popUp = new PopUp();
+                    popUp.invalidInterval(DetailActivity.this);
                 }
 
                 // Get the correct TimeUnit from dropdown menu.
@@ -224,6 +233,14 @@ public class DetailActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+    }
+
+    /**
+     * exits the detailactivity view without saving
+     */
+    public void cancel(){
+        Intent cancel = new Intent(DetailActivity.this, MainActivity.class);
+        startActivity(cancel);
     }
 
 
