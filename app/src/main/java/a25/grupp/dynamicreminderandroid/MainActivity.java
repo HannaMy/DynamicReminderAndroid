@@ -8,16 +8,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ListView;
 
 import java.util.Calendar;
 
-import a25.grupp.dynamicreminderandroid.model.FileHandler;
 import a25.grupp.dynamicreminderandroid.model.Notification;
 import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
@@ -51,6 +51,17 @@ public class MainActivity extends AppCompatActivity {
         //addNotification(this, task.generateNotification()); //TODO: flytta till korrekt ställe
     }
 
+    /**
+     * Creates a menu button for deleting in the toolbar
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.delete_menu, menu);
+        return true;
+    }
 
     private void initiateAdapter(){
 
