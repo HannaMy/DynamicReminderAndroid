@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -77,6 +78,25 @@ public class DetailActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.delete_menu, menu);
         return true;
+    }
+
+    /**
+     * On click listener for the delete button.
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        System.out.println("Clicked on delete");
+        if(item.getItemId() == R.id.delete_button) {
+                deleteTask();
+                return true;
+        }
+        else{
+            return super.onOptionsItemSelected(item);
+        }
+
+      //  return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -199,6 +219,22 @@ public class DetailActivity extends AppCompatActivity {
         lastPerformed.setHours(hour);
         lastPerformed.setMinutes(minute);
 
+    }
+
+    /**
+     * Deletes the selected task.
+     */
+    public void deleteTask()
+    {
+        int taskId = getTaskID();
+        TaskRegister taskRegister = TaskRegister.getInstance(this);
+
+        taskRegister.removeWithId(taskId);
+
+        Intent delete = new Intent(DetailActivity.this, MainActivity.class);
+        startActivity(delete);
+
+        // TODO Pop up som varnar & radera task från fil
     }
 
     /**
