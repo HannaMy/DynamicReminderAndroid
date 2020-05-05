@@ -32,21 +32,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTimeUnit" />
 
-        <ImageButton
-            android:id="@+id/btnDetails"
-            android:layout_width="34dp"
-            android:layout_height="80dp"
-            android:background="#17300909"
-            android:scaleType="center"
-            android:tint="#00911010"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_chevron_right_black_24dp"
-            tools:srcCompat="@drawable/ic_chevron_right_black_24dp" />
-
         <TextView
             android:id="@+id/tvTimeUnit"
             android:layout_width="62dp"
@@ -102,6 +87,19 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="79dp" />
 
+        <Button
+            android:id="@+id/btnExpand"
+            style="@android:style/Widget.DeviceDefault.Light.Button"
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:drawableStart="@drawable/ic_chevron_right_black_24dp"
+            android:drawableLeft="@drawable/ic_chevron_right_black_24dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>

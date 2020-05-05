@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -52,7 +53,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) mainActivity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View taskListItem = layoutInflater.inflate(R.layout.task_list_item,parent, false);
 
-        ImageButton btnDetails = taskListItem.findViewById(R.id.btnDetails);
+        Button btnDetails = taskListItem.findViewById(R.id.btnExpand);
         TextView tvAmountTime = taskListItem.findViewById(R.id.tvNbrTimeLeft);
         TextView tvTimeUnit = taskListItem.findViewById(R.id.tvTimeUnit);
         TextView tvTitle = taskListItem.findViewById(R.id.tvTitle);
