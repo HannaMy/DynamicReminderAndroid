@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import a25.grupp.dynamicreminderandroid.model.Notification;
 import a25.grupp.dynamicreminderandroid.model.PossibleTime;
@@ -50,6 +51,7 @@ public class DetailActivity extends AppCompatActivity {
      *
      * @param savedInstanceState
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,7 @@ public class DetailActivity extends AppCompatActivity {
      *
      * @param taskId the id of the task presented in the view
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
         ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
@@ -173,6 +176,11 @@ public class DetailActivity extends AppCompatActivity {
             }
         }, year, month, day);
         datePickerDialog.show();
+        Date lastPerformed = new Date();
+        lastPerformed.setYear(year);
+        lastPerformed.setMonth(month);
+        lastPerformed.setDate(day);
+
     }
 
     /**
