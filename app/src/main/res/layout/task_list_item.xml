@@ -92,6 +92,7 @@
             style="@android:style/Widget.DeviceDefault.Light.Button"
             android:layout_width="50dp"
             android:layout_height="80dp"
+            android:background="#C8B9B9"
             android:drawableStart="@drawable/ic_chevron_right_black_24dp"
             android:drawableLeft="@drawable/ic_chevron_right_black_24dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
