@@ -37,16 +37,18 @@ public class PopUp extends AppCompatDialogFragment {
         return returnValue;
     }
 
-    public Dialog invalidInterval(Context context){
+    public void invalidInterval(Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Invalid interval");
         builder.setMessage("You need to add a preferred interval as a number");
-        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
-        return builder.create();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        //return builder.create();
     }
 }
