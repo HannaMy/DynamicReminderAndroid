@@ -45,6 +45,8 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
 public class DetailActivity extends AppCompatActivity {
 
+    private Date lastPerformed;
+
 
     /**
      * Method is called to when activity is created
@@ -176,10 +178,12 @@ public class DetailActivity extends AppCompatActivity {
             }
         }, year, month, day);
         datePickerDialog.show();
-        Date lastPerformed = new Date();
+        lastPerformed = new Date();
         lastPerformed.setYear(year);
         lastPerformed.setMonth(month);
         lastPerformed.setDate(day);
+        lastPerformed.setHours(hour);
+        lastPerformed.setMinutes(minute);
 
     }
 
@@ -263,6 +267,7 @@ public class DetailActivity extends AppCompatActivity {
         if (selectedTaskId <= 0) {
             task = new Task(title, info, preferredInterval);
             task.setPossibleTimeForExecution(possibleTime);
+            task.setLastPerformed(lastPerformed);
             TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
             System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ task sparad");
             int id = task.getId();  //Todo den bör kunna tas bort?
@@ -275,6 +280,7 @@ public class DetailActivity extends AppCompatActivity {
             task.setTitle(title);
             task.setPreferredInterval(preferredInterval);
             task.setPossibleTimeForExecution(possibleTime);
+            task.setLastPerformed(lastPerformed);
             addNotification(getApplicationContext(), task.getNextNotification());
             taskRegister.saveRegister(DetailActivity.this);
             Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());
