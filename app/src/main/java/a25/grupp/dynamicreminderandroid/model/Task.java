@@ -68,7 +68,9 @@ public class Task implements Comparable<Object>, Serializable {
     }
 
     public Notification generateNotification(){
+        //Date timeForNotification = getDateForNotification();
         Date timeForNotification = new Date();
+
         String randomPhase = "Did you remember to ";//TODO: hämta en random fråga
         String message = randomPhase + title + "?";
 
@@ -76,8 +78,6 @@ public class Task implements Comparable<Object>, Serializable {
         if (possibleTimeForExecution != null){
             //kod som anpassar timeForNotification så att det stämmer överens med possible time
         }
-
-        //timeForNotification.setTime(getTimeUntil()); TODO: skriva kod som omvandlar timeUnitil till ett Date-objekt
         nextNotification = new Notification(this, timeForNotification, message);
         return nextNotification;
     }
