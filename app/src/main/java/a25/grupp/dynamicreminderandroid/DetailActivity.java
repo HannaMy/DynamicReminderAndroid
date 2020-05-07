@@ -349,6 +349,7 @@ public class DetailActivity extends AppCompatActivity {
             task.setPreferredInterval(preferredInterval);
             task.setPossibleTimeForExecution(possibleTime);
             task.setLastPerformed(lastPerformed);
+            task.setNextNotification();
             addNotification(getApplicationContext(), task.getNextNotification());
             taskRegister.saveRegister(DetailActivity.this);
             Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());

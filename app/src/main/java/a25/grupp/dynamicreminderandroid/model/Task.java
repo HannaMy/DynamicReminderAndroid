@@ -169,6 +169,8 @@ public class Task implements Comparable<Object>, Serializable {
 
         int preferredIntervalInMinutes = preferredInterval.getInMinutes();
         int timeUntilMINUTES = (int) (preferredIntervalInMinutes - minutesDIFFERENCE);
+
+        System.out.println("Time until in minutes = " + timeUntilMINUTES);
         return timeUntilMINUTES;
     }
     public int getTimeUntil(){
