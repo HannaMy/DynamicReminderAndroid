@@ -1,18 +1,10 @@
 package a25.grupp.dynamicreminderandroid.model;
 
 import android.content.Context;
-
 import android.util.Log;
-
-import android.content.Context;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 import java.io.Serializable;
 import java.util.HashMap;
-
-import a25.grupp.dynamicreminderandroid.DetailActivity;
-import a25.grupp.dynamicreminderandroid.MainActivity;
 
 /**
  * @author Hanna My Jansson
@@ -102,6 +94,7 @@ public class TaskRegister implements Serializable {
     public void removeWithId(int taskId) {
 
         taskHashMap.remove(taskId);
+        System.out.println("TTTTTTTTTTTTTTTT taskregister size" + taskHashMap.size());
     }
 
     /**
