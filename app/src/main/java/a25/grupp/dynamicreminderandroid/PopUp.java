@@ -1,9 +1,12 @@
 package a25.grupp.dynamicreminderandroid;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatDialogFragment;
 
 public class PopUp extends AppCompatDialogFragment {
@@ -37,14 +40,16 @@ public class PopUp extends AppCompatDialogFragment {
         return returnValue;
     }
 
-    public void invalidInterval(Context context){
+    public void invalidInterval(final Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Invalid interval");
         builder.setMessage("You need to add a preferred interval as a number");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                dialog.dismiss();
+                Intent intent = new Intent(context, DetailActivity.class);
+                startActivity(intent);
             }
         });
         AlertDialog alertDialog = builder.create();
