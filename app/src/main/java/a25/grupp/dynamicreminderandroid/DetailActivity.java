@@ -408,6 +408,13 @@ public class DetailActivity extends AppCompatActivity {
         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
         String date = formatDate.format(task.getLastPerformed());
         btnCalendarLastPerformed.setText(date);
+        btnCalendarLastPerformed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar();
+            }
+        });
+
 
     }
 
