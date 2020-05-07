@@ -68,8 +68,8 @@ public class Task implements Comparable<Object>, Serializable {
     }
 
     public Notification generateNotification(){
-        //Date timeForNotification = getDateForNotification();
-        Date timeForNotification = new Date();
+        Date timeForNotification = getDateForNotification();
+      //  Date timeForNotification = new Date();
 
         String randomPhase = "Did you remember to ";//TODO: hämta en random fråga
         String message = randomPhase + title + "?";
