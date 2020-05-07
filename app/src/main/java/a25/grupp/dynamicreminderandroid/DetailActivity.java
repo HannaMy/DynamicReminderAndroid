@@ -235,7 +235,7 @@ public class DetailActivity extends AppCompatActivity {
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(delete);
 
-        // TODO Pop up som varnar & radera task från fil
+        // TODO Pop up som varnar & radera notifikation
     }
 
     /**
