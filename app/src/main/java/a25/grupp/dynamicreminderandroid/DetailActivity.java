@@ -332,8 +332,10 @@ public class DetailActivity extends AppCompatActivity {
                 final int minutes = calendar.get(Calendar.MINUTE);
                 lastPerformed = calendar.getTime();
             }
+            task.setNextNotification();
 
             task.setLastPerformed(lastPerformed);
+            System.out.println("PPPPPPPPPPPPPPPPPPP lastperformed =" + lastPerformed);
             TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
             System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ task sparad");
             int id = task.getId();  //Todo den bör kunna tas bort?
