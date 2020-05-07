@@ -322,6 +322,17 @@ public class DetailActivity extends AppCompatActivity {
         if (selectedTaskId <= 0) {
             task = new Task(title, info, preferredInterval);
             task.setPossibleTimeForExecution(possibleTime);
+
+            if(lastPerformed == null) {
+                Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int months = calendar.get(Calendar.MONTH);
+                int years = calendar.get(Calendar.YEAR);
+                final int hours = calendar.get(Calendar.HOUR_OF_DAY);
+                final int minutes = calendar.get(Calendar.MINUTE);
+                lastPerformed = calendar.getTime();
+            }
+
             task.setLastPerformed(lastPerformed);
             TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
             System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ task sparad");
@@ -405,6 +416,7 @@ public class DetailActivity extends AppCompatActivity {
         lastPerformed = task.getLastPerformed();
         Button btnCalendarLastPerformed = findViewById(R.id.btnCalendarLastPreformed);
         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
+        System.out.println("Task last performed = " + task.getLastPerformed());
         String date = formatDate.format(task.getLastPerformed());
         btnCalendarLastPerformed.setText(date);
         btnCalendarLastPerformed.setOnClickListener(new View.OnClickListener() {
