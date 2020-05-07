@@ -191,7 +191,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(updateThread != null) {
+            updateThread.setRunning(false);
+            updateThread = null;
+        }
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(updateThread != null) {
+            updateThread.setRunning(false);
+            updateThread = null;
+        }
     }
 
     public class UpdateThread extends Thread {
@@ -213,7 +225,9 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Thread: Task Updated");
                 try {
                     Task[] taskArray = TaskRegister.getInstance(context).getTaskArray();
-                    adapter.setTaskArray(taskArray);
+                    if(taskArray.length > 0) {
+                        adapter.setTaskArray(taskArray);
+                    }
                     //adapter.updateList();
                     sleep(10000);
                 } catch (InterruptedException e) {
