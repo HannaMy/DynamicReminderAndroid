@@ -84,9 +84,10 @@ public class PossibleTime implements Serializable {
     }
 
     /**
+     *checks if the chosen interval is correct and possible to choose
      *
-     * @param date
-     * @return
+     * @param date a date from the chosen interval
+     * @return true if it is possible and false if it is not possible
      */
     public boolean possible(Date date){
         return ( possibleWeekDays.possible(date)  &&  possibleDates.possible(date)  &&   possibleHours.possible(date) );
