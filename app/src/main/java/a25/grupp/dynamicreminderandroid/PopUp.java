@@ -56,4 +56,8 @@ public class PopUp extends AppCompatDialogFragment {
         alertDialog.show();
         //return builder.create();
     }
+
+    public void popUpOnDeleteBtn(){
+
+    }
 }
