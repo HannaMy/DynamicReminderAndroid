@@ -28,7 +28,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -376,7 +375,7 @@ public class DetailActivity extends AppCompatActivity {
 
         //Sets the interval number
         EditText editTextSetInterval = findViewById(R.id.etTimeInterval);
-        editTextSetInterval.setText(String.format("%d", task.getId()));
+        editTextSetInterval.setText(String.format("%d", task.getPreferredInterval().getTime()));
 
         //Sets the interval time unit
         Spinner intervalTimeUnit = findViewById(R.id.dropDown_timeUnit);
