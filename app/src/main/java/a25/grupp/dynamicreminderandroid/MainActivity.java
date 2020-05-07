@@ -25,6 +25,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeSpan;
 
 public class MainActivity extends AppCompatActivity {
 
+    private UpdateThread updateThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
         Task[] taskArray = taskRegister.getTaskArray();
         System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÄÄÄÄÄÄÄÄÄÄÄÄÅÅÅÅÅÅÅÅÅÅÅ: taskArray: " + taskArray);
 
+        AdapterTaskOverview adapterTaskOverview;
+
      if(taskArray.length > 0) {
 
            int size = taskArray.length;
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             //Listview
-            AdapterTaskOverview adapterTaskOverview = new AdapterTaskOverview(this, titles);
+            adapterTaskOverview = new AdapterTaskOverview(this, titles);
             adapterTaskOverview.setTaskArray(taskArray);
 
             //adapterTaskOverview.updateListData(titles,intervalInfos,times,timeUnits,taskIds);
@@ -140,11 +143,13 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             //Listview
-            AdapterTaskOverview adapterTaskOverview = new AdapterTaskOverview(this, titles);
+            adapterTaskOverview = new AdapterTaskOverview(this, titles);
             adapterTaskOverview.updateListData(titles,intervalInfos,times,timeUnits,taskIds);
             ListView listView = findViewById(R.id.listviewOverview);
             listView.setAdapter(adapterTaskOverview);
         }
+
+        updateThread = new UpdateThread(adapterTaskOverview, this);
 
     }
 
@@ -183,4 +188,44 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-}
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    public class UpdateThread extends Thread {
+
+        private AdapterTaskOverview adapter;
+        private Context context;
+        private boolean running = true;
+
+        public UpdateThread(AdapterTaskOverview adapter, Context context) {
+            this.adapter = adapter;
+            this.context = context;
+            start();
+        }
+
+        @Override
+        public void run() {
+            while (running) {
+
+                System.out.println("Thread: Task Updated");
+                try {
+                    Task[] taskArray = TaskRegister.getInstance(context).getTaskArray();
+                    adapter.setTaskArray(taskArray);
+                    //adapter.updateList();
+                    sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        public void setRunning(boolean running)
+        { this.running = running;}
+        }
+
+    }
+
+
