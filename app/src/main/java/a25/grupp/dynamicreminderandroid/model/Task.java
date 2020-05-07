@@ -77,7 +77,7 @@ public class Task implements Comparable<Object>, Serializable {
             //kod som anpassar timeForNotification så att det stämmer överens med possible time
         }
 
-        timeForNotification.setTime(getTimeUntil());
+        //timeForNotification.setTime(getTimeUntil()); TODO: skriva kod som omvandlar timeUnitil till ett Date-objekt
         nextNotification = new Notification(this, timeForNotification, message);
         return nextNotification;
     }

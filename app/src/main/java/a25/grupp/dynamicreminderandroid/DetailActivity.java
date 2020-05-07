@@ -28,6 +28,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -161,13 +163,20 @@ public class DetailActivity extends AppCompatActivity {
         if (taskId > 0) {
             setTaskInfo(taskId);
         }
-        final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
-        btnCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar();
-            }
-        });
+
+        if(taskId == 0){
+            final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
+            Date currentTime = new Date();
+            btnCalendar.setText(currentTime.getDate() + "/" + (currentTime.getMonth() +1) + "/" + (currentTime.getYear() + 1900) +
+                    "\n" + currentTime.getHours() + ":" + currentTime.getMinutes()); // sets button with current time and date
+            btnCalendar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    calendar();
+                }
+            });
+        }
+
     }
 
     /**
@@ -192,11 +201,11 @@ public class DetailActivity extends AppCompatActivity {
 
     public void calendar() {
         Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR);
-        final int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        final int minute = calendar.get(Calendar.MINUTE);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int months = calendar.get(Calendar.MONTH);
+        int years = calendar.get(Calendar.YEAR);
+        final int hours = calendar.get(Calendar.HOUR_OF_DAY);
+        final int minutes = calendar.get(Calendar.MINUTE);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(DetailActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -206,19 +215,15 @@ public class DetailActivity extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
                         btnCalendar.setText(dayOfMonth + "/" + month + "/" + year + "\n" + hourOfDay + ":" + minute);
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(year, month, dayOfMonth, hourOfDay, minute);
+                        lastPerformed = cal.getTime();
                     }
-                }, hour, minute, android.text.format.DateFormat.is24HourFormat(DetailActivity.this));
+                }, hours, minutes, android.text.format.DateFormat.is24HourFormat(DetailActivity.this));
                 timePickerDialog.show();
             }
-        }, year, month, day);
+        }, years, months, day);
         datePickerDialog.show();
-        lastPerformed = new Date();
-        lastPerformed.setYear(year);
-        lastPerformed.setMonth(month);
-        lastPerformed.setDate(day);
-        lastPerformed.setHours(hour);
-        lastPerformed.setMinutes(minute);
-
     }
 
     /**
@@ -396,6 +401,19 @@ public class DetailActivity extends AppCompatActivity {
 
         EditText editTextInfo = findViewById(R.id.etNotes);
         editTextInfo.setText(task.getInfo());
+
+        //sets last performed button
+        lastPerformed = task.getLastPerformed();
+        Button btnCalendarLastPerformed = findViewById(R.id.btnCalendarLastPreformed);
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
+        String date = formatDate.format(task.getLastPerformed());
+        btnCalendarLastPerformed.setText(date);
+        btnCalendarLastPerformed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar();
+            }
+        });
 
 
     }
