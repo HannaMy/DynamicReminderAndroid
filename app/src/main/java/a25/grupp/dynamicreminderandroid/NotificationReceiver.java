@@ -2,6 +2,7 @@ package a25.grupp.dynamicreminderandroid;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     private PendingIntent yesPendingIntent;
     private PendingIntent yesEarlierPendingIntent;
     private PendingIntent noPendingIntent;
+    private int taskId;
 
     /**
      * This method creates a notification that it will broadcast at a given time
@@ -32,6 +34,7 @@ public class NotificationReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive(Context context, Intent intent) {
+        taskId = intent.getIntExtra("taskId", 0);
         this.context = context;
         title = "Hey you"; //metod för att hämta titel
         message = intent.getStringExtra("message");
@@ -41,9 +44,12 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         //What happens when the user clicks on the notification
         Intent landingIntent = new Intent(context, DetailActivity.class);
+        landingIntent.putExtra("taskId", taskId);
+        //TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         landingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent landingPendingIntent = PendingIntent.getActivity(context, 0, landingIntent, PendingIntent.FLAG_ONE_SHOT);
-
+        //stackBuilder.addNextIntentWithParentStack(landingIntent);
+        //PendingIntent landingPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent landingPendingIntent = PendingIntent.getActivity(context, 0, landingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         createButtonIntents();
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
