@@ -33,6 +33,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
     private Activity mainActivity;
     private Task[] taskArray;
     private String[] lateOrLeft;
+    private  TextView tvAmountTime;
 
     /**
      * Constructor
@@ -122,6 +123,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
         TextView tvTimeUnit = taskListItem.findViewById(R.id.tvTimeUnit);
         TextView tvTitle = taskListItem.findViewById(R.id.tvTitle);
         TextView tvInterval = taskListItem.findViewById(R.id.tvInterval);
+        Button btnDone = taskListItem.findViewById(R.id.btn_Done);
 
         if (taskArray != null) {
 
@@ -146,6 +148,14 @@ public class AdapterTaskOverview extends ArrayAdapter {
                 }
             });
 
+            btnDone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    taskArray[position].markAsDoneNow();
+
+                }
+            });
+
 
         } else {
             System.out.println("Adapter: getView " + position);
@@ -165,5 +175,9 @@ public class AdapterTaskOverview extends ArrayAdapter {
 
         }
         return taskListItem;
+    }
+
+    private void updateList(){
+        this.notifyDataSetChanged();
     }
 }
