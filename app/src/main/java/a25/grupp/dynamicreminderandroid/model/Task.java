@@ -151,6 +151,21 @@ public class Task implements Comparable<Object>, Serializable {
         return possibleTimeForExecution.getPossibleHours();
     }
 
+
+    private int getMinutesUntil(){
+        Calendar cal = Calendar.getInstance();
+        Date dateNow = cal.getTime();
+        dateNow.compareTo(lastPerformed);
+
+        long millisecondsNOW = dateNow.getTime();
+        long millisecondsDONE = lastPerformed.getTime();
+        long millisecondsDIFFERENCE = millisecondsNOW-millisecondsDONE;
+        long minutesDIFFERENCE = millisecondsDIFFERENCE/60000;
+
+        int preferredIntervalInMinutes = preferredInterval.getInMinutes();
+        int timeUntilMINUTES = (int) (preferredIntervalInMinutes - minutesDIFFERENCE);
+        return timeUntilMINUTES;
+    }
     public int getTimeUntil(){
 
             int time = preferredInterval.getTime();
@@ -163,17 +178,7 @@ public class Task implements Comparable<Object>, Serializable {
         }else{
 
             //calculates the time left of the task and returns it in the unit specified in preferredInterval.
-            Calendar cal = Calendar.getInstance();
-            Date dateNow = cal.getTime();
-            dateNow.compareTo(lastPerformed);
-
-            long millisecondsNOW = dateNow.getTime();
-            long millisecondsDONE = lastPerformed.getTime();
-            long millisecondsDIFFERENCE = millisecondsNOW-millisecondsDONE;
-            long minutesDIFFERENCE = millisecondsDIFFERENCE/60000;
-
-            int preferredIntervalInMinutes = preferredInterval.getInMinutes();
-            int timeUntilMINUTES = (int) (preferredIntervalInMinutes - minutesDIFFERENCE);
+         int timeUntilMINUTES = getMinutesUntil();
 
             switch (preferredInterval.getTimeUnit()) {
                 case hour:
@@ -200,6 +205,28 @@ public class Task implements Comparable<Object>, Serializable {
 
 
         return timeUntil;
+    }
+
+    /**
+     * Calculates the date that the notification should come
+     * @return the date for the notification
+     */
+    public Date getDateForNotification(){
+        int timeUntilMINUTES = getMinutesUntil();
+        long millisecondsUntil = timeUntilMINUTES*60000;
+        long millisecondsThen = 0;
+
+
+        Calendar cal = Calendar.getInstance();
+        Date dateNow = cal.getTime();
+        long millisecondsNOW = dateNow.getTime();
+
+        millisecondsThen = millisecondsNOW + millisecondsUntil;
+
+
+        Date date = new Date();
+        date.setTime(millisecondsThen);
+        return date;
     }
 
     public TimeUnit getTimeUnit(){
