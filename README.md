@@ -4,9 +4,9 @@
 
 ### Preparations
 In order to run the application, you'll need to have Android Studio installed on your computer.
-Download it here: (https://developer.android.com/studio/?gclid=Cj0KCQjwhtT1BRCiARIsAGlY51Ix05T9dPbBpxcUlt1wQNHyMgQdud43W6Q1AN9Al07qbkZZKz6t9bEaAneOEALw_wcB&gclsrc=aw.ds).
-Install the application om your personal computer, here (https://www.geeksforgeeks.org/guide-to-install-and-set-up-android-studio/) is a guide you can follow.
-Clone this repository and open it in Android Studio, then either connect an Android device (with developer access) or create a virtual device in the AVD-manager in Android Studio, click here: (https://developer.android.com/studio/run/managing-avds) for a guide. The application is compatible on devces that runs om Android API 19 and above, so make sure that your device is at least running on KitKat.
+Download it [here](https://developer.android.com/studio/?gclid=Cj0KCQjwhtT1BRCiARIsAGlY51Ix05T9dPbBpxcUlt1wQNHyMgQdud43W6Q1AN9Al07qbkZZKz6t9bEaAneOEALw_wcB&gclsrc=aw.ds).
+Install the application om your personal computer, [here](https://www.geeksforgeeks.org/guide-to-install-and-set-up-android-studio/) is a guide you can follow.
+Clone this repository and open it in Android Studio, then either connect an Android device (with developer access) or create a virtual device in the AVD-manager in Android Studio, click [here](https://developer.android.com/studio/run/managing-avds) for a guide. The application is compatible on devces that runs om Android API 19 and above, so make sure that your device is at least running on KitKat.
 
 ### Run the application
 Make sure that the device you want to run the application on is connected and running. Then press the green play-button in the menubar close to the top of Adroid Studio. Yoc can also access this in Run>Run app.
