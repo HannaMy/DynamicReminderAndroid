@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
          */
 
 
-
+        System.out.println("MAIN ACTIVITY task register size: " + taskRegister.getSize());
         Task[] taskArray = taskRegister.getTaskArray();
         System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÄÄÄÄÄÄÄÄÄÄÄÄÅÅÅÅÅÅÅÅÅÅÅ: taskArray: " + taskArray);
 
@@ -149,7 +149,9 @@ public class MainActivity extends AppCompatActivity {
             listView.setAdapter(adapterTaskOverview);
         }
 
-        updateThread = new UpdateThread(adapterTaskOverview, this);
+        taskRegister.saveRegister(this);
+
+       // updateThread = new UpdateThread(adapterTaskOverview, this);
 
     }
 

@@ -173,10 +173,13 @@ public class TaskRegister implements Serializable {
     public Task[] getTaskArray() {
 
         Task[] taskArray = new Task[taskHashMap.size()];
+        int counter = 0;
         for (int i = 1; i <= lastId; i++) {
             Task task = getTaskWithId(i);
             if (task != null) {
-                taskArray[i-1] = task;
+                System.out.println("Task register get task array i = " + i);
+                taskArray[counter] = task;
+                counter++;
             }
         }
         Log.i("TaskRegister", "Size of taskArray = " + "" + taskArray.length);

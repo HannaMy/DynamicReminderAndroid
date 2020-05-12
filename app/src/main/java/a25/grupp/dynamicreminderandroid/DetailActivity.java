@@ -234,6 +234,7 @@ public class DetailActivity extends AppCompatActivity {
         TaskRegister taskRegister = TaskRegister.getInstance(this);
 
         taskRegister.removeWithId(taskId);
+        System.out.println("Detail vid delete taskregister size: " + taskRegister.getSize());
         taskRegister.saveRegister(this);
 
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
