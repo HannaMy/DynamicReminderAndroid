@@ -220,7 +220,7 @@ public class DetailActivity extends AppCompatActivity {
                         cal.set(year, month, dayOfMonth, hourOfDay, minute);
                         lastPerformed = cal.getTime();
                         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
-                        String strDate = formatDate.format(cal);
+                        String strDate = formatDate.format(lastPerformed);
                         final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
                         btnCalendar.setText(strDate);
                     }
@@ -332,11 +332,6 @@ public class DetailActivity extends AppCompatActivity {
 
             if(lastPerformed == null) {
                 Calendar calendar = Calendar.getInstance();
-                final int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int months = calendar.get(Calendar.MONTH);
-                int years = calendar.get(Calendar.YEAR);
-                final int hours = calendar.get(Calendar.HOUR_OF_DAY);
-                final int minutes = calendar.get(Calendar.MINUTE);
                 lastPerformed = calendar.getTime();
             }
             task.setNextNotification();

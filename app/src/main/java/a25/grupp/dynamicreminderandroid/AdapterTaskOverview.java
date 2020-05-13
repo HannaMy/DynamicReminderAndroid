@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import a25.grupp.dynamicreminderandroid.model.Task;
 
+import static a25.grupp.dynamicreminderandroid.R.*;
+
 /**
  * Adapts the data in to tle list view in the overview in mainActivity
  *
@@ -42,7 +44,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
      * @param titles  teh titles of the tasks
      */
     public AdapterTaskOverview(@NonNull Context context, String[] titles) {
-        super(context, R.layout.task_list_item, R.id.tvTitle, titles);
+        super(context, layout.task_list_item, id.tvTitle, titles);
         System.out.println("adaper: construct");
         this.mainActivity = (MainActivity) context;
     }
@@ -116,14 +118,14 @@ public class AdapterTaskOverview extends ArrayAdapter {
 
 
         LayoutInflater layoutInflater = (LayoutInflater) mainActivity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View taskListItem = layoutInflater.inflate(R.layout.task_list_item, parent, false);
+        View taskListItem = layoutInflater.inflate(layout.task_list_item, parent, false);
 
-        Button btnDetails = taskListItem.findViewById(R.id.btnExpand);
-        TextView tvAmountTime = taskListItem.findViewById(R.id.tvNbrTimeLeft);
-        TextView tvTimeUnit = taskListItem.findViewById(R.id.tvTimeUnit);
-        TextView tvTitle = taskListItem.findViewById(R.id.tvTitle);
-        TextView tvInterval = taskListItem.findViewById(R.id.tvInterval);
-        Button btnDone = taskListItem.findViewById(R.id.btn_Done);
+        Button btnDetails = taskListItem.findViewById(id.btnExpand);
+        TextView tvAmountTime = taskListItem.findViewById(id.tvNbrTimeLeft);
+        TextView tvTimeUnit = taskListItem.findViewById(id.tvTimeUnit);
+        TextView tvTitle = taskListItem.findViewById(id.tvTitle);
+        TextView tvInterval = taskListItem.findViewById(id.tvInterval);
+        Button btnDone = taskListItem.findViewById(id.btn_Done);
 
         if (taskArray != null) {
 
@@ -132,11 +134,39 @@ public class AdapterTaskOverview extends ArrayAdapter {
             tvTitle.setText(taskArray[position].getTitle());
 
             //set the time unit
-            String leftOrLate  = lateOrLeft(taskArray[position]);
-            int color = textColor(taskArray[position]);
-            tvTimeUnit.setText(taskArray[position].getPreferredInterval().getTimeUnit().toString() + leftOrLate);
-            tvAmountTime.setTextColor(color);
-            tvTimeUnit.setTextColor(color);
+            int timeUntil = taskArray[position].getTimeUntil();
+
+            if (timeUntil > 1){
+                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s left";
+                tvTimeUnit.setText(timeUnit);
+                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.green));
+                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.green));
+
+            } if (timeUntil == 1){
+                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + " left";
+                tvTimeUnit.setText(timeUnit);
+                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.green));
+                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.green));
+
+            } if (timeUntil == 0){
+                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + " left";
+                tvTimeUnit.setText(timeUnit);
+                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.green));
+                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.green));
+
+            }if (timeUntil < 0){
+                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s late";
+                tvTimeUnit.setText(timeUnit);
+                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.red));
+                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.red));
+
+            }
+
+            //String leftOrLate  = lateOrLeft(taskArray[position]);
+            //int color = textColor(taskArray[position]);
+            //tvTimeUnit.setText(taskArray[position].getPreferredInterval().getTimeUnit().toString() + leftOrLate);
+            //tvAmountTime.setTextColor(color);
+            //tvTimeUnit.setTextColor(color);
 
             btnDetails.setOnClickListener(new View.OnClickListener() {
                 @Override
