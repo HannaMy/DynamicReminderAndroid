@@ -48,7 +48,9 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
 
 public class DetailActivity extends AppCompatActivity {
-
+    private PendingIntent notificationPendingIntent;
+    private AlarmManager notificationAlarmManager;
+    private Intent notificationIntent;
     private Date lastPerformed;
 
 
@@ -243,6 +245,9 @@ public class DetailActivity extends AppCompatActivity {
     public void deleteTask() {
         int taskId = getTaskID();
         TaskRegister taskRegister = TaskRegister.getInstance(this);
+
+        notificationAlarmManager.cancel(notificationPendingIntent);
+        notificationPendingIntent.cancel();
 
         taskRegister.removeWithId(taskId);
         System.out.println("Detail vid delete taskregister size: " + taskRegister.getSize());
@@ -446,7 +451,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-
+        addNotification(this, task.getNextNotification(), taskId);
     }
 
     /**
@@ -454,15 +459,15 @@ public class DetailActivity extends AppCompatActivity {
      */
     public void addNotification(Context context, Notification notification, int taskId) {
         Calendar nextNotification = notification.getCalendarTimeForNotification();
-        Intent intent = new Intent(context, NotificationReceiver.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("message", notification.getMessage());
-        intent.putExtra("taskId", taskId);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        notificationIntent = new Intent(context, NotificationReceiver.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        notificationIntent.putExtra("message", notification.getMessage());
+        notificationIntent.putExtra("taskId", taskId);
+        notificationPendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         //Denna ställer in när notifikationen ska visas
-        alarmManager.set(AlarmManager.RTC_WAKEUP, nextNotification.getTimeInMillis(), pendingIntent);
+        notificationAlarmManager.set(AlarmManager.RTC_WAKEUP, nextNotification.getTimeInMillis(), notificationPendingIntent);
         createNotificationChannel();
     }
 

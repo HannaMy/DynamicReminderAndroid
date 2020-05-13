@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         AdapterTaskOverview adapterTaskOverview = initiateAdapter();
-
+        /*
         boolean bool = true;
         while (bool) {
 
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        */
 
         //testar notifikation
         //Task task = new Task();
