@@ -14,7 +14,7 @@ public class PopUp extends AppCompatDialogFragment {
     private int returnValue;
     private DetailActivity detailActivity;
 
-    public int returnWithoutSaving(Context context, final DetailActivity detailActivity){
+    public void returnWithoutSaving(Context context, final DetailActivity detailActivity){
         this.detailActivity = detailActivity;
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Return without saving");
@@ -23,21 +23,17 @@ public class PopUp extends AppCompatDialogFragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //todo gå tillbaka utan att spara
-                returnValue = 1;
                 detailActivity.cancel();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                returnValue = 0;
                 //dialog.cancel();
             }
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-        return returnValue;
     }
 
     public void invalidInterval(final Context context){
@@ -48,8 +44,8 @@ public class PopUp extends AppCompatDialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                Intent intent = new Intent(context, DetailActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(context, DetailActivity.class);
+                //startActivity(intent);
             }
         });
         AlertDialog alertDialog = builder.create();
@@ -57,7 +53,7 @@ public class PopUp extends AppCompatDialogFragment {
         //return builder.create();
     }
 
-    public int popUpOnDeleteBtn(Context context, final DetailActivity detailActivity){
+    public void popUpOnDeleteBtn(Context context, final DetailActivity detailActivity){
         this.detailActivity = detailActivity;
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Delete a task");
@@ -66,20 +62,54 @@ public class PopUp extends AppCompatDialogFragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //todo gå tillbaka utan att spara
-                returnValue = 1;
                 detailActivity.deleteTask();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                returnValue = 0;
                 //dialog.cancel();
             }
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-        return returnValue;
+    }
+
+    public void invalidTitle(final Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Invalid Title");
+        builder.setMessage("You need to add a title");
+        builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //Intent intent = new Intent(context, DetailActivity.class);
+                //startActivity(intent);
+                //dialog.cancel();
+
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        //return builder.create();
+    }
+
+    public void invalidTitleAndInterval(final Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Invalid title and interval");
+        builder.setMessage("You need to enter a title and an interval");
+        builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //Intent intent = new Intent(context, DetailActivity.class);
+                //startActivity(intent);
+                //dialog.cancel();
+
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        //return builder.create();
     }
 }

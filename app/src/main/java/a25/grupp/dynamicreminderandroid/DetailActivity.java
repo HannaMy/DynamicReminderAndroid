@@ -71,6 +71,7 @@ public class DetailActivity extends AppCompatActivity {
 
     /**
      * Creates a menu button for deleting in the toolbar
+     *
      * @param menu
      * @return
      */
@@ -83,24 +84,26 @@ public class DetailActivity extends AppCompatActivity {
 
     /**
      * On click listener for the delete button.
+     *
      * @param item
      * @return
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         System.out.println("Clicked on delete");
-        if(item.getItemId() == R.id.delete_button) {
-                //deleteTask();
-                    PopUp popUp = new PopUp();
-                    //Shows a pop-up dialog asking if the user wants to return without saving
-                    popUp.popUpOnDeleteBtn(DetailActivity.this, DetailActivity.this);
-                return true;
-        }
-        else{
+        if (item.getItemId() == R.id.delete_button) {
+            //deleteTask();
+            PopUp popUp = new PopUp();
+            //Shows a pop-up dialog asking if the user wants to return without saving
+            popUp.popUpOnDeleteBtn(DetailActivity.this, DetailActivity.this);
+
+
+            return true;
+        } else {
             return super.onOptionsItemSelected(item);
         }
 
-      //  return super.onOptionsItemSelected(item);
+        //  return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -157,6 +160,7 @@ public class DetailActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 saveTask(taskId);
             }
         });
@@ -166,7 +170,7 @@ public class DetailActivity extends AppCompatActivity {
             setTaskInfo(taskId);
         }
 
-        if(taskId == 0){
+        if (taskId == 0) {
             Date currentTime = new Date();
             SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
             String date = formatDate.format(currentTime);
@@ -182,7 +186,6 @@ public class DetailActivity extends AppCompatActivity {
         }
 
     }
-
 
 
     /**
@@ -237,8 +240,7 @@ public class DetailActivity extends AppCompatActivity {
     /**
      * Deletes the selected task.
      */
-    public void deleteTask()
-    {
+    public void deleteTask() {
         int taskId = getTaskID();
         TaskRegister taskRegister = TaskRegister.getInstance(this);
 
@@ -277,9 +279,6 @@ public class DetailActivity extends AppCompatActivity {
         if (intervalAmount != 0) {
 
             Log.i("DetailActivity", "The preferred interval is: " + "" + intervalAmount);
-        } else if (intervalAmount == 0) {
-            PopUp popUp = new PopUp();
-            popUp.invalidInterval(DetailActivity.this);
         }
 
         // Get the correct TimeUnit from dropdown menu.
@@ -334,7 +333,7 @@ public class DetailActivity extends AppCompatActivity {
             task = new Task(title, info, preferredInterval);
             task.setPossibleTimeForExecution(possibleTime);
 
-            if(lastPerformed == null) {
+            if (lastPerformed == null) {
                 Calendar calendar = Calendar.getInstance();
                 final int day = calendar.get(Calendar.DAY_OF_MONTH);
                 int months = calendar.get(Calendar.MONTH);
@@ -366,8 +365,20 @@ public class DetailActivity extends AppCompatActivity {
             Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());
         }
         // Jumps back to MainActivity and shows the new task in the list
+
         Intent save = new Intent(DetailActivity.this, MainActivity.class);
-        startActivity(save);
+        if(title.equals("") && intervalAmount == 0){
+            PopUp popUp = new PopUp();
+            popUp.invalidTitleAndInterval(DetailActivity.this);
+        } else if(title.equals("")){
+            PopUp popUp = new PopUp();
+            popUp.invalidTitle(DetailActivity.this);
+        } else if (intervalAmount == 0) {
+            PopUp popUp = new PopUp();
+            popUp.invalidInterval(DetailActivity.this);
+        }else{
+            startActivity(save);
+        }
     }
 
     /**
