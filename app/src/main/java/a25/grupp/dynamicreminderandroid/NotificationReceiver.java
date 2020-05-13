@@ -29,17 +29,26 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     /**
      * This method creates a notification that it will broadcast at a given time
+     *
      * @param context the context from where the notification is called
-     * @param intent is the intent of this broadcast receiver (the notification)
+     * @param intent  is the intent of this broadcast receiver (the notification)
      */
     @Override
     public void onReceive(Context context, Intent intent) {
         taskId = intent.getIntExtra("taskId", 0);
         System.out.println("NotificationReceiver - taskid: " + taskId);
+
         NOTIFICATION_ID = taskId;
         this.context = context;
         title = "Hey you"; //metod för att hämta titel
         message = intent.getStringExtra("message");
+
+
+        //Ta emot intent från knapparna yesNow och No
+
+
+
+
 
         //Large icon
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.cockatiel);
@@ -48,10 +57,10 @@ public class NotificationReceiver extends BroadcastReceiver {
         Intent landingIntent = new Intent(context, DetailActivity.class);
         landingIntent.putExtra("taskId", taskId);
         //TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        landingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        landingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         //stackBuilder.addNextIntentWithParentStack(landingIntent);
         //PendingIntent landingPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent landingPendingIntent = PendingIntent.getActivity(context, 0, landingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent landingPendingIntent = PendingIntent.getActivity(context, taskId, landingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         createButtonIntents(taskId);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
@@ -75,23 +84,27 @@ public class NotificationReceiver extends BroadcastReceiver {
     /**
      * This method creates the pending intent of the buttons in the notification
      */
-    public void createButtonIntents(int taskId){
+    public void createButtonIntents(int taskId) {
         //Yes button (DetailActivity.class är landing activity just nu)
-        Intent yesIntent = new Intent(context, DetailActivity.class);
+        Intent yesIntent = new Intent(context, ButtonReceiver.class);
+        yesIntent.putExtra("action", "yesNow");
         yesIntent.putExtra("taskId", taskId);
-        yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        yesPendingIntent = PendingIntent.getActivity(context, 0, yesIntent, PendingIntent.FLAG_ONE_SHOT);
+        yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        yesIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        yesPendingIntent = PendingIntent.getBroadcast(context, taskId, yesIntent,PendingIntent.FLAG_ONE_SHOT);
 
         //Yes earlier button (DetailActivity.class är landing activity just nu)
         Intent yesEarlierIntent = new Intent(context, DetailActivity.class);
         yesEarlierIntent.putExtra("taskId", taskId);
-        yesEarlierIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        yesEarlierPendingIntent = PendingIntent.getActivity(context, 0, yesEarlierIntent, PendingIntent.FLAG_ONE_SHOT);
+        yesEarlierIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        yesEarlierPendingIntent = PendingIntent.getActivity(context, taskId, yesEarlierIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //No button (DetailActivity.class är landing activity just nu)
-        Intent noIntent = new Intent();
-        noIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        noPendingIntent = PendingIntent.getActivity(context, 0, noIntent, PendingIntent.FLAG_ONE_SHOT);
+        Intent noIntent = new Intent(context, ButtonReceiver.class);
+        noIntent.putExtra("action", "no");
+        noIntent.putExtra("taskId", taskId);
+        noIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        noPendingIntent = PendingIntent.getBroadcast(context, taskId, noIntent, PendingIntent.FLAG_ONE_SHOT);
     }
 
     public void setMessage(String message) {
