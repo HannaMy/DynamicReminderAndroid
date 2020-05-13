@@ -41,7 +41,7 @@ public class Task implements Comparable<Object>, Serializable {
         this.maximum = maximum;
         this.possibleTimeForExecution = possibleTimeForExecution;
         markAsDoneNow();
-        nextNotification = generateNotification();
+       // nextNotification = generateNotification();
 
 
     }
@@ -50,7 +50,7 @@ public class Task implements Comparable<Object>, Serializable {
         this.title = title;
         this.info = info;
         this.preferredInterval = preferredInterval;
-        nextNotification = generateNotification();
+        //nextNotification = generateNotification();
         markAsDoneNow();
 
     }
@@ -67,8 +67,15 @@ public class Task implements Comparable<Object>, Serializable {
         //TODO: skriva metod som avbryter nästa notifikation och skapar en ny
     }
 
+    public void setNextNotification()
+    {
+        nextNotification = generateNotification();
+    }
+
     public Notification generateNotification(){
-        Date timeForNotification = new Date();
+        Date timeForNotification = getDateForNotification();
+      //  Date timeForNotification = new Date();
+
         String randomPhase = "Did you remember to ";//TODO: hämta en random fråga
         String message = randomPhase + title + "?";
 
@@ -76,8 +83,6 @@ public class Task implements Comparable<Object>, Serializable {
         if (possibleTimeForExecution != null){
             //kod som anpassar timeForNotification så att det stämmer överens med possible time
         }
-
-        //timeForNotification.setTime(getTimeUntil()); TODO: skriva kod som omvandlar timeUnitil till ett Date-objekt
         nextNotification = new Notification(this, timeForNotification, message);
         return nextNotification;
     }
@@ -151,6 +156,23 @@ public class Task implements Comparable<Object>, Serializable {
         return possibleTimeForExecution.getPossibleHours();
     }
 
+
+    private int getMinutesUntil(){
+        Calendar cal = Calendar.getInstance();
+        Date dateNow = cal.getTime();
+        dateNow.compareTo(lastPerformed);
+
+        long millisecondsNOW = dateNow.getTime();
+        long millisecondsDONE = lastPerformed.getTime();
+        long millisecondsDIFFERENCE = millisecondsNOW-millisecondsDONE;
+        long minutesDIFFERENCE = millisecondsDIFFERENCE/60000;
+
+        int preferredIntervalInMinutes = preferredInterval.getInMinutes();
+        int timeUntilMINUTES = (int) (preferredIntervalInMinutes - minutesDIFFERENCE);
+
+        System.out.println("Time until in minutes = " + timeUntilMINUTES);
+        return timeUntilMINUTES;
+    }
     public int getTimeUntil(){
 
             int time = preferredInterval.getTime();
@@ -163,17 +185,7 @@ public class Task implements Comparable<Object>, Serializable {
         }else{
 
             //calculates the time left of the task and returns it in the unit specified in preferredInterval.
-            Calendar cal = Calendar.getInstance();
-            Date dateNow = cal.getTime();
-            dateNow.compareTo(lastPerformed);
-
-            long millisecondsNOW = dateNow.getTime();
-            long millisecondsDONE = lastPerformed.getTime();
-            long millisecondsDIFFERENCE = millisecondsNOW-millisecondsDONE;
-            long minutesDIFFERENCE = millisecondsDIFFERENCE/60000;
-
-            int preferredIntervalInMinutes = preferredInterval.getInMinutes();
-            int timeUntilMINUTES = (int) (preferredIntervalInMinutes - minutesDIFFERENCE);
+         int timeUntilMINUTES = getMinutesUntil();
 
             switch (preferredInterval.getTimeUnit()) {
                 case hour:
@@ -200,6 +212,28 @@ public class Task implements Comparable<Object>, Serializable {
 
 
         return timeUntil;
+    }
+
+    /**
+     * Calculates the date that the notification should come
+     * @return the date for the notification
+     */
+    public Date getDateForNotification(){
+        int timeUntilMINUTES = getMinutesUntil();
+        long millisecondsUntil = timeUntilMINUTES*60000;
+        long millisecondsThen = 0;
+
+
+        Calendar cal = Calendar.getInstance();
+        Date dateNow = cal.getTime();
+        long millisecondsNOW = dateNow.getTime();
+
+        millisecondsThen = millisecondsNOW + millisecondsUntil;
+
+
+        Date date = new Date();
+        date.setTime(millisecondsThen);
+        return date;
     }
 
     public TimeUnit getTimeUnit(){

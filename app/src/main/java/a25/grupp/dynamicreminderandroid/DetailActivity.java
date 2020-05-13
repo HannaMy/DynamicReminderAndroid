@@ -28,7 +28,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -168,10 +167,12 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         if(taskId == 0){
-            final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
             Date currentTime = new Date();
-            btnCalendar.setText(currentTime.getDate() + "/" + (currentTime.getMonth() +1) + "/" + (currentTime.getYear() + 1900) +
-                    "\n" + currentTime.getHours() + ":" + currentTime.getMinutes()); // sets button with current time and date
+            SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
+            String date = formatDate.format(currentTime);
+            final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
+
+            btnCalendar.setText(date); // sets button with current time and date
             btnCalendar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -181,6 +182,8 @@ public class DetailActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     /**
      * connects the gui components to the logic
@@ -216,11 +219,13 @@ public class DetailActivity extends AppCompatActivity {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(DetailActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
-                        btnCalendar.setText(dayOfMonth + "/" + month + "/" + year + "\n" + hourOfDay + ":" + minute);
                         Calendar cal = Calendar.getInstance();
                         cal.set(year, month, dayOfMonth, hourOfDay, minute);
                         lastPerformed = cal.getTime();
+                        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
+                        String strDate = formatDate.format(cal);
+                        final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
+                        btnCalendar.setText(strDate);
                     }
                 }, hours, minutes, android.text.format.DateFormat.is24HourFormat(DetailActivity.this));
                 timePickerDialog.show();
@@ -238,6 +243,7 @@ public class DetailActivity extends AppCompatActivity {
         TaskRegister taskRegister = TaskRegister.getInstance(this);
 
         taskRegister.removeWithId(taskId);
+        System.out.println("Detail vid delete taskregister size: " + taskRegister.getSize());
         taskRegister.saveRegister(this);
 
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
@@ -327,7 +333,20 @@ public class DetailActivity extends AppCompatActivity {
         if (selectedTaskId <= 0) {
             task = new Task(title, info, preferredInterval);
             task.setPossibleTimeForExecution(possibleTime);
+
+            if(lastPerformed == null) {
+                Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int months = calendar.get(Calendar.MONTH);
+                int years = calendar.get(Calendar.YEAR);
+                final int hours = calendar.get(Calendar.HOUR_OF_DAY);
+                final int minutes = calendar.get(Calendar.MINUTE);
+                lastPerformed = calendar.getTime();
+            }
+            task.setNextNotification();
+
             task.setLastPerformed(lastPerformed);
+            System.out.println("PPPPPPPPPPPPPPPPPPP lastperformed =" + lastPerformed);
             TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
             System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ task sparad");
             int id = task.getId();  //Todo den bör kunna tas bort?
@@ -341,6 +360,7 @@ public class DetailActivity extends AppCompatActivity {
             task.setPreferredInterval(preferredInterval);
             task.setPossibleTimeForExecution(possibleTime);
             task.setLastPerformed(lastPerformed);
+            task.setNextNotification();
             addNotification(getApplicationContext(), task.getNextNotification());
             taskRegister.saveRegister(DetailActivity.this);
             Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());
@@ -380,7 +400,7 @@ public class DetailActivity extends AppCompatActivity {
 
         //Sets the interval number
         EditText editTextSetInterval = findViewById(R.id.etTimeInterval);
-        editTextSetInterval.setText(String.format("%d", task.getId()));
+        editTextSetInterval.setText(String.format("%d", task.getPreferredInterval().getTime()));
 
         //Sets the interval time unit
         Spinner intervalTimeUnit = findViewById(R.id.dropDown_timeUnit);
@@ -410,6 +430,7 @@ public class DetailActivity extends AppCompatActivity {
         lastPerformed = task.getLastPerformed();
         Button btnCalendarLastPerformed = findViewById(R.id.btnCalendarLastPreformed);
         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
+        System.out.println("Task last performed = " + task.getLastPerformed());
         String date = formatDate.format(task.getLastPerformed());
         btnCalendarLastPerformed.setText(date);
         btnCalendarLastPerformed.setOnClickListener(new View.OnClickListener() {
