@@ -91,7 +91,10 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         System.out.println("Clicked on delete");
         if(item.getItemId() == R.id.delete_button) {
-                deleteTask();
+                //deleteTask();
+                    PopUp popUp = new PopUp();
+                    //Shows a pop-up dialog asking if the user wants to return without saving
+                    popUp.popUpOnDeleteBtn(DetailActivity.this, DetailActivity.this);
                 return true;
         }
         else{
@@ -239,6 +242,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(delete);
+
 
         // TODO Pop up som varnar & radera notifikation
     }
