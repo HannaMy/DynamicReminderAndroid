@@ -246,7 +246,7 @@ public class DetailActivity extends AppCompatActivity {
 
         taskRegister.removeWithId(taskId);
         System.out.println("Detail vid delete taskregister size: " + taskRegister.getSize());
-        taskRegister.saveRegister(this);
+        taskRegister.saveRegister(DetailActivity.this);
 
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(delete);
@@ -271,7 +271,7 @@ public class DetailActivity extends AppCompatActivity {
         try {
             EditText editTextInterval = findViewById(R.id.etTimeInterval);
             intervalAmount = Integer.parseInt(editTextInterval.getText().toString());
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + intervalAmount);
+            System.out.println("aaaaa" + intervalAmount);
         } catch (Exception e) {
             //Todo Felmeddelande med texten "You need to add a preferred interval as a number"
 
@@ -340,9 +340,9 @@ public class DetailActivity extends AppCompatActivity {
             task.setNextNotification();
 
             task.setLastPerformed(lastPerformed);
-            System.out.println("PPPPPPPPPPPPPPPPPPP lastperformed =" + lastPerformed);
+            System.out.println(" lastperformed =" + lastPerformed);
             TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
-            System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ task sparad");
+            System.out.println("task sparad");
             int id = task.getId();  //Todo den bör kunna tas bort?
             addNotification(getApplicationContext(), task.getNextNotification(), taskId);
 

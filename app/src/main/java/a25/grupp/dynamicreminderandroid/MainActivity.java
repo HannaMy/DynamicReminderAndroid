@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
         AdapterTaskOverview adapterTaskOverview = initiateAdapter();
 
-        boolean bool = true;
+        /*boolean bool = true;
         while (bool) {
 
-            System.out.println("Thread: Task Updated");
+            System.out.println("Thread: Task Updated ÖÖÖÖÖÖ");
 
             Task[] taskArray = TaskRegister.getInstance(this).getTaskArray();
             if (taskArray.length > 0) {
@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
+         */
 
         //testar notifikation
         //Task task = new Task();

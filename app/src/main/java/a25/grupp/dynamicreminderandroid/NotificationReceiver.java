@@ -12,6 +12,8 @@ import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
+import a25.grupp.dynamicreminderandroid.model.Notification;
+
 /**
  * @author Cornelia Sköld
  * @version 1.0
@@ -77,6 +79,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .addAction(R.mipmap.small_cockatiel, "Yes, earlier", yesEarlierPendingIntent)
                 .addAction(R.mipmap.small_cockatiel, "No", noPendingIntent);
 
+
+
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
         notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
     }
@@ -91,7 +95,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         yesIntent.putExtra("taskId", taskId);
         yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         yesIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        yesPendingIntent = PendingIntent.getBroadcast(context, taskId, yesIntent,PendingIntent.FLAG_ONE_SHOT);
+        yesPendingIntent = PendingIntent.getBroadcast(context, 200 +taskId, yesIntent,PendingIntent.FLAG_ONE_SHOT);
 
         //Yes earlier button (DetailActivity.class är landing activity just nu)
         Intent yesEarlierIntent = new Intent(context, DetailActivity.class);
@@ -104,7 +108,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         noIntent.putExtra("action", "no");
         noIntent.putExtra("taskId", taskId);
         noIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        noPendingIntent = PendingIntent.getBroadcast(context, taskId, noIntent, PendingIntent.FLAG_ONE_SHOT);
+        noPendingIntent = PendingIntent.getBroadcast(context, 300+taskId, noIntent, PendingIntent.FLAG_ONE_SHOT);
     }
 
     public void setMessage(String message) {
