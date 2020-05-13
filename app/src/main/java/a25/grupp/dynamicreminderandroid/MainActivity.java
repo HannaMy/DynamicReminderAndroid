@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
@@ -83,6 +84,20 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.delete_menu, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.refresh_button:
+                this.recreate();
+                return true;
+            case R.id.delete_button:
+                //TODO: kod för att ta bort flera uppgifter samtidigt
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private AdapterTaskOverview initiateAdapter() {

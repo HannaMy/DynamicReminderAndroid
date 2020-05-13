@@ -2,9 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/refresh_button"
+        android:icon="@android:drawable/ic_popup_sync"
+        android:title="refreshButton"
+        app:showAsAction="always" />
+
     <item android:id="@+id/delete_button"
         android:icon="@drawable/ic_delete_black_24dp"
         android:title="deleteButton"
         app:showAsAction="always" />
+
 
 </menu>
