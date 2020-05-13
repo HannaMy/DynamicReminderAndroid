@@ -183,7 +183,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
                 @Override
                 public void onClick(View v) {
                     taskArray[position].markAsDoneNow();
-
+                    mainActivity.recreate();
                 }
             });
 
