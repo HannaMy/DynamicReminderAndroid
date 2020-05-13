@@ -359,8 +359,8 @@ public class DetailActivity extends AppCompatActivity {
             taskRegister.saveRegister(DetailActivity.this);
             Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());
         }
-        // Jumps back to MainActivity and shows the new task in the list
 
+        // Checks title and interval and jumps back to MainActivity and shows the new task in the list if everything is correct
         Intent save = new Intent(DetailActivity.this, MainActivity.class);
         if(title.equals("") && intervalAmount == 0){
             PopUp popUp = new PopUp();
