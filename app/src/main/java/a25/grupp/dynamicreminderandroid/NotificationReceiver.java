@@ -18,7 +18,7 @@ import android.support.v4.app.NotificationManagerCompat;
  */
 public class NotificationReceiver extends BroadcastReceiver {
     private final String CHANNEL_ID = "channelReminders";
-    private final int NOTIFICATION_ID = 001;
+    private int NOTIFICATION_ID;
     private String title;
     private String message;
     private Context context;
@@ -35,6 +35,8 @@ public class NotificationReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         taskId = intent.getIntExtra("taskId", 0);
+        System.out.println("NotificationReceiver - taskid: " + taskId);
+        NOTIFICATION_ID = taskId;
         this.context = context;
         title = "Hey you"; //metod för att hämta titel
         message = intent.getStringExtra("message");
@@ -50,7 +52,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         //stackBuilder.addNextIntentWithParentStack(landingIntent);
         //PendingIntent landingPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent landingPendingIntent = PendingIntent.getActivity(context, 0, landingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        createButtonIntents();
+        createButtonIntents(taskId);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.small_cockatiel)
@@ -62,7 +64,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setContentIntent(landingPendingIntent)
                 .setAutoCancel(true)
-                .addAction(R.mipmap.small_cockatiel, "Yes", yesPendingIntent)
+                .addAction(R.mipmap.small_cockatiel, "Yes, now", yesPendingIntent)
                 .addAction(R.mipmap.small_cockatiel, "Yes, earlier", yesEarlierPendingIntent)
                 .addAction(R.mipmap.small_cockatiel, "No", noPendingIntent);
 
@@ -73,19 +75,21 @@ public class NotificationReceiver extends BroadcastReceiver {
     /**
      * This method creates the pending intent of the buttons in the notification
      */
-    public void createButtonIntents(){
+    public void createButtonIntents(int taskId){
         //Yes button (DetailActivity.class är landing activity just nu)
         Intent yesIntent = new Intent(context, DetailActivity.class);
+        yesIntent.putExtra("taskId", taskId);
         yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         yesPendingIntent = PendingIntent.getActivity(context, 0, yesIntent, PendingIntent.FLAG_ONE_SHOT);
 
         //Yes earlier button (DetailActivity.class är landing activity just nu)
         Intent yesEarlierIntent = new Intent(context, DetailActivity.class);
+        yesEarlierIntent.putExtra("taskId", taskId);
         yesEarlierIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         yesEarlierPendingIntent = PendingIntent.getActivity(context, 0, yesEarlierIntent, PendingIntent.FLAG_ONE_SHOT);
 
         //No button (DetailActivity.class är landing activity just nu)
-        Intent noIntent = new Intent(context, DetailActivity.class);
+        Intent noIntent = new Intent();
         noIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         noPendingIntent = PendingIntent.getActivity(context, 0, noIntent, PendingIntent.FLAG_ONE_SHOT);
     }

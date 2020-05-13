@@ -163,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
         Calendar nextNotification = notification.getCalendarTimeForNotification();
         Intent intent = new Intent(context, NotificationReceiver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("message", notification.getMessage());        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        intent.putExtra("message", notification.getMessage());
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         //Denna ställer in när notifikationen ska visas

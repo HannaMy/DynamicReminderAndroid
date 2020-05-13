@@ -340,7 +340,7 @@ public class DetailActivity extends AppCompatActivity {
             TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
             System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ task sparad");
             int id = task.getId();  //Todo den bör kunna tas bort?
-            addNotification(getApplicationContext(), task.getNextNotification());
+            addNotification(getApplicationContext(), task.getNextNotification(), taskId);
 
         } else {
             TaskRegister taskRegister = TaskRegister.getInstance(getBaseContext());
@@ -351,7 +351,7 @@ public class DetailActivity extends AppCompatActivity {
             task.setPossibleTimeForExecution(possibleTime);
             task.setLastPerformed(lastPerformed);
             task.setNextNotification();
-            addNotification(getApplicationContext(), task.getNextNotification());
+            addNotification(getApplicationContext(), task.getNextNotification(), taskId);
             taskRegister.saveRegister(DetailActivity.this);
             Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());
         }
@@ -436,11 +436,12 @@ public class DetailActivity extends AppCompatActivity {
     /**
      * This method creates an intent for a scheduled notification, using a Calendar object
      */
-    public void addNotification(Context context, Notification notification) {
+    public void addNotification(Context context, Notification notification, int taskId) {
         Calendar nextNotification = notification.getCalendarTimeForNotification();
         Intent intent = new Intent(context, NotificationReceiver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("message", notification.getMessage());
+        intent.putExtra("taskId", taskId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
