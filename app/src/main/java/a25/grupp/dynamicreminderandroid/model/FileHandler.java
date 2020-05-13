@@ -1,10 +1,14 @@
 package a25.grupp.dynamicreminderandroid.model;
 
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Stores the data on file
@@ -58,7 +62,7 @@ public class FileHandler {
             //BufferedInputStream bis = new BufferedInputStream(fis);
             ObjectInputStream ois = new ObjectInputStream(fis);
             taskRegister = (TaskRegister) ois.readObject();
-            System.out.println("FileHandler: Task read: " + taskRegister.toString());
+           // System.out.println("FileHandler: Task read: " + taskRegister.toString());
             fis.close();
             ois.close();
         } catch (FileNotFoundException e) {
