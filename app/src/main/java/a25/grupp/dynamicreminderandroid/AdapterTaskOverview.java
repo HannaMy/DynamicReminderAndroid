@@ -26,7 +26,6 @@ import static a25.grupp.dynamicreminderandroid.R.*;
  */
 
 public class AdapterTaskOverview extends ArrayAdapter {
-
     private String[] titles;
     private String[] intervalInfos;
     private int[] times;
@@ -34,8 +33,6 @@ public class AdapterTaskOverview extends ArrayAdapter {
     private int[] taskIds;
     private Activity mainActivity;
     private Task[] taskArray;
-    private String[] lateOrLeft;
-    private  TextView tvAmountTime;
 
     /**
      * Constructor
@@ -67,34 +64,6 @@ public class AdapterTaskOverview extends ArrayAdapter {
         this.timeUnits = timeUnits;
     }
 
-    private String lateOrLeft(Task task) {
-        int timeUntil = task.getTimeUntil();
-        String leftOrLate = "";
-        if (timeUntil > 1) {
-            leftOrLate = "s left";
-        }else if(timeUntil == 1){
-            leftOrLate = " left";
-        }else if(timeUntil == 0){
-            leftOrLate = " left";
-        }else if(timeUntil == -1){
-            leftOrLate = " late";
-        }else {
-            leftOrLate = "s late";
-        }
-        return leftOrLate;
-    }
-
-    private int textColor(Task task){
-        int timeUntil = task.getTimeUntil();
-        int color;
-        if (timeUntil >= 0) {
-            color = 0x99009900;
-        }else {
-            color = 0x99990000;
-        }
-        return color;
-    }
-
     /**
      * Sets the array with tasks
      *
@@ -115,8 +84,6 @@ public class AdapterTaskOverview extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-
         LayoutInflater layoutInflater = (LayoutInflater) mainActivity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View taskListItem = layoutInflater.inflate(layout.task_list_item, parent, false);
 
@@ -131,9 +98,8 @@ public class AdapterTaskOverview extends ArrayAdapter {
             tvInterval.setText(taskArray[position].getPreferredInterval().toString());
             tvTitle.setText(taskArray[position].getTitle());
 
-            //set the time unit
+            //setText and setTextColor for the TextViews displaying how much time it is left until the task is scheduled
             int timeUntil = taskArray[position].getTimeUntil();
-
             if (timeUntil > 1){
                 tvAmountTime.setText(String.valueOf(timeUntil));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s left";
@@ -162,12 +128,6 @@ public class AdapterTaskOverview extends ArrayAdapter {
                 tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.red));
                 tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.red));
             }
-
-            //String leftOrLate  = lateOrLeft(taskArray[position]);
-            //int color = textColor(taskArray[position]);
-            //tvTimeUnit.setText(taskArray[position].getPreferredInterval().getTimeUnit().toString() + leftOrLate);
-            //tvAmountTime.setTextColor(color);
-            //tvTimeUnit.setTextColor(color);
 
             btnDetails.setOnClickListener(new View.OnClickListener() {
                 @Override
