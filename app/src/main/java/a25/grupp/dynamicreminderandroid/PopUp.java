@@ -57,7 +57,29 @@ public class PopUp extends AppCompatDialogFragment {
         //return builder.create();
     }
 
-    public void popUpOnDeleteBtn(){
-
+    public int popUpOnDeleteBtn(Context context, final DetailActivity detailActivity){
+        this.detailActivity = detailActivity;
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Delete a task");
+        builder.setMessage("Are you sure you want to delete this task?");
+        //builder.setCancelable(true);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //todo gå tillbaka utan att spara
+                returnValue = 1;
+                detailActivity.deleteTask();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                returnValue = 0;
+                //dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        return returnValue;
     }
 }
