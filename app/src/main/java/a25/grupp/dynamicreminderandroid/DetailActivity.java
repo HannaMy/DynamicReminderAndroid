@@ -90,7 +90,10 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         System.out.println("Clicked on delete");
         if(item.getItemId() == R.id.delete_button) {
-                deleteTask();
+                //deleteTask();
+                    PopUp popUp = new PopUp();
+                    //Shows a pop-up dialog asking if the user wants to return without saving
+                    popUp.popUpOnDeleteBtn(DetailActivity.this, DetailActivity.this);
                 return true;
         }
         else{
@@ -164,10 +167,12 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         if(taskId == 0){
-            final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
             Date currentTime = new Date();
-            btnCalendar.setText(currentTime.getDate() + "/" + (currentTime.getMonth() +1) + "/" + (currentTime.getYear() + 1900) +
-                    "\n" + currentTime.getHours() + ":" + currentTime.getMinutes()); // sets button with current time and date
+            SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
+            String date = formatDate.format(currentTime);
+            final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
+
+            btnCalendar.setText(date); // sets button with current time and date
             btnCalendar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -177,6 +182,8 @@ public class DetailActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     /**
      * connects the gui components to the logic
@@ -212,11 +219,13 @@ public class DetailActivity extends AppCompatActivity {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(DetailActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
-                        btnCalendar.setText(dayOfMonth + "/" + month + "/" + year + "\n" + hourOfDay + ":" + minute);
                         Calendar cal = Calendar.getInstance();
                         cal.set(year, month, dayOfMonth, hourOfDay, minute);
                         lastPerformed = cal.getTime();
+                        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
+                        String strDate = formatDate.format(cal);
+                        final Button btnCalendar = findViewById(R.id.btnCalendarLastPreformed);
+                        btnCalendar.setText(strDate);
                     }
                 }, hours, minutes, android.text.format.DateFormat.is24HourFormat(DetailActivity.this));
                 timePickerDialog.show();
@@ -239,6 +248,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(delete);
+
 
         // TODO Pop up som varnar & radera notifikation
     }
