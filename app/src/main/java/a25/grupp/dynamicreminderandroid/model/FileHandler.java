@@ -33,8 +33,10 @@ public class FileHandler {
             BufferedOutputStream bos = new BufferedOutputStream(fos);
             ObjectOutputStream oos = new ObjectOutputStream(bos);
             oos.writeObject(taskRegister);
+            oos.flush();
 
             oos.close();
+            bos.close();
             fos.close();
             // System.out.println("FileHandler: taskregister written: " + taskRegister.toString());
         } catch (FileNotFoundException e) {

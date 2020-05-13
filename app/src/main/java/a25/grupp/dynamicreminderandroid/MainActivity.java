@@ -45,15 +45,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        initiateAdapter();
+        AdapterTaskOverview adapterTaskOverview = initiateAdapter();
+
+        boolean bool = true;
+        while (bool) {
+
+            System.out.println("Thread: Task Updated");
+
+            Task[] taskArray = TaskRegister.getInstance(this).getTaskArray();
+            if (taskArray.length > 0) {
+                adapterTaskOverview.setTaskArray(taskArray);
+                adapterTaskOverview.notifyDataSetChanged();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         //testar notifikation
         //Task task = new Task();
         //addNotification(this, task.generateNotification()); //TODO: flytta till korrekt ställe
     }
 
+
     /**
      * Creates a menu button for deleting in the toolbar
+     *
      * @param menu
      * @return
      */
@@ -64,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void initiateAdapter(){
+    private AdapterTaskOverview initiateAdapter() {
 
        /* FileHandler fh =  new FileHandler(this);
         fh.saveToFileString("Test30");
@@ -74,15 +93,12 @@ public class MainActivity extends AppCompatActivity {
         */
 
 
-
-
-
         //Temporär data
-        String[] titles  ={"Water Plants", "Dance", "Clean Bathroom", "Call Hilda"};
-        String[] intervalInfos= {"Every 5 days", "Every 3 day", "Every 1 week", "Every 5 weeks"};
-        int[] times={4, 2, 1, 4 };
+        String[] titles = {"Water Plants", "Dance", "Clean Bathroom", "Call Hilda"};
+        String[] intervalInfos = {"Every 5 days", "Every 3 day", "Every 1 week", "Every 5 weeks"};
+        int[] times = {4, 2, 1, 4};
         String[] timeUnits = {"Days left", "Days left", "Weeks left", "Weeks left"};
-        int[] taskIds={1,2,3,4};
+        int[] taskIds = {1, 2, 3, 4};
 
 
         TaskRegister taskRegister = TaskRegister.getInstance(this);
@@ -103,29 +119,28 @@ public class MainActivity extends AppCompatActivity {
 
         AdapterTaskOverview adapterTaskOverview;
 
-     if(taskArray.length > 0) {
+        if (taskArray.length > 0) {
 
-           int size = taskArray.length;
+            int size = taskArray.length;
             titles = new String[size];
             intervalInfos = new String[size];
             times = new int[size];
             timeUnits = new String[size];
             taskIds = new int[size];
 
-            for (int i = 0; i < taskArray.length; i++)
-            {
+            for (int i = 0; i < taskArray.length; i++) {
 
                 Task task = taskArray[i];
                 System.out.println("ÖÖ task: " + task + " i: " + i);
                 titles[i] = task.getTitle();
                 TimeSpan timeSpan = task.getPreferredInterval();
-                if(timeSpan!= null) {
+                if (timeSpan != null) {
                     intervalInfos[i] = task.getPreferredInterval().toString();
                     times[i] = task.getTimeUntil();
                     timeUnits[i] = "time unit";
                 }
 
-                         //TODO fixa rätt timeunit
+                //TODO fixa rätt timeunit
                 taskIds[i] = task.getId();
             }
 
@@ -139,19 +154,23 @@ public class MainActivity extends AppCompatActivity {
             listView.setAdapter(adapterTaskOverview);
 
 
-        }
-        else
-        {
+        } else {
             //Listview
             adapterTaskOverview = new AdapterTaskOverview(this, titles);
-            adapterTaskOverview.updateListData(titles,intervalInfos,times,timeUnits,taskIds);
+            adapterTaskOverview.updateListData(titles, intervalInfos, times, timeUnits, taskIds);
             ListView listView = findViewById(R.id.listviewOverview);
             listView.setAdapter(adapterTaskOverview);
         }
 
         taskRegister.saveRegister(this);
 
-       // updateThread = new UpdateThread(adapterTaskOverview, this);
+        /*  updateThread = new UpdateThread(adapterTaskOverview, this);
+
+         */
+
+
+        return adapterTaskOverview;
+
 
     }
 
@@ -159,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method creates an intent for a scheduled notification, using a Calendar object
      */
-    public void addNotification(Context context, Notification notification){
+    public void addNotification(Context context, Notification notification) {
         Calendar nextNotification = notification.getCalendarTimeForNotification();
         Intent intent = new Intent(context, NotificationReceiver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -175,9 +194,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method creates the notification channel for the notifications in the category of reminders
      */
-    private void createNotificationChannel(){
+    private void createNotificationChannel() {
         //Checks if the device runs on Android 8.0 and above (Oreo)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String CHANNEL_ID = "channelReminders";
             CharSequence name = "Reminders channel"; //TODO: flytta till res?
             String description = "Includes all the reminders"; //TODO: flytta till res?
@@ -194,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(updateThread != null) {
+        if (updateThread != null) {
             updateThread.setRunning(false);
             updateThread = null;
         }
@@ -203,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        if(updateThread != null) {
+        if (updateThread != null) {
             updateThread.setRunning(false);
             updateThread = null;
         }
@@ -228,10 +247,10 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Thread: Task Updated");
                 try {
                     Task[] taskArray = TaskRegister.getInstance(context).getTaskArray();
-                    if(taskArray.length > 0) {
+                    if (taskArray.length > 0) {
                         adapter.setTaskArray(taskArray);
                     }
-                    //adapter.updateList();
+                    adapter.notifyDataSetChanged();
                     sleep(10000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -239,10 +258,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        public void setRunning(boolean running)
-        { this.running = running;}
+        public void setRunning(boolean running) {
+            this.running = running;
         }
-
     }
+
+}
 
 
