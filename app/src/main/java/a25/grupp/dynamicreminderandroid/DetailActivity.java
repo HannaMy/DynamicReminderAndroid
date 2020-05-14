@@ -329,37 +329,6 @@ public class DetailActivity extends AppCompatActivity {
                 break;
         }
 
-        if (selectedTaskId <= 0) {
-            task = new Task(title, info, preferredInterval);
-            task.setPossibleTimeForExecution(possibleTime);
-
-            if (lastPerformed == null) {
-                Calendar calendar = Calendar.getInstance();
-                lastPerformed = calendar.getTime();
-            }
-            task.setNextNotification();
-
-            task.setLastPerformed(lastPerformed);
-            System.out.println(" lastperformed =" + lastPerformed);
-            TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
-            System.out.println("task sparad");
-            int id = task.getId();  //Todo den bör kunna tas bort?
-            addNotification(getApplicationContext(), task.getNextNotification(), taskId);
-
-        } else {
-            TaskRegister taskRegister = TaskRegister.getInstance(getBaseContext());
-            task = taskRegister.getTaskWithId(selectedTaskId);
-            task.setInfo(info);
-            task.setTitle(title);
-            task.setPreferredInterval(preferredInterval);
-            task.setPossibleTimeForExecution(possibleTime);
-            task.setLastPerformed(lastPerformed);
-            task.setNextNotification();
-            addNotification(getApplicationContext(), task.getNextNotification(), taskId);
-            taskRegister.saveRegister(DetailActivity.this);
-            Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());
-        }
-
         // Checks title and interval and jumps back to MainActivity and shows the new task in the list if everything is correct
         Intent save = new Intent(DetailActivity.this, MainActivity.class);
         if(title.equals("") && intervalAmount == 0){
@@ -372,6 +341,38 @@ public class DetailActivity extends AppCompatActivity {
             PopUp popUp = new PopUp();
             popUp.invalidInterval(DetailActivity.this);
         }else{
+
+            if (selectedTaskId <= 0) {
+                task = new Task(title, info, preferredInterval);
+                task.setPossibleTimeForExecution(possibleTime);
+
+                if (lastPerformed == null) {
+                    Calendar calendar = Calendar.getInstance();
+                    lastPerformed = calendar.getTime();
+                }
+                task.setNextNotification();
+
+                task.setLastPerformed(lastPerformed);
+                System.out.println(" lastperformed =" + lastPerformed);
+                TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
+                System.out.println("task sparad");
+                int id = task.getId();  //Todo den bör kunna tas bort?
+                addNotification(getApplicationContext(), task.getNextNotification(), taskId);
+
+            } else {
+                TaskRegister taskRegister = TaskRegister.getInstance(getBaseContext());
+                task = taskRegister.getTaskWithId(selectedTaskId);
+                task.setInfo(info);
+                task.setTitle(title);
+                task.setPreferredInterval(preferredInterval);
+                task.setPossibleTimeForExecution(possibleTime);
+                task.setLastPerformed(lastPerformed);
+                task.setNextNotification();
+                addNotification(getApplicationContext(), task.getNextNotification(), taskId);
+                taskRegister.saveRegister(DetailActivity.this);
+                Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());
+            }
+
             startActivity(save);
         }
     }
@@ -458,7 +459,7 @@ public class DetailActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("message", notification.getMessage());
         intent.putExtra("taskId", taskId);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, taskId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         //Denna ställer in när notifikationen ska visas
