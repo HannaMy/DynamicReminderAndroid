@@ -79,7 +79,9 @@ public class Task implements Comparable<Object>, Serializable {
     public Notification generateNotification() {
         Date timeForNotification = getDateForNotification();
 
-        String[] questions = context.getResources().getStringArray(R.array.questions);
+
+        //TODO: Jämför om det är första påminnelsen eller senare. I så fall byt string array.
+        String[] questions = context.getResources().getStringArray(R.array.questionsHappy);
         Random rand = new Random();
         int randomIndex = rand.nextInt(5);
         String randomPhase = questions[randomIndex];
