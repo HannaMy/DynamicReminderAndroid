@@ -343,7 +343,7 @@ public class DetailActivity extends AppCompatActivity {
         }else{
 
             if (selectedTaskId <= 0) {
-                task = new Task(title, info, preferredInterval);
+                task = new Task(title, info, preferredInterval, this);
                 task.setPossibleTimeForExecution(possibleTime);
 
                 if (lastPerformed == null) {
