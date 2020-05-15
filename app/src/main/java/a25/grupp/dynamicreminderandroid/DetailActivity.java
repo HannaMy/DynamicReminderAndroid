@@ -266,7 +266,7 @@ public class DetailActivity extends AppCompatActivity {
         String title = editTextTitle.getText().toString();
         Log.i("DetailActivity", "The title of the task is: " + title);
 
-        //preferredIntervall
+        //preferredInterval
         int intervalAmount = 0;
         try {
             EditText editTextInterval = findViewById(R.id.etTimeInterval);

@@ -168,7 +168,7 @@ public class Task implements Comparable<Object>, Serializable {
     private int getMinutesUntil(){
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
-        dateNow.compareTo(lastPerformed);
+        dateNow.compareTo(lastPerformed);//Gör väl inget?
 
         long millisecondsNOW = dateNow.getTime();
         long millisecondsDONE = lastPerformed.getTime();
