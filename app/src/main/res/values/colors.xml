@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="red">#ce1616</color>
-    <color name="green">#11b711</color>
+    <color name="colorPrimary">#b4bda6</color>
+    <color name="colorPrimaryDark">#1f221d</color>
+    <color name="colorAccent">#6c525f</color>
+
+    <color name="redPurple">#6B061A</color>
+    <color name="rosewood">#690B11</color>
+
+    <color name="lightPurple">#f2ede8</color>
+    <color name="eggplant">#6C525F</color>
+    <color name="darkSienna">#3D2029</color>
+
+    <color name="ghostWhite1">#F4F3FC</color>
+    <color name="ghostWhite2">#EBEBF1</color>
+    <color name="gainsboro">#D7D9DE</color>
+    <color name="darkLiver">#615466</color>
+    <color name="purple">#3B3342</color>
+    <color name="xieketic">#14121E</color>
+
+    <color name="magnolia">#F7F2FF</color>
+    <color name="grayWhite">#E6E6ED</color>
+    <color name="cadetBlue">#B1B2BC</color>
+    <color name="eggplantPurple">#663B47</color>
+    <color name="darkerEggplantPurple">#513745</color>
+
+    <color name="lightGray">#f7f4ef</color>
+    <color name="gray">#c9d1bb</color>
+    <color name="lightGreen">#6A6F64</color>
+    <color name="blackOlive">#3A3E3B</color>
+    <color name="eerieBlack">#1F221D</color>
+    <color name="darkGreen">#222620</color>
+
+
+
+
 </resources>
