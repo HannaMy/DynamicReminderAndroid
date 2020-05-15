@@ -15,7 +15,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import a25.grupp.dynamicreminderandroid.model.Notification;
 
 /**
- * @author Cornelia Sköld
+ * @author Cornelia Sköld, Hanna My Jansson
  * @version 1.0
  */
 public class NotificationReceiver extends BroadcastReceiver {
@@ -50,8 +50,6 @@ public class NotificationReceiver extends BroadcastReceiver {
 
 
 
-
-
         //Large icon
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.cockatiel);
 
@@ -80,7 +78,6 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .addAction(R.mipmap.small_cockatiel, "No", noPendingIntent);
 
 
-
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
         notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
     }
@@ -93,15 +90,14 @@ public class NotificationReceiver extends BroadcastReceiver {
         Intent yesIntent = new Intent(context, ButtonReceiver.class);
         yesIntent.putExtra("action", "yesNow");
         yesIntent.putExtra("taskId", taskId);
-        yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        yesIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
         yesPendingIntent = PendingIntent.getBroadcast(context, 200 +taskId, yesIntent,PendingIntent.FLAG_ONE_SHOT);
 
         //Yes earlier button (DetailActivity.class är landing activity just nu)
         Intent yesEarlierIntent = new Intent(context, DetailActivity.class);
         yesEarlierIntent.putExtra("taskId", taskId);
         yesEarlierIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        yesEarlierPendingIntent = PendingIntent.getActivity(context, taskId, yesEarlierIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        yesEarlierPendingIntent = PendingIntent.getActivity(context, taskId+1000, yesEarlierIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //No button (DetailActivity.class är landing activity just nu)
         Intent noIntent = new Intent(context, ButtonReceiver.class);

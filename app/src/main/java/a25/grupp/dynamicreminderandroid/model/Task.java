@@ -1,14 +1,19 @@
 package a25.grupp.dynamicreminderandroid.model;
 
+import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
+
+import a25.grupp.dynamicreminderandroid.R;
 
 /**
- * This class represents a task .....
+ * This class represents a task
+ *
  * @author Anni Johansson
  * @version 1.0
  */
@@ -21,66 +26,69 @@ public class Task implements Comparable<Object>, Serializable {
     private PossibleTime possibleTimeForExecution;
     private Date lastPerformed;
     private Notification nextNotification;
+    private Context context;
 
-    public Task()
-    {
+    public Task() {
 
     }
 
-    public Task(int taskId)
-    {
-        id= taskId;
+    public Task(int taskId) {
+        id = taskId;
     }
 
-    //TODO: Flera konstruktorer eller skicka in null och ?? i parametrarna n�r vissa val saknas?
-    public Task(String title, String info, TimeSpan preferredInterval, TimeSpan maximum, PossibleTime possibleTimeForExecution)
-    {
+    public Task(String title, String info, TimeSpan preferredInterval, TimeSpan maximum, PossibleTime possibleTimeForExecution, Context context) {
         this.title = title;
         this.info = info;
         this.preferredInterval = preferredInterval;
         this.maximum = maximum;
         this.possibleTimeForExecution = possibleTimeForExecution;
+        this.context = context;
         markAsDoneNow();
-       // nextNotification = generateNotification();
-
-
     }
-    public Task(String title, String info, TimeSpan preferredInterval)
-    {
+
+    public Task(String title, String info, TimeSpan preferredInterval, Context context) {
         this.title = title;
         this.info = info;
         this.preferredInterval = preferredInterval;
-        //nextNotification = generateNotification();
+        this.context = context;
         markAsDoneNow();
+    }
+
+    public void performed(Date date) {
 
     }
 
-    public void performed(Date date)
-    {
-
-    }
-
-    public void markAsDoneNow(){
+    /**
+     * Changes time for the variabel lastPerformed to the current time.
+     */
+    public void markAsDoneNow() {
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
         lastPerformed = dateNow;
         //TODO: skriva metod som avbryter nästa notifikation och skapar en ny
     }
 
-    public void setNextNotification()
-    {
+    public void setNextNotification() {
         nextNotification = generateNotification();
     }
 
-    private Notification generateNotification(){
+    /**
+     * Creates a new notification with a randomly generated title
+     * @return {@link Notification}
+     */
+    public Notification generateNotification() {
         Date timeForNotification = getDateForNotification();
-      //  Date timeForNotification = new Date();
 
-        String randomPhase = "Did you remember to ";//TODO: hämta en random fråga
-        String message = randomPhase + title + "?";
+
+        //TODO: Jämför om det är första påminnelsen eller senare. I så fall byt string array.
+        String[] questions = context.getResources().getStringArray(R.array.questionsHappy);
+        Random rand = new Random();
+        int randomIndex = rand.nextInt(5);
+        String randomPhase = questions[randomIndex];
+        String message = randomPhase + " " + title + "?";
 
         //TODO: kontrollera om det finns custom possible time
-        if (possibleTimeForExecution != null){
+        if (possibleTimeForExecution != null) {
             //kod som anpassar timeForNotification så att det stämmer överens med possible time
         }
         nextNotification = new Notification(this, timeForNotification, message);
@@ -226,11 +234,18 @@ public class Task implements Comparable<Object>, Serializable {
         long millisecondsNOW = dateNow.getTime();
 
         long millisecondsThen = 0;
+
         if(timeUntilMINUTES >0) {
             long millisecondsUntil = timeUntilMINUTES * 60000;
             millisecondsThen = millisecondsNOW + millisecondsUntil;
         }else{
             millisecondsThen = millisecondsNOW + 1000*60; //TODO lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
+            int intervalInMinutes =  preferredInterval.getInMinutes();
+
+
+
+
+
         }
         date.setTime(millisecondsThen);
         return date;
