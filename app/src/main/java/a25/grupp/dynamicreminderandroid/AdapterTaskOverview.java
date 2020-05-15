@@ -125,8 +125,8 @@ public class AdapterTaskOverview extends ArrayAdapter {
                 tvAmountTime.setText(String.valueOf(Math.abs(timeUntil)));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s late";
                 tvTimeUnit.setText(timeUnit);
-                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.red));
-                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.red));
+                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.rosewood));
+                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.rosewood));
             }
 
             btnDetails.setOnClickListener(new View.OnClickListener() {
