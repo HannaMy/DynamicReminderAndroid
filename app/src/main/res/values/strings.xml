@@ -14,4 +14,15 @@
         <item>months</item>
         <item>years</item>
     </string-array>
+
+
+    <string-array name="questions">
+        <item>Did you remember to </item>
+        <item>Dont forget to </item>
+        <item>Its time to </item>
+        <item>I just wanted to remind you to </item>
+        <item>Seems like a good time to </item>
+        <item>Such a nice day to </item>
+    </string-array>
+
 </resources>
