@@ -72,7 +72,7 @@ public class Task implements Comparable<Object>, Serializable {
         nextNotification = generateNotification();
     }
 
-    public Notification generateNotification(){
+    private Notification generateNotification(){
         Date timeForNotification = getDateForNotification();
       //  Date timeForNotification = new Date();
 
@@ -219,19 +219,19 @@ public class Task implements Comparable<Object>, Serializable {
      * @return the date for the notification
      */
     public Date getDateForNotification(){
+        Date date = new Date();
         int timeUntilMINUTES = getMinutesUntil();
-        long millisecondsUntil = timeUntilMINUTES*60000;
-        long millisecondsThen = 0;
-
-
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
         long millisecondsNOW = dateNow.getTime();
 
-        millisecondsThen = millisecondsNOW + millisecondsUntil;
-
-
-        Date date = new Date();
+        long millisecondsThen = 0;
+        if(timeUntilMINUTES >0) {
+            long millisecondsUntil = timeUntilMINUTES * 60000;
+            millisecondsThen = millisecondsNOW + millisecondsUntil;
+        }else{
+            millisecondsThen = millisecondsNOW + 1000*60; //TODO lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
+        }
         date.setTime(millisecondsThen);
         return date;
     }

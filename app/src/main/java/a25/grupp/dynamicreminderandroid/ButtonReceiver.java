@@ -40,7 +40,6 @@ public class ButtonReceiver extends BroadcastReceiver {
 
     private void remindAgain(int taskId){
         Task task = taskRegister.getTaskWithId(taskId);
-        task.generateNotification();
-        //TODO metod för att generera ny notifikation
+        task.setNextNotification();
     }
 }
