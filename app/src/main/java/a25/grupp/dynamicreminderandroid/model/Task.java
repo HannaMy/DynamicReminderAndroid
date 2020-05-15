@@ -226,11 +226,18 @@ public class Task implements Comparable<Object>, Serializable {
         long millisecondsNOW = dateNow.getTime();
 
         long millisecondsThen = 0;
+
         if(timeUntilMINUTES >0) {
             long millisecondsUntil = timeUntilMINUTES * 60000;
             millisecondsThen = millisecondsNOW + millisecondsUntil;
         }else{
             millisecondsThen = millisecondsNOW + 1000*60; //TODO lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
+            int intervalInMinutes =  preferredInterval.getInMinutes();
+
+
+
+
+
         }
         date.setTime(millisecondsThen);
         return date;

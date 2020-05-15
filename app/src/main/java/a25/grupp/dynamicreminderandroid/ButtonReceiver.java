@@ -7,6 +7,10 @@ import android.content.Intent;
 import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
 
+/**
+ *
+ * @author Hanna My Jansson
+ */
 public class ButtonReceiver extends BroadcastReceiver {
 
     TaskRegister taskRegister;
@@ -27,11 +31,7 @@ public class ButtonReceiver extends BroadcastReceiver {
             }
         }
 
-
-
-
     }
-
 
     private void markAsDone(int taskId){
      Task task = taskRegister.getTaskWithId(taskId);

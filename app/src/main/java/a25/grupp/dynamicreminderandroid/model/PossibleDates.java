@@ -13,8 +13,6 @@ public class PossibleDates implements Serializable {
     private boolean[] possibleDates;
 
 
-
-
     public PossibleDates() {
         possibleDates = new boolean[31];
         setAllToTrue();
