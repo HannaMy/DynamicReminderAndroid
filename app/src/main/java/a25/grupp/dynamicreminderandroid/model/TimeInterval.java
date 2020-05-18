@@ -11,12 +11,12 @@ import java.util.Date;
  * @version 1.0
  */
 public class TimeInterval implements Serializable {
-    private LocalTime from;
-    private LocalTime to;
+    private int from;
+    private int to;
     private boolean isEmpty;
 
 
-    public TimeInterval(LocalTime from, LocalTime to) {
+    public TimeInterval(int from, int to) {
         this.from = from;
         this.to = to;
         isEmpty = false;
@@ -42,9 +42,9 @@ public class TimeInterval implements Serializable {
      * @param to the end of the interval
      * @return true if it was able to change the interval
      */
-    public boolean setInterval(LocalTime from, LocalTime to) {
+    public boolean setInterval(int from, int to) {
 
-        if (from.compareTo(to)!=1) {
+        if (from<to) {
             this.from = from;
             this.to = to;
             isEmpty = false;
@@ -56,11 +56,11 @@ public class TimeInterval implements Serializable {
 
     }
 
-    public LocalTime getFrom() {
+    public int getFrom() {
         return from;
     }
 
-    public LocalTime getTo() {
+    public int getTo() {
         return to;
     }
 
@@ -74,13 +74,43 @@ public class TimeInterval implements Serializable {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int hour = cal.get(Calendar.HOUR);
-        int minute = cal.get(Calendar.MINUTE);
+        //int minute = cal.get(Calendar.MINUTE);
 
-        LocalTime testTime = LocalTime.of(hour, minute);
 
-        if (testTime.isBefore(to) && testTime.isAfter(from)) {
+
+        if (from<=hour && to>hour) {
             return true;
         }
         return false;
     }
+
+    public int hoursUntilInterval(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int hour = cal.get(Calendar.HOUR);
+        //int minute = cal.get(Calendar.MINUTE);
+
+        int hoursUntil = from-hour;
+        if(hoursUntil<0){
+            hoursUntil += 24;
+        }
+        return hoursUntil;
+    }
+
+    public int hoursBeforeInterval(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int hour = cal.get(Calendar.HOUR);
+        //int minute = cal.get(Calendar.MINUTE);
+
+        int hoursBefore = hour-(to-1);
+        if(hoursBefore<0){
+            hoursBefore += 24;
+        }
+        return hoursBefore;
+    }
+
+
 }

@@ -46,7 +46,7 @@ public class PossibleTime implements Serializable {
      * @param from a LocalTime with the right time for the beginning of the interval
      * @param to a LocalTime with the right time for the end of the interval
      */
-    public void setPossibleHours(LocalTime from, LocalTime to) {
+    public void setPossibleHours(int from, int to) {
         possibleHours.clearAllInterval();
 
         boolean bol = possibleHours.addInterval(from, to);
@@ -58,7 +58,7 @@ public class PossibleTime implements Serializable {
      * @param from a LocalTime with the right time for the beginning of the interval
      * @param to a LocalTime with the right time for the end of the interval
      */
-    public boolean addPossibleHours(LocalTime from, LocalTime to) {
+    public boolean addPossibleHours(int from, int to) {
         boolean worked = possibleHours.addInterval(from, to);
         return worked;
     }
@@ -92,4 +92,29 @@ public class PossibleTime implements Serializable {
     public boolean possible(Date date){
         return ( possibleWeekDays.possible(date)  &&  possibleDates.possible(date)  &&   possibleHours.possible(date) );
     }
+
+    /**
+     * Changes the dates to the first time that is possible before the given date, if it is not possible now
+     * hours until can maximum be cut by half
+     * if its not possible to find a time before it will return the next possible time.
+     * @param date the date that is decided now and is going to be adjusted in the method
+     * @param hoursUntilNotification the number of hours from this time until the notification is going to be sent
+     * @return the new date for the notification
+     */
+    public Date changeToReasonableTime(Date date, long hoursUntilNotification){
+            int hoursUntil = possibleHours.hoursUntilPossible(date);
+            int hoursBefore = possibleHours.hoursBeforePossible(date);
+            if(hoursBefore<hoursUntil && (hoursUntilNotification/2)>= hoursBefore){
+                long millisecondsOriginDate = date.getTime();
+                long milliSecondsBefore = hoursBefore * 1000 * 60 * 60;
+                date.setTime(millisecondsOriginDate - milliSecondsBefore);
+            }else{
+                long millisecondsOriginDate = date.getTime();
+                long milliSecondsUntil= hoursUntil * 1000 * 60 * 60;
+                date.setTime(millisecondsOriginDate + milliSecondsUntil);
+            }
+
+            return date;
+    }
+
 }

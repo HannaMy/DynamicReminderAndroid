@@ -40,12 +40,12 @@ public class PossibleHours implements Serializable {
         cal.setTime(from);
         int fromHour = cal.get(Calendar.HOUR);
         int fromMinute = cal.get(Calendar.MINUTE);
-        LocalTime timeFrom = LocalTime.of(fromHour, fromMinute);
+        int timeFrom = fromHour;
 
         cal.setTime(to);
         int toHour = cal.get(Calendar.HOUR);
         int toMinute = cal.get(Calendar.HOUR);
-        LocalTime timeTo = LocalTime.of(toHour, toMinute);
+        int timeTo = toHour;
 
         intervals[freeIntervalIndex].setInterval(timeFrom, timeTo);
 
@@ -65,7 +65,7 @@ public class PossibleHours implements Serializable {
      * @param timeTo   object then end of the interval
      * @return true if it was able to add the interval
      */
-    public boolean addInterval(LocalTime timeFrom, LocalTime timeTo) {
+    public boolean addInterval(int timeFrom, int timeTo) {
 
         if (freeIntervalIndex >= MAX_NBR_OF_INTERVALS)
             return false;
@@ -104,5 +104,19 @@ public class PossibleHours implements Serializable {
                 possible = true;
         }
         return possible;
+    }
+
+    public int hoursUntilPossible(Date date){
+        //TODO endast implementerat för ett interval, bara att loopa och välja det lägsta
+         TimeInterval interval =   intervals[0];
+        int hoursUntil =  interval.hoursUntilInterval(date);
+        return hoursUntil;
+    }
+    public int hoursBeforePossible(Date date){
+        //TODO endast implementerat för ett interval, bara att loopa och välja det lägsta
+        TimeInterval interval =   intervals[0];
+        int hoursBefore =  interval.hoursBeforeInterval(date);
+        return hoursBefore;
+
     }
 }
