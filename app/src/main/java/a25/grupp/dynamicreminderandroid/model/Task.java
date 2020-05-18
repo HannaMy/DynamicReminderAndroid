@@ -29,12 +29,14 @@ public class Task implements Comparable<Object>, Serializable {
     private Notification nextNotification;
     private Context context;
 
-    public Task() {
-
+    public Task()
+    {
+        setPossibleHours(8,22);
     }
 
     public Task(int taskId) {
         id = taskId;
+        setPossibleHours(8,22);
     }
 
     public Task(String title, String info, TimeSpan preferredInterval, TimeSpan maximum, PossibleTime possibleTimeForExecution, Context context) {
@@ -44,6 +46,7 @@ public class Task implements Comparable<Object>, Serializable {
         this.maximum = maximum;
         this.possibleTimeForExecution = possibleTimeForExecution;
         this.context = context;
+        setPossibleHours(8,22);
         markAsDoneNow();
     }
 
@@ -168,7 +171,7 @@ public class Task implements Comparable<Object>, Serializable {
     }
 
 
-    public void setPossibleTimeInterval(int from, int to) {
+    public void setPossibleHours(int from, int to) {
         possibleTimeForExecution.setPossibleHours(from, to);
     }
 

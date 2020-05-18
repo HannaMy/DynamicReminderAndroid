@@ -109,13 +109,17 @@ public class PossibleHours implements Serializable {
     public int hoursUntilPossible(Date date){
         //TODO endast implementerat för ett interval, bara att loopa och välja det lägsta
          TimeInterval interval =   intervals[0];
-        int hoursUntil =  interval.hoursUntilInterval(date);
+        int hoursUntil  =0;
+         if(interval!=null)
+             hoursUntil =  interval.hoursUntilInterval(date);
         return hoursUntil;
     }
     public int hoursBeforePossible(Date date){
         //TODO endast implementerat för ett interval, bara att loopa och välja det lägsta
         TimeInterval interval =   intervals[0];
-        int hoursBefore =  interval.hoursBeforeInterval(date);
+        int hoursBefore = 0;
+        if(interval!=null)
+        hoursBefore = interval.hoursBeforeInterval(date);
         return hoursBefore;
 
     }
