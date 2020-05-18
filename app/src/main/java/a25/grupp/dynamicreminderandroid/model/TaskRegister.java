@@ -196,6 +196,7 @@ public class TaskRegister implements Serializable {
      */
     public String toString() {
         String str = "";
+
         for (int i = 1; i <= taskHashMap.size(); i++) {
             str += taskHashMap.get(i).toString() + "\n";
             str += "\n--------------------------------";
