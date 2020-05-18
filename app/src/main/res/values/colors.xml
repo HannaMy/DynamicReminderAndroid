@@ -34,4 +34,14 @@
 
 
 
+    <color name="textColor">#11141D</color>
+    <color name="background1">#F3F1E9</color>
+    <color name="background2">#E4EAED</color>
+    <color name="HeaderColor">#1F344B</color>
+    <color name="redColor">#9A1D1D</color>
+    <color name="btnColor">#CCAF61</color>
+
+
+
+
 </resources>
