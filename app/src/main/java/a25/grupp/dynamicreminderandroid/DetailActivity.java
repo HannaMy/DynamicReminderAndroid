@@ -407,7 +407,7 @@ public class DetailActivity extends AppCompatActivity {
         //Sets the title text
         EditText editTextSetTitle = findViewById(R.id.etTitle);
         editTextSetTitle.setText(task.getTitle());
-        getSupportActionBar().setTitle(task.getTitle());
+        Objects.requireNonNull(getSupportActionBar()).setTitle(task.getTitle());
 
         //Sets the interval number
         EditText editTextSetInterval = findViewById(R.id.etTimeInterval);

@@ -20,12 +20,14 @@
 
     <Button
         android:id="@+id/btn_Done"
+        style="@style/DoneButton"
         android:layout_width="wrap_content"
         android:layout_height="38dp"
-        android:drawableEnd="@mipmap/check_mark_powder"
+        android:drawableEnd="@drawable/ic_check_eggplant"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Mark as done "
-        android:textColor="@color/colorLightBG"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvInterval"
         app:layout_constraintTop_toBottomOf="@+id/tvInterval" />
