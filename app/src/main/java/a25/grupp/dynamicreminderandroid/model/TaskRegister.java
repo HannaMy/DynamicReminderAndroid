@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 /**
+ * This class represents a register where all saved tasks a stored
+ *
  * @author Hanna My Jansson
  * @version 1.0
  */

@@ -16,13 +16,22 @@
     </string-array>
 
 
-    <string-array name="questions">
-        <item>Did you remember to </item>
-        <item>Dont forget to </item>
-        <item>Its time to </item>
-        <item>I just wanted to remind you to </item>
-        <item>Seems like a good time to </item>
-        <item>Such a nice day to </item>
+    <string-array name="questionsHappy">
+        <item>Isn\'t this the perfect time to</item>
+        <item>Maybe it\'s time to </item>
+        <item>Just a friendly reminder to</item>
+        <item>I just wanted to remind you to</item>
+        <item>Seems like a good time to</item>
+        <item>Such a nice day to</item>
+    </string-array>
+
+    <string-array name="questionsSerious">
+        <item>Don\'t forget to</item>
+        <item>It really is time to</item>
+        <item>Don\'t forget that you\'re supposed to</item>
+        <item>Did you remember to</item>
+        <item>Finish what you\'re doing and then</item>
+        <item>Pleeeease don\'t forget to</item>
     </string-array>
 
 </resources>
