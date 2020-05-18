@@ -42,7 +42,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 /**
  * The activity that shows the details of the tasks, also the activity to use when adding a new task
  *
- * @author Hanna My Jansson, Anni Johansson, Cornelia
+ * @author Hanna My Jansson, Anni Johansson, Cornelia, Hanna Ringkvist
  * @version 1.0
  */
 
