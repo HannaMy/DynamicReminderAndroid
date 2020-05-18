@@ -31,6 +31,7 @@ import android.widget.TimePicker;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import a25.grupp.dynamicreminderandroid.model.Notification;
 import a25.grupp.dynamicreminderandroid.model.PossibleTime;
@@ -183,6 +184,8 @@ public class DetailActivity extends AppCompatActivity {
                     calendar();
                 }
             });
+
+            Objects.requireNonNull(getSupportActionBar()).setTitle("New task");
         }
 
     }
@@ -404,6 +407,7 @@ public class DetailActivity extends AppCompatActivity {
         //Sets the title text
         EditText editTextSetTitle = findViewById(R.id.etTitle);
         editTextSetTitle.setText(task.getTitle());
+        getSupportActionBar().setTitle(task.getTitle());
 
         //Sets the interval number
         EditText editTextSetInterval = findViewById(R.id.etTimeInterval);

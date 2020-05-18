@@ -4,12 +4,13 @@
 
     <item
         android:id="@+id/refresh_button"
-        android:icon="@drawable/ic_refresh"
+        android:icon="@drawable/ic_refresh_isabelle_30"
         android:title="refreshButton"
         app:showAsAction="always" />
 
-    <item android:id="@+id/delete_button"
-        android:icon="@drawable/ic_delete_black_24dp"
+    <item
+        android:id="@+id/delete_button"
+        android:icon="@drawable/ic_delete_isabelle_30"
         android:title="deleteButton"
         app:showAsAction="always" />
 
