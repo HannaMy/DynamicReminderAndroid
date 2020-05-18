@@ -168,6 +168,10 @@ public class AdapterTaskOverview extends ArrayAdapter {
         return taskListItem;
     }
 
+
+    /**
+     * Updating the list with tasks
+     */
     private void updateList(){
         this.notifyDataSetChanged();
     }

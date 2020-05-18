@@ -91,7 +91,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         yesIntent.putExtra("action", "yesNow");
         yesIntent.putExtra("taskId", taskId);
         yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        yesPendingIntent = PendingIntent.getBroadcast(context, 200 +taskId, yesIntent,PendingIntent.FLAG_ONE_SHOT);
+        yesPendingIntent = PendingIntent.getBroadcast(context, 200 + taskId, yesIntent,PendingIntent.FLAG_ONE_SHOT);
 
         //Yes earlier button (DetailActivity.class är landing activity just nu)
         Intent yesEarlierIntent = new Intent(context, DetailActivity.class);

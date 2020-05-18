@@ -168,7 +168,7 @@ public class Task implements Comparable<Object>, Serializable {
     private int getMinutesUntil(){
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
-        dateNow.compareTo(lastPerformed);
+        dateNow.compareTo(lastPerformed);//Gör väl inget?
 
         long millisecondsNOW = dateNow.getTime();
         long millisecondsDONE = lastPerformed.getTime();
@@ -249,6 +249,27 @@ public class Task implements Comparable<Object>, Serializable {
         }
         date.setTime(millisecondsThen);
         return date;
+    }
+
+    public void intervalGroups(){
+        int intervalInMinutes = preferredInterval.getInMinutes();
+        if(intervalInMinutes <= 1440){ //under 1h
+            //todo 1h
+        }else if(intervalInMinutes >= 1441 && intervalInMinutes <= 4320){ //between 1h and 3d
+            //todo 2/3/4h?
+        } else if(intervalInMinutes >= 4321 && intervalInMinutes <= 8640){ //between 3d and 6d
+            //todo 8h
+        } else if(intervalInMinutes >= 8641 && intervalInMinutes <= 20159){ //between 6d and 2w
+            //todo 1d
+        } else if(intervalInMinutes >= 20160 && intervalInMinutes <= 43799){ //between 2w ands 1m
+            //todo 2d
+        } else if(intervalInMinutes >= 43800 && intervalInMinutes <= 131399){ //between 1m and 3m
+            //todo 3d
+        } else if(intervalInMinutes >= 131400 && intervalInMinutes <= 1051200){ //between 3m and 2y
+            //todo 1w
+        } else{ //over 2y
+            //todo 2w
+        }
     }
 
     public TimeUnit getTimeUnit(){

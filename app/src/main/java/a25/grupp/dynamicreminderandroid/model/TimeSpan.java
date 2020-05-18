@@ -3,7 +3,7 @@ package a25.grupp.dynamicreminderandroid.model;
 import java.io.Serializable;
 
 /**
- * Timespan sets the intervalls beetween how often a task needs to be done.
+ * TimeSpan sets the interval beetween how often a task needs to be done.
  *
  * @author Hanna Ringkvist
  * @version 1.0
@@ -19,6 +19,10 @@ public class TimeSpan implements Serializable {
     }
 
 
+    /**
+     * Changes the timeunit to minutes
+     * @return a number of how many minutes the interval should be
+     */
     public int getInMinutes() {
         int minutes = 0;
         switch (timeUnit) {
@@ -60,6 +64,11 @@ public class TimeSpan implements Serializable {
         this.timeUnit = timeUnit;
     }
 
+
+    /**
+     * Creates a String that explains the interval
+     * @return a String that explains the interval
+     */
     @Override
     public String toString() {
         return "Every " + time + " " + timeUnit;

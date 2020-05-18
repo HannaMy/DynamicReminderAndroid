@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 /**
+ * This class represents a register where all saved tasks a stored
+ *
  * @author Hanna My Jansson
  * @version 1.0
  */
@@ -194,6 +196,7 @@ public class TaskRegister implements Serializable {
      */
     public String toString() {
         String str = "";
+
         for (int i = 1; i <= taskHashMap.size(); i++) {
             str += taskHashMap.get(i).toString() + "\n";
             str += "\n--------------------------------";

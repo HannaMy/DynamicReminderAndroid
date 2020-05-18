@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             listView.setAdapter(adapterTaskOverview);
         }
 
-        taskRegister.saveRegister(this);
+       // taskRegister.saveRegister(this);
 
         /*  updateThread = new UpdateThread(adapterTaskOverview, this);
 
