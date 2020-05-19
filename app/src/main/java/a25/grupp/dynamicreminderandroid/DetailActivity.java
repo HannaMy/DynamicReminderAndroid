@@ -50,6 +50,8 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 public class DetailActivity extends AppCompatActivity {
 
     private Date lastPerformed;
+    private int possibleStartTime;
+    private int possibleEndTime;
 
 
     /**
@@ -145,16 +147,13 @@ public class DetailActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.availableHours, android.R.layout.simple_spinner_item);
         adapterStart.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropDownPosStart.setAdapter(adapterStart);
+        dropDownPosStart.setSelection(7);
         dropDownPosStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if (position == 0) {
-                    System.out.println("1 AM valt i start time");
-
-                } else if (position == 1) {
-                    System.out.println("2 AM valt i start time");
-                }
+                possibleStartTime = (position + 1);
+                System.out.println("Possible start time = " + possibleStartTime);
             }
 
             @Override
@@ -167,18 +166,13 @@ public class DetailActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapterEnd = ArrayAdapter.createFromResource(this, R.array.availableHours, android.R.layout.simple_spinner_item);
         adapterEnd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropDownPosEnd.setAdapter(adapterEnd);
+        dropDownPosEnd.setSelection(19);
         dropDownPosEnd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if (position == 0) {
-                    System.out.println("1 AM valt");
-
-
-                } else if (position == 1) {
-                    System.out.println("2 AM valt");
-
-                }
+                possibleEndTime = (position + 1);
+                System.out.println("Possible end time = " + possibleEndTime);
             }
 
             @Override
@@ -358,6 +352,7 @@ public class DetailActivity extends AppCompatActivity {
 
         // Handles possibleTime depending on choice in dropdown menu
         PossibleTime possibleTime = new PossibleTime();
+        possibleTime.setPossibleHours(possibleStartTime, possibleEndTime);
 
         //Gamla possibleTime-koden
         /*
