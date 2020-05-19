@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -115,14 +114,14 @@ public class DetailActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
-        ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
-        constraintLayout.setVisibility(View.GONE);
+      //  ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
+     //   constraintLayout.setVisibility(View.GONE);
 
-
+/*
         final Spinner dropDownAlways = findViewById(R.id.ddAvailability);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.available, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dropDownAlways.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.available, android.R.layout.simple_spinner_item);
+        adapterStart.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropDownAlways.setAdapter(adapterStart);
         dropDownAlways.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -142,9 +141,58 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         });
+
+ */
+
+        final Spinner dropDownPosStart = findViewById(R.id.posStartTime);
+        ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.availableHours, android.R.layout.simple_spinner_item);
+        adapterStart.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropDownPosStart.setAdapter(adapterStart);
+        dropDownPosStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position == 0) {
+                    System.out.println("1 AM valt i start time");
+
+                } else if (position == 1) {
+                    System.out.println("2 AM valt i start time");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        final Spinner dropDownPosEnd = findViewById(R.id.posEndTime);
+        ArrayAdapter<CharSequence> adapterEnd = ArrayAdapter.createFromResource(this, R.array.availableHours, android.R.layout.simple_spinner_item);
+        adapterEnd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropDownPosEnd.setAdapter(adapterEnd);
+        dropDownPosEnd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position == 0) {
+                    System.out.println("1 AM valt");
+
+
+                } else if (position == 1) {
+                    System.out.println("2 AM valt");
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         final Spinner dropDownTimeUnit = findViewById(R.id.dropDown_timeUnit);
         ArrayAdapter<CharSequence> adapterTimeUnit = ArrayAdapter.createFromResource(this, R.array.timeunits, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterEnd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropDownTimeUnit.setAdapter(adapterTimeUnit);
 
         Button btnCancel = findViewById(R.id.btnCancel);
@@ -313,9 +361,11 @@ public class DetailActivity extends AppCompatActivity {
         String info = editTextInfo.getText().toString();
         TimeSpan preferredInterval = new TimeSpan(intervalAmount, timeUnit);
 
+
         // Handles possibleTime depending on choice in dropdown menu
         PossibleTime possibleTime = new PossibleTime();
-        final Spinner dropDownAlways = findViewById(R.id.ddAvailability);
+        /*
+        final Spinner dropDownAlways = findViewById(R.id.posStartTime);
         TextView textView1 = (TextView) dropDownAlways.getSelectedView();
         String result1 = textView1.getText().toString();
         switch (result1) {
@@ -331,7 +381,7 @@ public class DetailActivity extends AppCompatActivity {
                 //  possibleTime.setPossibleHours(localTimes[0], localTimes[1]);
                 break;
         }
-
+*/
         // Checks title and interval and jumps back to MainActivity and shows the new task in the list if everything is correct
         Intent save = new Intent(DetailActivity.this, MainActivity.class);
         if(title.equals("") && intervalAmount == 0){

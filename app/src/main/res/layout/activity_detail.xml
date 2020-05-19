@@ -64,7 +64,7 @@
                 style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-condensed-medium"
@@ -73,8 +73,9 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.564"
                 app:layout_constraintStart_toEndOf="@+id/tvLastPreformedText"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutHideable" />
+                app:layout_constraintTop_toBottomOf="@+id/posEndTime" />
 
             <EditText
                 android:id="@+id/etTitle"
@@ -143,20 +144,6 @@
                 app:layout_constraintStart_toEndOf="@+id/etTimeInterval"
                 app:layout_constraintTop_toBottomOf="@+id/etTitle" />
 
-            <Spinner
-                android:id="@+id/ddAvailability"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/colorLightBG"
-                android:minHeight="26dp"
-                android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvAvailable"
-                app:layout_constraintTop_toBottomOf="@+id/etNotes" />
-
             <TextView
                 android:id="@+id/tvTitelDescription"
                 android:layout_width="wrap_content"
@@ -194,7 +181,7 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:gravity="center_vertical"
                 android:minHeight="26dp"
-                android:text="Im available for this task: "
+                android:text="I'm available for this task between: "
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -208,149 +195,58 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-condensed-medium"
-                android:text="Last time i did this was"
+                android:text="Last time I did this was"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutHideable" />
+                app:layout_constraintTop_toBottomOf="@+id/posStartTime" />
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/constraintLayoutHideable"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:background="@color/colorBG"
-                android:textSize="16dp"
+            <Spinner
+                android:id="@+id/posStartTime"
+                android:layout_width="160dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="#FFFFFF"
+                android:spinnerMode="dropdown"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvAvailable" />
+
+            <Spinner
+                android:id="@+id/posEndTime"
+                android:layout_width="160dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="58dp"
+                android:layout_marginEnd="16dp"
+                android:background="#FFFFFF"
+                android:spinnerMode="dropdown"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ddAvailability">
+                app:layout_constraintHorizontal_bias="0.96"
+                app:layout_constraintStart_toEndOf="@+id/posStartTime"
+                app:layout_constraintTop_toBottomOf="@+id/etNotes" />
 
-                <CheckBox
-                    android:id="@+id/checkBoxMo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Mo"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/checkBoxTu"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxWe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="We"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/checkBoxTh"
-                    app:layout_constraintStart_toEndOf="@+id/checkBoxTu"
-                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxTh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Th"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/checkBoxFr"
-                    app:layout_constraintStart_toEndOf="@+id/checkBoxWe"
-                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxFr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Fr"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/checkBoxSa"
-                    app:layout_constraintStart_toEndOf="@+id/checkBoxTh"
-                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxSa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Sa"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/checkBoxSu"
-                    app:layout_constraintStart_toEndOf="@+id/checkBoxFr"
-                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxSu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Su"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/checkBoxSa"
-                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxTu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Tu"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/checkBoxWe"
-                    app:layout_constraintStart_toEndOf="@+id/checkBoxMo"
-                    app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-                <EditText
-                    android:id="@+id/editText6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="9"
-                    android:hint="from date"
-                    android:inputType="time"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textColorHint="@color/colorLightAccent"
-                    android:textSize="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <EditText
-                    android:id="@+id/editText7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:ems="9"
-                    android:hint="to date"
-                    android:inputType="time"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textColorHint="@color/colorLightAccent"
-                    android:textSize="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.483"
-                    app:layout_constraintStart_toEndOf="@+id/editText6"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvAnd"
+                android:layout_width="36dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="26dp"
+                android:text="and"
+                app:layout_constraintBottom_toTopOf="@+id/btnCalendarLastPreformed"
+                app:layout_constraintEnd_toStartOf="@+id/posEndTime"
+                app:layout_constraintHorizontal_bias="0.29"
+                app:layout_constraintStart_toEndOf="@+id/posStartTime"
+                app:layout_constraintTop_toBottomOf="@+id/tvAvailable"
+                app:layout_constraintVertical_bias="0.562" />
 
         </android.support.constraint.ConstraintLayout>
+
     </ScrollView>
 
 </RelativeLayout>
