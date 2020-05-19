@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 import a25.grupp.dynamicreminderandroid.model.Notification;
 import a25.grupp.dynamicreminderandroid.model.Task;
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Dynamic Reminder");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
