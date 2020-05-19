@@ -1,6 +1,7 @@
 package a25.grupp.dynamicreminderandroid;
 
 import android.app.AlarmManager;
+import android.app.Application;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
@@ -68,7 +69,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setLargeIcon(largeIcon)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setColor(Color.GREEN)
+                .setColor(context.getResources().getColor(R.color.colorPrimary))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setContentIntent(landingPendingIntent)
