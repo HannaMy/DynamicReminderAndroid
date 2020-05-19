@@ -251,8 +251,9 @@ public class Task implements Comparable<Object>, Serializable {
             millisecondsUntil = timeUntilMINUTES * 60000;
             millisecondsThen = millisecondsNOW + millisecondsUntil;
         } else {
-            millisecondsThen = millisecondsNOW + 1000 * 60; //TODO lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
-            int intervalInMinutes = preferredInterval.getInMinutes();
+            millisecondsUntil = intervalGroups();
+            millisecondsThen = millisecondsNOW + millisecondsUntil;
+            //millisecondsThen = millisecondsNOW + 1000 * 60; //TODO lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
 
 
         }
@@ -268,25 +269,27 @@ public class Task implements Comparable<Object>, Serializable {
            return  adjustedDate;
     }
 
-    public void intervalGroups() {
+    public long intervalGroups() {
+        long nextInterval = 0;
         int intervalInMinutes = preferredInterval.getInMinutes();
-        if (intervalInMinutes <= 1440) { //under 1h
-            //todo 1h
-        } else if (intervalInMinutes >= 1441 && intervalInMinutes <= 4320) { //between 1h and 3d
-            //todo 2/3/4h?
+        if (intervalInMinutes <= 1440) { //under 1d
+            nextInterval = 60;
+        } else if (intervalInMinutes >= 1441 && intervalInMinutes <= 4320) { //between 1d and 3d
+            nextInterval = 180 * 60000; //1h in milliseconds
         } else if (intervalInMinutes >= 4321 && intervalInMinutes <= 8640) { //between 3d and 6d
-            //todo 8h
+            nextInterval = 480 * 60000; //3h in milliseconds
         } else if (intervalInMinutes >= 8641 && intervalInMinutes <= 20159) { //between 6d and 2w
-            //todo 1d
+            nextInterval = 1440 * 60000; //1d in milliseconds
         } else if (intervalInMinutes >= 20160 && intervalInMinutes <= 43799) { //between 2w ands 1m
-            //todo 2d
+            nextInterval = 2880 * 60000; //2d in milliseconds
         } else if (intervalInMinutes >= 43800 && intervalInMinutes <= 131399) { //between 1m and 3m
-            //todo 3d
+            nextInterval = 4320 * 60000; // 3d in milliseconds
         } else if (intervalInMinutes >= 131400 && intervalInMinutes <= 1051200) { //between 3m and 2y
-            //todo 1w
+            nextInterval = 10080 * 60000; //1w in milliseconds
         } else { //over 2y
-            //todo 2w
+            nextInterval = 20160 * 60000; //2w in milliseconds
         }
+        return nextInterval;
     }
 
     public TimeUnit getTimeUnit() {

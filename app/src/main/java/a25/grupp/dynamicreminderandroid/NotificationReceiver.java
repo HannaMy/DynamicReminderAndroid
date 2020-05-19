@@ -51,7 +51,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
 
         //Large icon
-        Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.cockatiel);
+        Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.grey_cockatiel_2);
 
         //What happens when the user clicks on the notification
         Intent landingIntent = new Intent(context, DetailActivity.class);
@@ -64,7 +64,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         createButtonIntents(taskId);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.small_cockatiel)
+                .setSmallIcon(R.mipmap.small_purple_cockatiel)
                 .setLargeIcon(largeIcon)
                 .setContentTitle(title)
                 .setContentText(message)
@@ -73,9 +73,9 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setContentIntent(landingPendingIntent)
                 .setAutoCancel(true)
-                .addAction(R.mipmap.small_cockatiel, "Yes, now", yesPendingIntent)
-                .addAction(R.mipmap.small_cockatiel, "Yes, earlier", yesEarlierPendingIntent)
-                .addAction(R.mipmap.small_cockatiel, "No", noPendingIntent);
+                .addAction(R.mipmap.small_purple_cockatiel, "Yes, now", yesPendingIntent)
+                .addAction(R.mipmap.small_purple_cockatiel, "Yes, earlier", yesEarlierPendingIntent)
+                .addAction(R.mipmap.small_purple_cockatiel, "No", noPendingIntent);
 
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
