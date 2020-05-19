@@ -83,22 +83,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.delete_menu, menu);
+        inflater.inflate(R.menu.refresh_menu, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.refresh_button:
                 this.recreate();
-                return true;
-            case R.id.delete_button:
-                //TODO: kod för att ta bort flera uppgifter samtidigt
-                return true;
-            default:
                 return super.onOptionsItemSelected(item);
-        }
+
     }
 
     private AdapterTaskOverview initiateAdapter() {

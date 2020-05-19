@@ -18,6 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:visibility="visible"
+            app:contentInsetStart="5dp"
             app:logo="@drawable/logo"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="@string/title_activity_main" />

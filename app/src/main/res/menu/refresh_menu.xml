@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/delete_button"
-        android:icon="@drawable/ic_delete_25"
-        android:title="deleteButton"
+        android:id="@+id/refresh_button"
+        android:icon="@drawable/ic_refresh_25"
+        android:title="refreshButton"
         app:showAsAction="always" />
-
 
 </menu>
