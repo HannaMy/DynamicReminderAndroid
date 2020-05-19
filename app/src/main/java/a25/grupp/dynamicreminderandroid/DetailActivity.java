@@ -9,7 +9,6 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -104,7 +103,6 @@ public class DetailActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
 
-        //  return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -115,10 +113,10 @@ public class DetailActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
-      //  ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
-     //   constraintLayout.setVisibility(View.GONE);
+        /*
+       ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
+       constraintLayout.setVisibility(View.GONE);
 
-/*
         final Spinner dropDownAlways = findViewById(R.id.ddAvailability);
         ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.available, android.R.layout.simple_spinner_item);
         adapterStart.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -135,8 +133,6 @@ public class DetailActivity extends AppCompatActivity {
 
                 }
             }
-
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -239,7 +235,6 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-
     /**
      * connects the gui components to the logic
      */
@@ -303,8 +298,7 @@ public class DetailActivity extends AppCompatActivity {
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(delete);
 
-
-        // TODO Pop up som varnar & radera notifikation
+        // TODO Radera notifikation
     }
 
     /**
@@ -325,8 +319,7 @@ public class DetailActivity extends AppCompatActivity {
             intervalAmount = Integer.parseInt(editTextInterval.getText().toString());
             System.out.println("aaaaa" + intervalAmount);
         } catch (Exception e) {
-            //Todo Felmeddelande med texten "You need to add a preferred interval as a number"
-
+            e.printStackTrace();
         }
         if (intervalAmount != 0) {
 
@@ -365,6 +358,8 @@ public class DetailActivity extends AppCompatActivity {
 
         // Handles possibleTime depending on choice in dropdown menu
         PossibleTime possibleTime = new PossibleTime();
+
+        //Gamla possibleTime-koden
         /*
         final Spinner dropDownAlways = findViewById(R.id.posStartTime);
         TextView textView1 = (TextView) dropDownAlways.getSelectedView();
@@ -501,8 +496,6 @@ public class DetailActivity extends AppCompatActivity {
                 calendar();
             }
         });
-
-
     }
 
     /**
