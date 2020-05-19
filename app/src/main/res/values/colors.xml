@@ -4,10 +4,14 @@
     <color name="colorPrimary">#6C525F</color>
     <color name="colorAccent">#513745</color>
     <color name="colorLightAccent">#B4A6AA</color>
+    <color name="colorMediumBG">#C6BABB</color>
     <color name="colorBG">#F2EDE8</color>
     <color name="colorLightBG">#FBF9F5</color>
+    <color name="colorMediumLightBG">#E9E3DF</color>
 
 
     <color name="persianPlum">#6F181E</color>
-    <color name="rosewood">#690B11</color>
+
+    <color name="cheekRedDark">#bd1d03</color>
+    <color name="cheekRed">#ea5a43</color>
 </resources>

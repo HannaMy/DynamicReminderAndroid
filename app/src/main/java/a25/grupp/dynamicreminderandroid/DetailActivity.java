@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -43,7 +44,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 /**
  * The activity that shows the details of the tasks, also the activity to use when adding a new task
  *
- * @author Hanna My Jansson, Anni Johansson, Cornelia, Hanna Ringkvist
+ * @author Hanna My Jansson, Anni Johansson, Cornelia Sköld, Hanna Ringkvist
  * @version 1.0
  */
 
