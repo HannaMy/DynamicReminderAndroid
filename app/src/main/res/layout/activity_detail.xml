@@ -204,28 +204,28 @@
 
             <Spinner
                 android:id="@+id/posStartTime"
-                android:layout_width="160dp"
+                android:layout_width="80dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="58dp"
                 android:background="#FFFFFF"
                 android:spinnerMode="dropdown"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvAvailable" />
+                app:layout_constraintTop_toBottomOf="@+id/etNotes" />
 
             <Spinner
                 android:id="@+id/posEndTime"
-                android:layout_width="160dp"
+                android:layout_width="80dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="58dp"
+                android:layout_marginTop="56dp"
                 android:layout_marginEnd="16dp"
                 android:background="#FFFFFF"
                 android:spinnerMode="dropdown"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.96"
+                app:layout_constraintHorizontal_bias="0.306"
                 app:layout_constraintStart_toEndOf="@+id/posStartTime"
                 app:layout_constraintTop_toBottomOf="@+id/etNotes" />
 
