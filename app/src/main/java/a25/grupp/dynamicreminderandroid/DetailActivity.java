@@ -37,6 +37,7 @@ import a25.grupp.dynamicreminderandroid.model.Notification;
 import a25.grupp.dynamicreminderandroid.model.PossibleTime;
 import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
+import a25.grupp.dynamicreminderandroid.model.TimeInterval;
 import a25.grupp.dynamicreminderandroid.model.TimeSpan;
 import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
@@ -478,6 +479,14 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
 
         EditText editTextInfo = findViewById(R.id.etNotes);
         editTextInfo.setText(task.getInfo());
+        //possiblehour
+        Spinner dropDownPosEnd = findViewById(R.id.posEndTime);
+        Spinner dropDownPosStart = findViewById(R.id.posStartTime);
+
+        TimeInterval possibleHours = task.getPossibleHour();
+
+        dropDownPosStart.setSelection(possibleHours.getFrom()-1);
+        dropDownPosEnd.setSelection(possibleHours.getTo()-1);
 
         //sets last performed button
         lastPerformed = task.getLastPerformed();

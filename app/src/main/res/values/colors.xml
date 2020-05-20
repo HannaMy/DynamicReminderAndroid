@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryDark">#3D2029</color>
-    <color name="colorPrimary">#6C525F</color>
-    <color name="colorAccent">#513745</color>
-    <color name="colorLightAccent">#B4A6AA</color>
-    <color name="colorMediumBG">#C6BABB</color>
-    <color name="colorBG">#F2EDE8</color>
-    <color name="colorLightBG">#FBF9F5</color>
-    <color name="colorMediumLightBG">#E9E3DF</color>
+    <color name="colorDarkDark">#3D2029</color>
+    <color name="colorDark">#513745</color>
+    <color name="colorMediumDark">#6C525F</color>
+    <color name="colorMedium">#C6BABB</color>
+    <color name="colorMediumLight">#E9E3DF</color>
+    <color name="colorLight">#F2EDE8</color>
+    <color name="colorLightLight">#FBF9F5</color>
+
 
 
     <color name="persianPlum">#6F181E</color>

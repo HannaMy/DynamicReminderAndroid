@@ -69,7 +69,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setLargeIcon(largeIcon)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setColor(context.getResources().getColor(R.color.colorPrimary))
+                .setColor(context.getResources().getColor(R.color.colorMediumDark))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setContentIntent(landingPendingIntent)

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMediumBG"
+    android:background="@color/colorMedium"
     tools:context=".DetailActivity">
 
     <Button
@@ -15,14 +15,14 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
-        android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="@android:string/cancel"
         android:textAllCaps="true"
-        android:textColor="@color/colorLightBG"
+        android:textColor="@color/colorLight"
         android:textSize="18sp" />
 
     <Button
@@ -38,7 +38,7 @@
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Save"
         android:textAllCaps="true"
-        android:textColor="@color/colorLightBG"
+        android:textColor="@color/colorLight"
         android:textSize="18sp" />
 
     <ScrollView
@@ -52,7 +52,7 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="-2dp"
-        android:background="@color/colorBG">
+        android:background="@color/colorLight">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
@@ -71,7 +71,7 @@
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="YY-MM-DD hh:mm"
-                android:textColor="@color/colorLightBG"
+                android:textColor="@color/colorLight"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -86,12 +86,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:background="@color/colorLightBG"
+                android:background="@color/colorLightLight"
                 android:ems="10"
                 android:hint="your task title"
                 android:inputType="textPersonName"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorLightAccent"
+                android:textColor="@color/colorDarkDark"
+                android:textColorHint="@color/colorMedium"
                 android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,13 +103,13 @@
                 android:layout_height="26dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorLightBG"
+                android:background="@color/colorLightLight"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="0"
                 android:inputType="number"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorLightAccent"
+                android:textColor="@color/colorDarkDark"
+                android:textColorHint="@color/colorMedium"
                 android:textSize="16dp"
                 app:layout_constraintStart_toEndOf="@+id/tvEvery"
                 app:layout_constraintTop_toBottomOf="@+id/etTitle" />
@@ -121,15 +121,15 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@color/colorLightBG"
+                android:background="@color/colorLightLight"
                 android:ems="10"
                 android:gravity="top"
                 android:hint="Notes"
                 android:inputType="textMultiLine"
                 android:lines="5"
                 android:singleLine="false"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorLightAccent"
+                android:textColor="@color/colorDarkDark"
+                android:textColorHint="@color/colorMedium"
                 android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -142,7 +142,7 @@
                 android:layout_height="26dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorLightBG"
+                android:background="@color/colorLightLight"
                 app:layout_constraintStart_toEndOf="@+id/etTimeInterval"
                 app:layout_constraintTop_toBottomOf="@+id/etTitle" />
 
@@ -154,7 +154,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="I would like to be reminded to ..."
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorDarkDark"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -168,7 +168,7 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:gravity="center_vertical"
                 android:text="Every"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorDarkDark"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etTitle" />
@@ -184,7 +184,7 @@
                 android:gravity="center_vertical"
                 android:minHeight="26dp"
                 android:text="I'm available for this task between: "
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorDarkDark"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etNotes" />
@@ -198,7 +198,7 @@
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Last time I did this was"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorDarkDark"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -207,10 +207,10 @@
             <Spinner
                 android:id="@+id/posStartTime"
                 android:layout_width="80dp"
-                android:layout_height="43dp"
+                android:layout_height="26dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="58dp"
-                android:background="#FFFFFF"
+                android:background="@color/colorLightLight"
                 android:spinnerMode="dropdown"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
@@ -219,11 +219,11 @@
             <Spinner
                 android:id="@+id/posEndTime"
                 android:layout_width="80dp"
-                android:layout_height="43dp"
+                android:layout_height="26dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="58dp"
                 android:layout_marginEnd="16dp"
-                android:background="#FFFFFF"
+                android:background="@color/colorLightLight"
                 android:spinnerMode="dropdown"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -239,7 +239,9 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="26dp"
+                android:fontFamily="sans-serif-condensed"
                 android:text="and"
+                android:textColor="@color/colorMedium"
                 app:layout_constraintBottom_toTopOf="@+id/btnCalendarLastPreformed"
                 app:layout_constraintEnd_toStartOf="@+id/posEndTime"
                 app:layout_constraintHorizontal_bias="0.29"
