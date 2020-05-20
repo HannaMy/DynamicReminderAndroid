@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        AdapterTaskOverview adapterTaskOverview = initiateAdapter();
+        initiateAdapter();
 
         /*boolean bool = true;
         while (bool) {
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private AdapterTaskOverview initiateAdapter() {
+    private void initiateAdapter() {
 
        /* FileHandler fh =  new FileHandler(this);
         fh.saveToFileString("Test30");
@@ -154,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
                 taskIds[i] = task.getId();
             }
 
-
             //Listview
             adapterTaskOverview = new AdapterTaskOverview(this, titles);
             adapterTaskOverview.setTaskArray(taskArray);
@@ -162,14 +161,16 @@ public class MainActivity extends AppCompatActivity {
             //adapterTaskOverview.updateListData(titles,intervalInfos,times,timeUnits,taskIds);
             ListView listView = findViewById(R.id.listviewOverview);
             listView.setAdapter(adapterTaskOverview);
-
+            listView.setEmptyView(findViewById(R.id.empty));
 
         } else {
             //Listview
-            adapterTaskOverview = new AdapterTaskOverview(this, titles);
-            adapterTaskOverview.updateListData(titles, intervalInfos, times, timeUnits, taskIds);
-            ListView listView = findViewById(R.id.listviewOverview);
-            listView.setAdapter(adapterTaskOverview);
+
+            //adapterTaskOverview = new AdapterTaskOverview(this, titles);
+            //adapterTaskOverview.updateListData(titles, intervalInfos, times, timeUnits, taskIds);
+            System.out.println("empty");
+
+
         }
 
        // taskRegister.saveRegister(this);
@@ -177,11 +178,6 @@ public class MainActivity extends AppCompatActivity {
         /*  updateThread = new UpdateThread(adapterTaskOverview, this);
 
          */
-
-
-        return adapterTaskOverview;
-
-
     }
 
 
