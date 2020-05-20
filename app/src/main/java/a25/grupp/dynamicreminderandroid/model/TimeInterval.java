@@ -73,7 +73,7 @@ public class TimeInterval implements Serializable {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        int hour = cal.get(Calendar.HOUR);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
         //int minute = cal.get(Calendar.MINUTE);
 
 
