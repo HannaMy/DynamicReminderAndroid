@@ -181,15 +181,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * This method creates an intent for a scheduled notification, using a Calendar object
-     */
-    public void addNotification(Context context, Notification notification) {
+    public void addNotification(Context context, Notification notification, int taskId) {
         Calendar nextNotification = notification.getCalendarTimeForNotification();
         Intent intent = new Intent(context, NotificationReceiver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("message", notification.getMessage());
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        intent.putExtra("taskId", taskId);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, taskId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         //Denna ställer in när notifikationen ska visas

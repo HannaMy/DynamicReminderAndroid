@@ -395,9 +395,10 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                     Calendar calendar = Calendar.getInstance();
                     lastPerformed = calendar.getTime();
                 }
+                task.setLastPerformed(lastPerformed);
                 task.setNextNotification();
 
-                task.setLastPerformed(lastPerformed);
+
                 //System.out.println(" lastperformed =" + lastPerformed);
                 TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
                 System.out.println("task sparad");

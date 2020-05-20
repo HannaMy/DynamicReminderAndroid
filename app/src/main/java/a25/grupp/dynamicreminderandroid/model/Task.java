@@ -49,7 +49,7 @@ public class Task implements Comparable<Object>, Serializable {
         this.title = title;
         this.info = info;
         this.preferredInterval = preferredInterval;
-        markAsDoneNow();
+        //markAsDoneNow();
     }
 
     public void performed(Date date) {
@@ -199,7 +199,7 @@ public class Task implements Comparable<Object>, Serializable {
     private int getMinutesUntil() {
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
-        dateNow.compareTo(lastPerformed);//Gör väl inget?
+        //dateNow.compareTo(lastPerformed);//Gör väl inget?
 
         long millisecondsNOW = dateNow.getTime();
         long millisecondsDONE = lastPerformed.getTime();
