@@ -90,6 +90,8 @@
                 android:ems="10"
                 android:hint="your task title"
                 android:inputType="textPersonName"
+                android:paddingStart="4dp"
+                android:paddingLeft="4dp"
                 android:textColor="@color/colorDarkDark"
                 android:textColorHint="@color/colorMedium"
                 android:textSize="16dp"
@@ -127,6 +129,8 @@
                 android:hint="Notes"
                 android:inputType="textMultiLine"
                 android:lines="5"
+                android:paddingStart="4dp"
+                android:paddingLeft="4dp"
                 android:singleLine="false"
                 android:textColor="@color/colorDarkDark"
                 android:textColorHint="@color/colorMedium"
@@ -209,19 +213,19 @@
                 android:layout_width="80dp"
                 android:layout_height="26dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="58dp"
+                android:layout_marginTop="8dp"
                 android:background="@color/colorLightLight"
                 android:spinnerMode="dropdown"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etNotes" />
+                app:layout_constraintTop_toBottomOf="@+id/tvAvailable" />
 
             <Spinner
                 android:id="@+id/posEndTime"
                 android:layout_width="80dp"
                 android:layout_height="26dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="58dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:background="@color/colorLightLight"
                 android:spinnerMode="dropdown"
@@ -229,25 +233,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.306"
                 app:layout_constraintStart_toEndOf="@+id/posStartTime"
-                app:layout_constraintTop_toBottomOf="@+id/etNotes" />
+                app:layout_constraintTop_toBottomOf="@+id/tvAvailable" />
 
             <TextView
                 android:id="@+id/tvAnd"
                 android:layout_width="36dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="22dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="6dp"
-                android:layout_marginBottom="26dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="and"
                 android:textColor="@color/colorMedium"
-                app:layout_constraintBottom_toTopOf="@+id/btnCalendarLastPreformed"
                 app:layout_constraintEnd_toStartOf="@+id/posEndTime"
                 app:layout_constraintHorizontal_bias="0.29"
                 app:layout_constraintStart_toEndOf="@+id/posStartTime"
-                app:layout_constraintTop_toBottomOf="@+id/tvAvailable"
-                app:layout_constraintVertical_bias="0.562" />
+                app:layout_constraintTop_toBottomOf="@+id/tvAvailable" />
 
         </android.support.constraint.ConstraintLayout>
 
