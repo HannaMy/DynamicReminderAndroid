@@ -68,7 +68,6 @@ public class Task implements Comparable<Object>, Serializable {
 
     public void setNextNotification() {
         nextNotification = generateNotification();
-        System.out.println("Task - notification generated: date for it: " + nextNotification.getTimeForNotification().toString());
     }
 
     public void setNextNotification(Notification nextNotification) {
@@ -266,23 +265,19 @@ public class Task implements Comparable<Object>, Serializable {
 
         long millisecondsThen = 0;
         long millisecondsUntil = 0;
-        if (timeUntilMINUTES >= 0) {
+       // if (timeUntilMINUTES > 0) {
             millisecondsUntil = timeUntilMINUTES * 60000;
             millisecondsThen = millisecondsNOW + millisecondsUntil;
-        } else {
-            millisecondsUntil = intervalGroups();
-            millisecondsThen = millisecondsNOW + millisecondsUntil;
-            //millisecondsThen = millisecondsNOW + 1000 * 60; //lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
+       // } else {
+         //   millisecondsUntil = intervalGroups();
+           // millisecondsThen = millisecondsNOW + millisecondsUntil;
+            //millisecondsThen = millisecondsNOW + 1000 * 60; //TODO lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
 
 
-        }
+      //  }
         date.setTime(millisecondsThen);
-        System.out.println("Task - notification generated before adjusting - date: " + date.toString());
-        boolean possible = possibleTimeForExecution.getPossibleHours().isInInterval(date);
-        System.out.println("Possible" + possible);
-        if(!possible) {
-            date = adjustToPossibleTime(date, millisecondsUntil / (1000 * 60 * 60));
-        }
+
+        date = adjustToPossibleTime(date, millisecondsUntil / (1000 * 60 * 60));
         return date;
     }
 

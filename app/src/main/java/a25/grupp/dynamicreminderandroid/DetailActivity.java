@@ -519,6 +519,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
 
         //Denna ställer in när notifikationen ska visas
         alarmManager.set(AlarmManager.RTC_WAKEUP, nextNotification.getTimeInMillis(), pendingIntent);
+        System.out.println("Time until next notification = " + nextNotification.getTimeInMillis());
         createNotificationChannel();
     }
 
