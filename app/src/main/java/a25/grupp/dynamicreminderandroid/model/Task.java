@@ -195,7 +195,7 @@ public class Task implements Comparable<Object>, Serializable {
     }
 
 
-    private int getMinutesUntil() {
+    public int getMinutesUntil() {
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
         //dateNow.compareTo(lastPerformed);//Gör väl inget?
@@ -264,24 +264,24 @@ public class Task implements Comparable<Object>, Serializable {
 
         long millisecondsThen = 0;
         long millisecondsUntil = 0;
-       // if (timeUntilMINUTES > 0) {
+        if (timeUntilMINUTES > 0) {
             millisecondsUntil = timeUntilMINUTES * 60000;
+            millisecondsThen = millisecondsNOW + millisecondsUntil; }
+        else {
+            millisecondsUntil = intervalGroups();
             millisecondsThen = millisecondsNOW + millisecondsUntil;
-       // } else {
-         //   millisecondsUntil = intervalGroups();
-           // millisecondsThen = millisecondsNOW + millisecondsUntil;
-            //millisecondsThen = millisecondsNOW + 1000 * 60; //TODO lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
-
-
-      //  }
+           // millisecondsThen = millisecondsNOW + 1000 * 60; //TODO lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
+        }
         date.setTime(millisecondsThen);
-
+        System.out.println("Task getDateForNotification date = " + date);
         date = adjustToPossibleTime(date, millisecondsUntil / (1000 * 60 * 60));
         return date;
     }
 
     private Date adjustToPossibleTime(Date date, long hoursUntilNotification) {
+        System.out.println("Task adjustPossibleTime possibleTime = " + possibleTimeForExecution);
            Date adjustedDate =  possibleTimeForExecution.changeToReasonableTime(date, hoursUntilNotification);
+        System.out.println("Task adjustPossibleTime = " + adjustedDate);
 
            return  adjustedDate;
     }
