@@ -104,22 +104,22 @@ public class AdapterTaskOverview extends ArrayAdapter {
                 tvAmountTime.setText(String.valueOf(timeUntil));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s left";
                 tvTimeUnit.setText(timeUnit);
-                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorPrimaryDark));
-                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorPrimaryDark));
+                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
+                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
 
             } if (timeUntil == 1){
                 tvAmountTime.setText(String.valueOf(timeUntil));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + " left";
                 tvTimeUnit.setText(timeUnit);
-                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorPrimaryDark));
-                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorPrimaryDark));
+                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
+                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
 
             } if (timeUntil == 0){
                 tvAmountTime.setText(String.valueOf(timeUntil));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + " left";
                 tvTimeUnit.setText(timeUnit);
-                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorPrimaryDark));
-                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorPrimaryDark));
+                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
+                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
 
             }if (timeUntil < 0){
                 tvAmountTime.setText(String.valueOf(Math.abs(timeUntil)));
