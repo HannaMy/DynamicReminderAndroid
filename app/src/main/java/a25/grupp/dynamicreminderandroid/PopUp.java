@@ -13,7 +13,7 @@ import android.support.v7.app.AppCompatDialogFragment;
  * this class creats a PopUp window when a user tries to do something in the application
  * that the user needs to be warned about, or does something that is not possible to do
  *
- * @author Hanna Ringkvist
+ * @author Minna Röriksson, Hanna Ringkvist
  */
 
 public class PopUp extends AppCompatDialogFragment {

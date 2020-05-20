@@ -16,7 +16,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import a25.grupp.dynamicreminderandroid.model.Notification;
 
 /**
- * @author Cornelia Sköld, Hanna My Jansson
+ * @author Cornelia Sköld, Hanna My Jansson, Minna Röriksson
  * @version 1.0
  */
 public class NotificationReceiver extends BroadcastReceiver {
