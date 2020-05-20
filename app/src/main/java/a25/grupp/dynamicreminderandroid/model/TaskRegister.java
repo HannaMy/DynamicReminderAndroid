@@ -4,6 +4,9 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 
 /**
@@ -162,8 +165,7 @@ public class TaskRegister implements Serializable {
      * Returns the hashmap of the taskregister
      * @return the hashmap of the taskregister
      */
-    public HashMap<Integer, Task> getTaskHashMap() {
-        return taskHashMap;
+    public HashMap<Integer, Task> getTaskHashMap() { return taskHashMap;
     }
 
     /**
@@ -190,6 +192,22 @@ public class TaskRegister implements Serializable {
                 counter++;
             }
         }
+
+        Arrays.sort(taskArray, new Comparator<Task>() {
+            @Override
+            public int compare(Task first, Task second) {
+                    return first.getMinutesUntil() - second.getMinutesUntil();
+                }
+        });
+
+
+        for (int i = 0; i <= taskArray.length; i++){
+            System.out.println(taskArray[i].getMinutesUntil());
+        }
+
+
+
+
         Log.i("TaskRegister", "Size of taskArray = " + "" + taskArray.length);
         return taskArray;
     }

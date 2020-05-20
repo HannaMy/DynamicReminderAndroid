@@ -194,7 +194,7 @@ public class Task implements Comparable<Object>, Serializable {
     }
 
 
-    private int getMinutesUntil() {
+    public int getMinutesUntil() {
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
         dateNow.compareTo(lastPerformed);//Gör väl inget?
