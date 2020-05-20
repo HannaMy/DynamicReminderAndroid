@@ -8,6 +8,9 @@
         <item name="colorAccent">@color/colorMediumDark</item>
         <item name="android:statusBarColor">@color/colorMedium</item>
         <item name="android:colorButtonNormal">@color/colorMediumDark</item>
+        <item name="actionMenuTextColor">@color/colorLight</item>
+        <item name="titleTextColor">@color/colorLight</item>
+
     </style>
     <style name="ColoredButton" parent="Widget.AppCompat.Button"> <item name="colorButtonNormal">@color/colorMediumDark</item> </style>
     <style name="DoneButton" parent="android:Widget.Button"><item name="android:background">@drawable/custom_done</item></style>

@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorMediumDark</item>
         <item name="colorPrimaryDark">@color/colorDarkDark</item>
         <item name="colorAccent">@color/colorMediumDark</item>
+        <item name="actionMenuTextColor">@color/colorLight</item>
+        <item name="titleTextColor">@color/colorLight</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">
