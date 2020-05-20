@@ -166,7 +166,7 @@ public class Task implements Comparable<Object>, Serializable {
         return possibleTimeForExecution.getPossibleWeekdays();
     }
 
-    public TimeInterval getPossibleTimeInterval() {
+    public TimeInterval getPossibleHour() {
         return possibleTimeForExecution.getPossibleHours();
     }
 
