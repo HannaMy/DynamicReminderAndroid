@@ -44,7 +44,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 /**
  * The activity that shows the details of the tasks, also the activity to use when adding a new task
  *
- * @author Hanna My Jansson, Anni Johansson, Cornelia Sköld, Hanna Ringkvist
+ * @author Hanna My Jansson, Anni Johansson, Cornelia Sköld, Hanna Ringkvist, Minna Röriksson
  * @version 1.0
  */
 
@@ -146,8 +146,8 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
  */
 
         final Spinner dropDownPosStart = findViewById(R.id.posStartTime);
-        ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.availableHours, android.R.layout.simple_spinner_item);
-        adapterStart.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.availableHours, R.layout.custom_spinner);
+        adapterStart.setDropDownViewResource(R.layout.custom_spinner);
         dropDownPosStart.setAdapter(adapterStart);
         dropDownPosStart.setSelection(7);
         dropDownPosStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -165,8 +165,8 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         });
 
         final Spinner dropDownPosEnd = findViewById(R.id.posEndTime);
-        ArrayAdapter<CharSequence> adapterEnd = ArrayAdapter.createFromResource(this, R.array.availableHours, android.R.layout.simple_spinner_item);
-        adapterEnd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapterEnd = ArrayAdapter.createFromResource(this, R.array.availableHours, R.layout.custom_spinner);
+        adapterEnd.setDropDownViewResource(R.layout.custom_spinner);
         dropDownPosEnd.setAdapter(adapterEnd);
         dropDownPosEnd.setSelection(19);
         dropDownPosEnd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -184,8 +184,8 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         });
 
         final Spinner dropDownTimeUnit = findViewById(R.id.dropDown_timeUnit);
-        ArrayAdapter<CharSequence> adapterTimeUnit = ArrayAdapter.createFromResource(this, R.array.timeunits, android.R.layout.simple_spinner_item);
-        adapterEnd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapterTimeUnit = ArrayAdapter.createFromResource(this, R.array.timeunits, R.layout.custom_spinner);
+        adapterTimeUnit.setDropDownViewResource(R.layout.custom_spinner);
         dropDownTimeUnit.setAdapter(adapterTimeUnit);
 
         Button btnCancel = findViewById(R.id.btnCancel);

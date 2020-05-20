@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * This class represents a task
  *
- * @author Anni Johansson
+ * @author Anni Johansson, Minna Röriksson
  * @version 1.0
  */
 public class Task implements Comparable<Object>, Serializable {
