@@ -313,13 +313,12 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         try {
             EditText editTextInterval = findViewById(R.id.etTimeInterval);
             intervalAmount = Integer.parseInt(editTextInterval.getText().toString());
-            System.out.println("aaaaa" + intervalAmount);
         } catch (Exception e) {
             e.printStackTrace();
         }
         if (intervalAmount != 0) {
 
-            Log.i("DetailActivity", "The preferred interval is: " + "" + intervalAmount);
+            //Log.i("DetailActivity", "The preferred interval is: " + "" + intervalAmount);
         }
 
         // Get the correct TimeUnit from dropdown menu.
@@ -399,7 +398,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                 task.setNextNotification();
 
                 task.setLastPerformed(lastPerformed);
-                System.out.println(" lastperformed =" + lastPerformed);
+                //System.out.println(" lastperformed =" + lastPerformed);
                 TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
                 System.out.println("task sparad");
                 int id = task.getId();
@@ -494,7 +493,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         lastPerformed = task.getLastPerformed();
         Button btnCalendarLastPerformed = findViewById(R.id.btnCalendarLastPreformed);
         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
-        System.out.println("Task last performed = " + task.getLastPerformed());
+       // System.out.println("Task last performed = " + task.getLastPerformed());
         String date = formatDate.format(task.getLastPerformed());
         btnCalendarLastPerformed.setText(date);
         btnCalendarLastPerformed.setOnClickListener(new View.OnClickListener() {

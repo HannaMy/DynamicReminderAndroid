@@ -55,10 +55,8 @@ public class TaskRegister implements Serializable {
      * @return the task register
      */
     public static TaskRegister getInstance(Context context) {
-        System.out.println("getInstance oooooooooo");
         if(register == null) {
             register = new TaskRegister();
-            System.out.println("getInstance() register: " + register);
             register.loadTaskRegister(context);
         }
 
@@ -100,9 +98,7 @@ public class TaskRegister implements Serializable {
      * @param taskId tha id of the task that is to be removed
      */
     public void removeWithId(int taskId) {
-
         taskHashMap.remove(taskId);
-        System.out.println("TTTTTTTTTTTTTTTT taskregister size" + taskHashMap.size());
     }
 
     /**
@@ -185,12 +181,10 @@ public class TaskRegister implements Serializable {
         for (int i = 1; i <= lastId; i++) {
             Task task = getTaskWithId(i);
             if (task != null) {
-                System.out.println("Task register get task array i = " + i);
                 taskArray[counter] = task;
                 counter++;
             }
         }
-        Log.i("TaskRegister", "Size of taskArray = " + "" + taskArray.length);
         return taskArray;
     }
 
