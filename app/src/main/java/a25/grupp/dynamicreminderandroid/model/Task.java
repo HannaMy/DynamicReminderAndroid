@@ -1,16 +1,12 @@
 package a25.grupp.dynamicreminderandroid.model;
 
-import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import java.io.Serializable;
-import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
-
-import a25.grupp.dynamicreminderandroid.R;
 
 /**
  * This class represents a task
@@ -27,7 +23,7 @@ public class Task implements Comparable<Object>, Serializable {
     private PossibleTime possibleTimeForExecution;
     private Date lastPerformed;
     private Notification nextNotification;
-    private Context context;
+
 
     public Task()
     {
@@ -39,22 +35,20 @@ public class Task implements Comparable<Object>, Serializable {
         setPossibleHours(8,22);
     }
 
-    public Task(String title, String info, TimeSpan preferredInterval, TimeSpan maximum, PossibleTime possibleTimeForExecution, Context context) {
+    public Task(String title, String info, TimeSpan preferredInterval, TimeSpan maximum, PossibleTime possibleTimeForExecution) {
         this.title = title;
         this.info = info;
         this.preferredInterval = preferredInterval;
         this.maximum = maximum;
         this.possibleTimeForExecution = possibleTimeForExecution;
-        this.context = context;
         setPossibleHours(8,22);
         markAsDoneNow();
     }
 
-    public Task(String title, String info, TimeSpan preferredInterval, Context context) {
+    public Task(String title, String info, TimeSpan preferredInterval) {
         this.title = title;
         this.info = info;
         this.preferredInterval = preferredInterval;
-        this.context = context;
         markAsDoneNow();
     }
 
@@ -88,9 +82,8 @@ public class Task implements Comparable<Object>, Serializable {
     public Notification generateNotification() {
         Date timeForNotification = getDateForNotification();
 
-
         //TODO: Jämför om det är första påminnelsen eller senare. I så fall byt string array.
-        String[] questions = context.getResources().getStringArray(R.array.questionsHappy);
+        String[] questions = getQuestionHappy();
         Random rand = new Random();
         int randomIndex = rand.nextInt(5);
         String randomPhase = questions[randomIndex];
@@ -104,6 +97,31 @@ public class Task implements Comparable<Object>, Serializable {
         nextNotification = new Notification(this, timeForNotification, message);
         return nextNotification;
     }
+
+    private String[] getQuestionHappy()
+    {
+        String[] happyQuestion = {"Isn't this the perfect time to",
+            "Maybe it's time to",
+            "Just a friendly reminder to",
+            "I just wanted to remind you to",
+            "Seems like a good time to",
+            "Such a nice day to"};
+
+        return happyQuestion;
+    }
+
+    private String[] getQuestionsSerious()
+    {
+        String[] seriousQuestion = {"Don't forget to",
+                "It really is time to",
+                "Don't forget that you're supposed to",
+                "Did you remember to",
+                "Finish what you're doing and then",
+                "Pleeeease don't forget to"};
+
+        return seriousQuestion;
+    }
+
 
     public String getTitle() {
         return title;

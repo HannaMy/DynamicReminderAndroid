@@ -389,7 +389,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         }else{
 
             if (selectedTaskId <= 0) {
-                task = new Task(title, info, preferredInterval, this);
+                task = new Task(title, info, preferredInterval);
                 task.setPossibleTimeForExecution(possibleTime);
 
                 if (lastPerformed == null) {
@@ -402,8 +402,8 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                 System.out.println(" lastperformed =" + lastPerformed);
                 TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
                 System.out.println("task sparad");
-                int id = task.getId();  //Todo den bör kunna tas bort?
-                addNotification(getApplicationContext(), task.getNextNotification(), taskId);
+                int id = task.getId();
+                addNotification(getApplicationContext(), task.getNextNotification(), id);
 
             } else {
                 TaskRegister taskRegister = TaskRegister.getInstance(getBaseContext());
@@ -487,6 +487,8 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
 
         dropDownPosStart.setSelection(possibleHours.getFrom()-1);
         dropDownPosEnd.setSelection(possibleHours.getTo()-1);
+
+        //Sets possible
 
         //sets last performed button
         lastPerformed = task.getLastPerformed();
