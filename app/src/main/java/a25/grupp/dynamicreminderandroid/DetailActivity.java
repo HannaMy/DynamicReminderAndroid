@@ -9,7 +9,6 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -52,6 +51,8 @@ import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 public class DetailActivity extends AppCompatActivity implements Serializable {
 
     private Date lastPerformed;
+    private int possibleStartTime;
+    private int possibleEndTime;
 
 
     /**
@@ -105,7 +106,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
             return super.onOptionsItemSelected(item);
         }
 
-        //  return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -116,10 +116,10 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
-      //  ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
-     //   constraintLayout.setVisibility(View.GONE);
+        /*
+       ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
+       constraintLayout.setVisibility(View.GONE);
 
-/*
         final Spinner dropDownAlways = findViewById(R.id.ddAvailability);
         ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.available, android.R.layout.simple_spinner_item);
         adapterStart.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -136,8 +136,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
 
                 }
             }
-
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -150,16 +148,13 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.availableHours, android.R.layout.simple_spinner_item);
         adapterStart.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropDownPosStart.setAdapter(adapterStart);
+        dropDownPosStart.setSelection(7);
         dropDownPosStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if (position == 0) {
-                    System.out.println("1 AM valt i start time");
-
-                } else if (position == 1) {
-                    System.out.println("2 AM valt i start time");
-                }
+                possibleStartTime = (position + 1);
+                System.out.println("Possible start time = " + possibleStartTime);
             }
 
             @Override
@@ -172,18 +167,13 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         ArrayAdapter<CharSequence> adapterEnd = ArrayAdapter.createFromResource(this, R.array.availableHours, android.R.layout.simple_spinner_item);
         adapterEnd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropDownPosEnd.setAdapter(adapterEnd);
+        dropDownPosEnd.setSelection(19);
         dropDownPosEnd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if (position == 0) {
-                    System.out.println("1 AM valt");
-
-
-                } else if (position == 1) {
-                    System.out.println("2 AM valt");
-
-                }
+                possibleEndTime = (position + 1);
+                System.out.println("Possible end time = " + possibleEndTime);
             }
 
             @Override
@@ -239,7 +229,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         }
 
     }
-
 
     /**
      * connects the gui components to the logic
@@ -304,8 +293,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(delete);
 
-
-        // TODO Pop up som varnar & radera notifikation
+        // TODO Radera notifikation
     }
 
     /**
@@ -326,8 +314,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
             intervalAmount = Integer.parseInt(editTextInterval.getText().toString());
             System.out.println("aaaaa" + intervalAmount);
         } catch (Exception e) {
-            //Todo Felmeddelande med texten "You need to add a preferred interval as a number"
-
+            e.printStackTrace();
         }
         if (intervalAmount != 0) {
 
@@ -366,6 +353,9 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
 
         // Handles possibleTime depending on choice in dropdown menu
         PossibleTime possibleTime = new PossibleTime();
+        possibleTime.setPossibleHours(possibleStartTime, possibleEndTime);
+
+        //Gamla possibleTime-koden
         /*
         final Spinner dropDownAlways = findViewById(R.id.posStartTime);
         TextView textView1 = (TextView) dropDownAlways.getSelectedView();
@@ -502,8 +492,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                 calendar();
             }
         });
-
-
     }
 
     /**
