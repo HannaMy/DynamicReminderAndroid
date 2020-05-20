@@ -63,6 +63,7 @@ public class Task implements Comparable<Object>, Serializable {
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
         lastPerformed = dateNow;
+        setNextNotification();
         //TODO: skriva metod som avbryter nästa notifikation och skapar en ny
     }
 
@@ -206,8 +207,6 @@ public class Task implements Comparable<Object>, Serializable {
 
         int preferredIntervalInMinutes = preferredInterval.getInMinutes();
         int timeUntilMINUTES = (int) (preferredIntervalInMinutes - minutesDIFFERENCE);
-
-        System.out.println("Time until in minutes = " + timeUntilMINUTES);
         return timeUntilMINUTES;
     }
 

@@ -123,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
          */
 
 
-        System.out.println("MAIN ACTIVITY task register size: " + taskRegister.getSize());
+      //  System.out.println("MAIN ACTIVITY task register size: " + taskRegister.getSize());
         Task[] taskArray = taskRegister.getTaskArray();
-        System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÄÄÄÄÄÄÄÄÄÄÄÄÅÅÅÅÅÅÅÅÅÅÅ: taskArray: " + taskArray);
+       // System.out.println("ÖÖÖÖÖÖÖÖÖÖÖÄÄÄÄÄÄÄÄÄÄÄÄÅÅÅÅÅÅÅÅÅÅÅ: taskArray: " + taskArray);
 
         AdapterTaskOverview adapterTaskOverview;
 
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < taskArray.length; i++) {
 
                 Task task = taskArray[i];
-                System.out.println("ÖÖ task: " + task + " i: " + i);
+                //System.out.println("ÖÖ task: " + task + " i: " + i);
                 titles[i] = task.getTitle();
                 TimeSpan timeSpan = task.getPreferredInterval();
                 if (timeSpan != null) {
