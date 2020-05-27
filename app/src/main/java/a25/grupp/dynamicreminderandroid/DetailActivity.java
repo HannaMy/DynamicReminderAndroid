@@ -187,6 +187,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         ArrayAdapter<CharSequence> adapterTimeUnit = ArrayAdapter.createFromResource(this, R.array.timeunits, R.layout.custom_spinner);
         adapterTimeUnit.setDropDownViewResource(R.layout.custom_spinner);
         dropDownTimeUnit.setAdapter(adapterTimeUnit);
+        dropDownTimeUnit.setSelection(1);
 
         Button btnCancel = findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
