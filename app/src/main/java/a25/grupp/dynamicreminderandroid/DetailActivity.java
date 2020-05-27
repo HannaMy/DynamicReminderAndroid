@@ -282,11 +282,22 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     }
 
     /**
-     * Deletes the selected task.
+     * Deletes the selected task and the scheduled notification.
      */
     public void deleteTask() {
         int taskId = getTaskID();
         TaskRegister taskRegister = TaskRegister.getInstance(this);
+
+        Task task = taskRegister.getTaskWithId(taskId);
+        Notification notification = task.getNextNotification();
+
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("message", notification.getMessage());
+        intent.putExtra("taskId", taskId);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, taskId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
 
         taskRegister.removeWithId(taskId);
         System.out.println("Detail vid delete taskregister size: " + taskRegister.getSize());
@@ -295,7 +306,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(delete);
 
-        // TODO Radera notifikation
     }
 
     /**
