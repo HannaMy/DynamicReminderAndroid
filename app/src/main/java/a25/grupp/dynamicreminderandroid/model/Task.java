@@ -274,14 +274,19 @@ public class Task implements Comparable<Object>, Serializable {
         }
         date.setTime(millisecondsThen);
         System.out.println("Task getDateForNotification date = " + date);
-        date = adjustToPossibleTime(date, millisecondsUntil / (1000 * 60 * 60));
+        boolean possible  =possibleTimeForExecution.getPossibleHours().isInInterval(date);
+        System.out.println("Task : possible? " + possible);
+        if(!possible) {
+            date = adjustToPossibleTime(date, millisecondsUntil / (1000 * 60 * 60));
+        }
+        System.out.println("Task getDateForNotification adjusted date = " + date);
         return date;
     }
 
     private Date adjustToPossibleTime(Date date, long hoursUntilNotification) {
-        System.out.println("Task adjustPossibleTime possibleTime = " + possibleTimeForExecution);
+       // System.out.println("Task adjustPossibleTime possibleTime = " + possibleTimeForExecution);
            Date adjustedDate =  possibleTimeForExecution.changeToReasonableTime(date, hoursUntilNotification);
-        System.out.println("Task adjustPossibleTime = " + adjustedDate);
+        //System.out.println("Task adjustPossibleTime = " + adjustedDate);
 
            return  adjustedDate;
     }
