@@ -102,23 +102,23 @@ public class Task implements Comparable<Object>, Serializable {
     private String[] getQuestionHappy()
     {
         String[] happyQuestion = {"Isn't this the perfect time to",
-            "Maybe it's time to",
-            "Just a friendly reminder to",
-            "I just wanted to remind you to",
-            "Seems like a good time to",
-            "Such a nice day to"};
+            "Sunshine, maybe it's time to",
+            "Can you please make time to",
+            "It's wonderful if you can make time to",
+            "Wow, isn't it time for you to",
+            "Friendly reminder, have you remembered to"};
 
         return happyQuestion;
     }
 
     private String[] getQuestionsSerious()
     {
-        String[] seriousQuestion = {"Don't forget to",
-                "It really is time to",
-                "Don't forget that you're supposed to",
+        String[] seriousQuestion = {"Have you remembered to",
+                "Isn't it time for you to",
+                "Another reminder, have you remembered to",
                 "Did you remember to",
-                "Finish what you're doing and then",
-                "Pleeeease don't forget to"};
+                "Please, can you make time to",
+                "Pleeeease, maybe it's time for you to"};
 
         return seriousQuestion;
     }
