@@ -387,16 +387,16 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
 */
         // Checks title and interval and jumps back to MainActivity and shows the new task in the list if everything is correct
         Intent save = new Intent(DetailActivity.this, MainActivity.class);
-        if(title.equals("") && intervalAmount == 0){
+        if (title.equals("") && intervalAmount == 0) {
             PopUp popUp = new PopUp();
             popUp.invalidTitleAndInterval(DetailActivity.this);
-        } else if(title.equals("")){
+        } else if (title.equals("")) {
             PopUp popUp = new PopUp();
             popUp.invalidTitle(DetailActivity.this);
         } else if (intervalAmount == 0) {
             PopUp popUp = new PopUp();
             popUp.invalidInterval(DetailActivity.this);
-        }else{
+        } else {
 
             if (selectedTaskId <= 0) {
                 task = new Task(title, info, preferredInterval);
@@ -457,63 +457,64 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     public void setTaskInfo(int taskId) {
         TaskRegister taskregister = TaskRegister.getInstance(this.getBaseContext());
         Task task = taskregister.getTaskWithId(taskId);
+        if (task != null) {
+            //Sets the title text
+            EditText editTextSetTitle = findViewById(R.id.etTitle);
+            editTextSetTitle.setText(task.getTitle());
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Edit task");
 
-        //Sets the title text
-        EditText editTextSetTitle = findViewById(R.id.etTitle);
-        editTextSetTitle.setText(task.getTitle());
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Edit task");
+            //Sets the interval number
+            EditText editTextSetInterval = findViewById(R.id.etTimeInterval);
+            editTextSetInterval.setText(String.format("%d", task.getPreferredInterval().getTime()));
 
-        //Sets the interval number
-        EditText editTextSetInterval = findViewById(R.id.etTimeInterval);
-        editTextSetInterval.setText(String.format("%d", task.getPreferredInterval().getTime()));
-
-        //Sets the interval time unit
-        Spinner intervalTimeUnit = findViewById(R.id.dropDown_timeUnit);
-        TimeUnit timeUnit = task.getPreferredInterval().getTimeUnit();
-        switch (timeUnit) {
-            case hour:
-                intervalTimeUnit.setSelection(0);
-                break;
-            case day:
-                intervalTimeUnit.setSelection(1);
-                break;
-            case week:
-                intervalTimeUnit.setSelection(2);
-                break;
-            case month:
-                intervalTimeUnit.setSelection(3);
-                break;
-            case year:
-                intervalTimeUnit.setSelection(4);
-                break;
-        }
-
-        EditText editTextInfo = findViewById(R.id.etNotes);
-        editTextInfo.setText(task.getInfo());
-        //possiblehour
-        Spinner dropDownPosEnd = findViewById(R.id.posEndTime);
-        Spinner dropDownPosStart = findViewById(R.id.posStartTime);
-
-        TimeInterval possibleHours = task.getPossibleHour();
-
-        dropDownPosStart.setSelection(possibleHours.getFrom()-1);
-        dropDownPosEnd.setSelection(possibleHours.getTo()-1);
-
-        //Sets possible
-
-        //sets last performed button
-        lastPerformed = task.getLastPerformed();
-        Button btnCalendarLastPerformed = findViewById(R.id.btnCalendarLastPreformed);
-        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
-       // System.out.println("Task last performed = " + task.getLastPerformed());
-        String date = formatDate.format(task.getLastPerformed());
-        btnCalendarLastPerformed.setText(date);
-        btnCalendarLastPerformed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar();
+            //Sets the interval time unit
+            Spinner intervalTimeUnit = findViewById(R.id.dropDown_timeUnit);
+            TimeUnit timeUnit = task.getPreferredInterval().getTimeUnit();
+            switch (timeUnit) {
+                case hour:
+                    intervalTimeUnit.setSelection(0);
+                    break;
+                case day:
+                    intervalTimeUnit.setSelection(1);
+                    break;
+                case week:
+                    intervalTimeUnit.setSelection(2);
+                    break;
+                case month:
+                    intervalTimeUnit.setSelection(3);
+                    break;
+                case year:
+                    intervalTimeUnit.setSelection(4);
+                    break;
             }
-        });
+
+            EditText editTextInfo = findViewById(R.id.etNotes);
+            editTextInfo.setText(task.getInfo());
+            //possiblehour
+            Spinner dropDownPosEnd = findViewById(R.id.posEndTime);
+            Spinner dropDownPosStart = findViewById(R.id.posStartTime);
+
+            TimeInterval possibleHours = task.getPossibleHour();
+
+            dropDownPosStart.setSelection(possibleHours.getFrom() - 1);
+            dropDownPosEnd.setSelection(possibleHours.getTo() - 1);
+
+            //Sets possible
+
+            //sets last performed button
+            lastPerformed = task.getLastPerformed();
+            Button btnCalendarLastPerformed = findViewById(R.id.btnCalendarLastPreformed);
+            SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
+            // System.out.println("Task last performed = " + task.getLastPerformed());
+            String date = formatDate.format(task.getLastPerformed());
+            btnCalendarLastPerformed.setText(date);
+            btnCalendarLastPerformed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    calendar();
+                }
+            });
+        }
     }
 
     /**
