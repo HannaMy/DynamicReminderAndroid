@@ -57,7 +57,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
 
 
     /**
-     * Method is called to when activity is created
+     * Method is called to when activity is created.
      *
      * @param savedInstanceState
      */
@@ -74,7 +74,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
 
 
     /**
-     * Creates a menu button for deleting in the toolbar
+     * Creates a menu button for deleting in the toolbar.
      *
      * @param menu
      * @return
@@ -101,7 +101,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
             //Shows a pop-up dialog asking if the user wants to return without saving
             popUp.popUpOnDeleteBtn(DetailActivity.this, DetailActivity.this);
 
-
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -117,33 +116,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
-        /*
-       ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
-       constraintLayout.setVisibility(View.GONE);
-
-        final Spinner dropDownAlways = findViewById(R.id.ddAvailability);
-        ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.available, android.R.layout.simple_spinner_item);
-        adapterStart.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dropDownAlways.setAdapter(adapterStart);
-        dropDownAlways.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ConstraintLayout constraintLayout = findViewById(R.id.constraintLayoutHideable);
-                if (position == 0) {
-                    constraintLayout.setVisibility(View.GONE);
-
-                } else if (position == 1) {
-                    constraintLayout.setVisibility(View.VISIBLE);
-
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
- */
 
         final Spinner dropDownPosStart = findViewById(R.id.posStartTime);
         ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.availableHours, R.layout.custom_spinner);
@@ -233,7 +205,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     }
 
     /**
-     * connects the gui components to the logic
+     * Connects the gui components to the logic
      */
     private void createGuiComponents() {
     }
@@ -245,7 +217,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     }
 
     /**
-     * exits the detailactivity view without saving
+     * Exits the DetailActivity view without saving
      */
     public void cancel() {
         Intent cancel = new Intent(DetailActivity.this, MainActivity.class);
@@ -282,7 +254,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     }
 
     /**
-     * Deletes the selected task and the scheduled notification.
+     * Deletes the selected task and its scheduled notification.
      */
     public void deleteTask() {
         int taskId = getTaskID();
@@ -309,7 +281,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     }
 
     /**
-     * the task is saved with all the data from the detailsview
+     * The task is saved with all the data from the details view
      */
     private void saveTask(int taskId) {
         Task task = null;
@@ -366,37 +338,18 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         PossibleTime possibleTime = new PossibleTime();
         possibleTime.setPossibleHours(possibleStartTime, possibleEndTime);
 
-        //Gamla possibleTime-koden
-        /*
-        final Spinner dropDownAlways = findViewById(R.id.posStartTime);
-        TextView textView1 = (TextView) dropDownAlways.getSelectedView();
-        String result1 = textView1.getText().toString();
-        switch (result1) {
-            case "Always":
-                //todo Fixa detta
-                break;
-            case "Custom":
-                //todo Fixa detta
-
-                //  possibleTime.setPossibleWeekDays(frame.getPossibleWeekdays()); //Todo
-                //  possibleTime.setPossibleDates(frame.getPossibleDates());        //Todo
-                //  LocalTime[] localTimes = frame.getPossibleHours();              //Todo
-                //  possibleTime.setPossibleHours(localTimes[0], localTimes[1]);
-                break;
-        }
-*/
         // Checks title and interval and jumps back to MainActivity and shows the new task in the list if everything is correct
         Intent save = new Intent(DetailActivity.this, MainActivity.class);
-        if(title.equals("") && intervalAmount == 0){
+        if (title.equals("") && intervalAmount == 0) {
             PopUp popUp = new PopUp();
             popUp.invalidTitleAndInterval(DetailActivity.this);
-        } else if(title.equals("")){
+        } else if (title.equals("")) {
             PopUp popUp = new PopUp();
             popUp.invalidTitle(DetailActivity.this);
         } else if (intervalAmount == 0) {
             PopUp popUp = new PopUp();
             popUp.invalidInterval(DetailActivity.this);
-        }else{
+        } else {
 
             if (selectedTaskId <= 0) {
                 task = new Task(title, info, preferredInterval);
@@ -435,7 +388,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     }
 
     /**
-     * Gets the task id from the intent and retunrs it
+     * Gets the task id from the intent and returns it
      *
      * @return the id of the task
      */
@@ -448,7 +401,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
 
 
     /**
-     * If the tasks exists fill in the task information in fields
+     * If the task exists fill in the task information in fields
      *
      * @param taskId the id of the task presented in the view
      */
@@ -457,63 +410,63 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     public void setTaskInfo(int taskId) {
         TaskRegister taskregister = TaskRegister.getInstance(this.getBaseContext());
         Task task = taskregister.getTaskWithId(taskId);
+        if (task != null) {
+            //Sets the title text
+            EditText editTextSetTitle = findViewById(R.id.etTitle);
+            editTextSetTitle.setText(task.getTitle());
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Edit task");
 
-        //Sets the title text
-        EditText editTextSetTitle = findViewById(R.id.etTitle);
-        editTextSetTitle.setText(task.getTitle());
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Edit task");
+            //Sets the interval number
+            EditText editTextSetInterval = findViewById(R.id.etTimeInterval);
+            editTextSetInterval.setText(String.format("%d", task.getPreferredInterval().getTime()));
 
-        //Sets the interval number
-        EditText editTextSetInterval = findViewById(R.id.etTimeInterval);
-        editTextSetInterval.setText(String.format("%d", task.getPreferredInterval().getTime()));
-
-        //Sets the interval time unit
-        Spinner intervalTimeUnit = findViewById(R.id.dropDown_timeUnit);
-        TimeUnit timeUnit = task.getPreferredInterval().getTimeUnit();
-        switch (timeUnit) {
-            case hour:
-                intervalTimeUnit.setSelection(0);
-                break;
-            case day:
-                intervalTimeUnit.setSelection(1);
-                break;
-            case week:
-                intervalTimeUnit.setSelection(2);
-                break;
-            case month:
-                intervalTimeUnit.setSelection(3);
-                break;
-            case year:
-                intervalTimeUnit.setSelection(4);
-                break;
-        }
-
-        EditText editTextInfo = findViewById(R.id.etNotes);
-        editTextInfo.setText(task.getInfo());
-        //possiblehour
-        Spinner dropDownPosEnd = findViewById(R.id.posEndTime);
-        Spinner dropDownPosStart = findViewById(R.id.posStartTime);
-
-        TimeInterval possibleHours = task.getPossibleHour();
-
-        dropDownPosStart.setSelection(possibleHours.getFrom()-1);
-        dropDownPosEnd.setSelection(possibleHours.getTo()-1);
-
-        //Sets possible
-
-        //sets last performed button
-        lastPerformed = task.getLastPerformed();
-        Button btnCalendarLastPerformed = findViewById(R.id.btnCalendarLastPreformed);
-        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
-       // System.out.println("Task last performed = " + task.getLastPerformed());
-        String date = formatDate.format(task.getLastPerformed());
-        btnCalendarLastPerformed.setText(date);
-        btnCalendarLastPerformed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar();
+            //Sets the interval time unit
+            Spinner intervalTimeUnit = findViewById(R.id.dropDown_timeUnit);
+            TimeUnit timeUnit = task.getPreferredInterval().getTimeUnit();
+            switch (timeUnit) {
+                case hour:
+                    intervalTimeUnit.setSelection(0);
+                    break;
+                case day:
+                    intervalTimeUnit.setSelection(1);
+                    break;
+                case week:
+                    intervalTimeUnit.setSelection(2);
+                    break;
+                case month:
+                    intervalTimeUnit.setSelection(3);
+                    break;
+                case year:
+                    intervalTimeUnit.setSelection(4);
+                    break;
             }
-        });
+
+            EditText editTextInfo = findViewById(R.id.etNotes);
+            editTextInfo.setText(task.getInfo());
+            //possiblehour
+            Spinner dropDownPosEnd = findViewById(R.id.posEndTime);
+            Spinner dropDownPosStart = findViewById(R.id.posStartTime);
+
+            TimeInterval possibleHours = task.getPossibleHour();
+
+            dropDownPosStart.setSelection(possibleHours.getFrom() - 1);
+            dropDownPosEnd.setSelection(possibleHours.getTo() - 1);
+
+            //Sets possible
+
+            //sets last performed button
+            lastPerformed = task.getLastPerformed();
+            Button btnCalendarLastPerformed = findViewById(R.id.btnCalendarLastPreformed);
+            SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
+            String date = formatDate.format(task.getLastPerformed());
+            btnCalendarLastPerformed.setText(date);
+            btnCalendarLastPerformed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    calendar();
+                }
+            });
+        }
     }
 
     /**
