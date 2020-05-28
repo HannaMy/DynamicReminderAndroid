@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 import a25.grupp.dynamicreminderandroid.model.Task;
 
 import static a25.grupp.dynamicreminderandroid.R.*;
@@ -72,6 +74,15 @@ public class AdapterTaskOverview extends ArrayAdapter {
      */
     public void setTaskArray(Task[] taskArray) {
         this.taskArray = taskArray;
+    }
+
+    public String getToastMessage(){
+        String[] toastMessages = {"Great job!", "You're doing great!", "Well done!", "Keep up the good work!"
+                ,"Way to go!", "Fantastic work!", "Wow! Nice work", "Terrific!", "Good for you!",
+                "You should be proud!", "That's awesome!", "Keep it up!"};
+        Random rand = new Random();
+        int randomIndex = rand.nextInt(12);
+        return toastMessages[randomIndex];
     }
 
     /**
@@ -146,7 +157,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
                     taskArray[position].markAsDoneNow();
                     mainActivity.recreate();
                     Toast.makeText(mainActivity.getApplicationContext(),
-                            "Great job!",
+                            getToastMessage(),
                             Toast.LENGTH_LONG)
                             .show();
                 }
