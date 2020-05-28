@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -117,6 +118,8 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        notificationManagerCompat.cancel(taskId);
 
         final Spinner dropDownPosStart = findViewById(R.id.posStartTime);
         ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.availableHours, R.layout.custom_spinner);
