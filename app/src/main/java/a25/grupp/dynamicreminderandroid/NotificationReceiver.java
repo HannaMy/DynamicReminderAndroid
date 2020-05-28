@@ -76,7 +76,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setAutoCancel(true)
                 .addAction(R.mipmap.small_purple_cockatiel, "Yes, now", yesPendingIntent)
                 .addAction(R.mipmap.small_purple_cockatiel, "Yes, earlier", yesEarlierPendingIntent)
-                .addAction(R.mipmap.small_purple_cockatiel, "No", noPendingIntent);
+                .addAction(R.mipmap.small_purple_cockatiel, "No", noPendingIntent)
+                .setDeleteIntent(noPendingIntent);
 
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
