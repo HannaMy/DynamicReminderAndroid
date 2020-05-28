@@ -3,7 +3,6 @@ package a25.grupp.dynamicreminderandroid;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +17,9 @@ import java.util.Random;
 
 import a25.grupp.dynamicreminderandroid.model.Task;
 
-import static a25.grupp.dynamicreminderandroid.R.*;
+import static a25.grupp.dynamicreminderandroid.R.color;
+import static a25.grupp.dynamicreminderandroid.R.id;
+import static a25.grupp.dynamicreminderandroid.R.layout;
 
 /**
  * Adapts the data in to tle list view in the overview in mainActivity
@@ -132,12 +132,19 @@ public class AdapterTaskOverview extends ArrayAdapter {
 
             } if (timeUntil == 0){
                 tvAmountTime.setText(String.valueOf(timeUntil));
-                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + " left";
+                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s left";
                 tvTimeUnit.setText(timeUnit);
                 tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
                 tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
 
-            }if (timeUntil < 0){
+            }if (timeUntil == -1){
+                tvAmountTime.setText(String.valueOf(Math.abs(timeUntil)));
+                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + " late";
+                tvTimeUnit.setText(timeUnit);
+                tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.cheekRedDark));
+                tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.cheekRedDark));
+            }
+            if (timeUntil < -1){
                 tvAmountTime.setText(String.valueOf(Math.abs(timeUntil)));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s late";
                 tvTimeUnit.setText(timeUnit);
