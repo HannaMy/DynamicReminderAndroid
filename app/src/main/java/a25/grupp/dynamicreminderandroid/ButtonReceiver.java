@@ -27,6 +27,8 @@ public class ButtonReceiver extends BroadcastReceiver {
             if (action.equals("yesNow")) {
                 System.out.println("NotificationREceiver - yeNow btn clicked");
                 markAsDone(taskId);
+                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+                notificationManagerCompat.cancel(taskId);
             } else if (action.equals("no")) {
                 System.out.println("NotificationREceiver - no btn clicked");
                 remindAgain(taskId);
