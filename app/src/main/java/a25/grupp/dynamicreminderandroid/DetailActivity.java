@@ -83,9 +83,15 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.delete_menu, menu);
-        return true;
+        if(getTaskID() != 0) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.delete_menu, menu);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**
@@ -98,9 +104,9 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     public boolean onOptionsItemSelected(MenuItem item) {
         System.out.println("Clicked on delete");
         if (item.getItemId() == R.id.delete_button) {
-            //deleteTask();
+
             PopUp popUp = new PopUp();
-            //Shows a pop-up dialog asking if the user wants to return without saving
+            //Shows a pop-up dialog asking if the user wants to delete the task
             popUp.popUpOnDeleteBtn(DetailActivity.this, DetailActivity.this);
 
             return true;
