@@ -24,7 +24,7 @@ import static a25.grupp.dynamicreminderandroid.R.*;
 /**
  * Adapts the data in to tle list view in the overview in mainActivity
  *
- * @author Hanna My Jansson
+ * @author Hanna My Jansson, Minna Röriksson
  * @version 1.0
  */
 
@@ -76,6 +76,10 @@ public class AdapterTaskOverview extends ArrayAdapter {
         this.taskArray = taskArray;
     }
 
+    /**
+     * Returns a message to be recieved when a task is done
+     * @return a random message
+     */
     public String getToastMessage(){
         String[] toastMessages = {"Great job!", "You're doing great!", "Well done!", "Keep up the good work!"
                 ,"Way to go!", "Fantastic work!", "Wow! Nice work", "Terrific!", "Good for you!",
