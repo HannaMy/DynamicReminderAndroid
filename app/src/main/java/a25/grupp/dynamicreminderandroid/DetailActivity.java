@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -278,6 +279,11 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(delete);
 
+        Toast.makeText(this,
+                "Task deleted!",
+                Toast.LENGTH_LONG)
+                .show();
+
     }
 
     /**
@@ -384,6 +390,11 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
             }
 
             startActivity(save);
+
+            Toast.makeText(this,
+                    "Task saved!",
+                    Toast.LENGTH_LONG)
+                    .show();
         }
     }
 
