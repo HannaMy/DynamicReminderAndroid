@@ -294,8 +294,12 @@ public class Task implements Comparable<Object>, Serializable {
     public long intervalGroups() {
         long nextInterval = 0;
         int intervalInMinutes = preferredInterval.getInMinutes();
-        if (intervalInMinutes <= 1440) { //under 1d
-            nextInterval = 60;
+        if (intervalInMinutes <= 120) { //under 2h
+            nextInterval = 15 * 60000;
+        } else if (intervalInMinutes <= 240) { //between 2h and 4h
+            nextInterval = 30 * 60000;
+        } else if (intervalInMinutes <= 1440) { //between 4h and 1d
+                nextInterval = 60 * 60000;
         } else if (intervalInMinutes >= 1441 && intervalInMinutes <= 4320) { //between 1d and 3d
             nextInterval = 180 * 60000; //1h in milliseconds
         } else if (intervalInMinutes >= 4321 && intervalInMinutes <= 8640) { //between 3d and 6d
