@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.widget.Toast;
 
 import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
@@ -29,11 +30,19 @@ public class ButtonReceiver extends BroadcastReceiver {
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
                 notificationManagerCompat.cancel(taskId);
                 markAsDone(taskId);
+                Toast.makeText(context,
+                        "Good for you!",
+                        Toast.LENGTH_LONG)
+                        .show();
             } else if (action.equals("no")) {
                 System.out.println("NotificationREceiver - no btn clicked");
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
                 notificationManagerCompat.cancel(taskId);
                 remindAgain(taskId);
+                Toast.makeText(context,
+                        "I'll remind you later then!",
+                        Toast.LENGTH_LONG)
+                        .show();
             }
         }
 
@@ -47,5 +56,6 @@ public class ButtonReceiver extends BroadcastReceiver {
     private void remindAgain(int taskId){
         Task task = taskRegister.getTaskWithId(taskId);
         task.setNextNotification();
+
     }
 }
