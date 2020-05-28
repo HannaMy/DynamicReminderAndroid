@@ -3,6 +3,8 @@ package a25.grupp.dynamicreminderandroid;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 
 import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
@@ -28,6 +30,8 @@ public class ButtonReceiver extends BroadcastReceiver {
             } else if (action.equals("no")) {
                 System.out.println("NotificationREceiver - no btn clicked");
                 remindAgain(taskId);
+                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+                notificationManagerCompat.cancel(taskId);
             }
         }
 
