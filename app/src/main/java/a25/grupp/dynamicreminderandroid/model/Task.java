@@ -296,9 +296,9 @@ public class Task implements Comparable<Object>, Serializable {
         int intervalInMinutes = preferredInterval.getInMinutes();
         if (intervalInMinutes <= 120) { //under 2h
             nextInterval = 15 * 60000; //15m in milliseconds
-        } else if (intervalInMinutes <= 240) { //between 2h and 4h
+        } else if (intervalInMinutes >= 120 && intervalInMinutes <= 240) { //between 2h and 4h
             nextInterval = 30 * 60000; //30m in milliseconds
-        } else if (intervalInMinutes <= 1440) { //between 4h and 1d
+        } else if (intervalInMinutes >= 240 && intervalInMinutes <= 1440) { //between 4h and 1d
                 nextInterval = 60 * 60000; //1h in milliseconds
         } else if (intervalInMinutes >= 1441 && intervalInMinutes <= 4320) { //between 1d and 3d
             nextInterval = 180 * 60000; //2h in milliseconds
