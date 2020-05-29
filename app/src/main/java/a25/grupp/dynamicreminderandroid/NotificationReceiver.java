@@ -1,19 +1,15 @@
 package a25.grupp.dynamicreminderandroid;
 
-import android.app.AlarmManager;
-import android.app.Application;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
-import a25.grupp.dynamicreminderandroid.model.Notification;
+import java.util.Random;
 
 /**
  * @author Cornelia Sköld, Hanna My Jansson, Minna Röriksson
@@ -43,13 +39,8 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         NOTIFICATION_ID = taskId;
         this.context = context;
-        title = "Hey you"; //metod för att hämta titel
+        title = randomGreeting();
         message = intent.getStringExtra("message");
-
-
-        //Ta emot intent från knapparna yesNow och No
-
-
 
         //Large icon
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.grey_cockatiel_2);
@@ -57,10 +48,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         //What happens when the user clicks on the notification
         Intent landingIntent = new Intent(context, DetailActivity.class);
         landingIntent.putExtra("taskId", taskId);
-        //TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         landingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        //stackBuilder.addNextIntentWithParentStack(landingIntent);
-        //PendingIntent landingPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent landingPendingIntent = PendingIntent.getActivity(context, taskId, landingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         createButtonIntents(taskId);
 
@@ -109,7 +97,21 @@ public class NotificationReceiver extends BroadcastReceiver {
         noPendingIntent = PendingIntent.getBroadcast(context, 300+taskId, noIntent, PendingIntent.FLAG_ONE_SHOT);
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    /**
+     * This method chose a random greeting out of an array
+     * @return A string for the title in the notification
+     */
+    public String randomGreeting() {
+        String[] greetings = {"Cheep chirp",
+                "Piddywee my friend",
+                "Squawk! Hello",
+                "Coo coo mate!",
+                "Tweet tweet",
+                "Cuckoo to you",
+                "Chatter chatter"};
+        Random rand = new Random();
+        int randomIndex = rand.nextInt(5);
+
+        return greetings[randomIndex];
     }
 }
