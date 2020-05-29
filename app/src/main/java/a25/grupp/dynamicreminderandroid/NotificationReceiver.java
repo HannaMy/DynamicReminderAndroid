@@ -42,10 +42,8 @@ public class NotificationReceiver extends BroadcastReceiver {
         title = randomGreeting();
         message = intent.getStringExtra("message");
 
-        //Large icon
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.grey_cockatiel_2);
 
-        //What happens when the user clicks on the notification
         Intent landingIntent = new Intent(context, DetailActivity.class);
         landingIntent.putExtra("taskId", taskId);
         landingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -66,7 +64,6 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .addAction(R.mipmap.small_purple_cockatiel, "Yes, earlier", yesEarlierPendingIntent)
                 .addAction(R.mipmap.small_purple_cockatiel, "No", noPendingIntent)
                 .setDeleteIntent(noPendingIntent);
-
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
         notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
