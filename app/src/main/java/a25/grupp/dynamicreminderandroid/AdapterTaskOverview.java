@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.Random;
 
 import a25.grupp.dynamicreminderandroid.model.Task;
+import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
 import static a25.grupp.dynamicreminderandroid.R.color;
 import static a25.grupp.dynamicreminderandroid.R.id;
@@ -114,46 +115,46 @@ public class AdapterTaskOverview extends ArrayAdapter {
         if (taskArray != null) {
             tvInterval.setText(taskArray[position].getPreferredInterval().toString());
             tvTitle.setText(taskArray[position].getTitle());
-
             int timeUntil = taskArray[position].getTimeUntil().getTime();
+            TimeUnit timeUnit = taskArray[position].getTimeUntil().getTimeUnit();
+            String timeUnitString = timeUnit.toString();
             if (timeUntil > 1) {
                 tvAmountTime.setText(String.valueOf(timeUntil));
-                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s left";
-                tvTimeUnit.setText(timeUnit);
+                timeUnitString = timeUnitString + "s left";
                 tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
                 tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
 
             }
             if (timeUntil == 1) {
                 tvAmountTime.setText(String.valueOf(timeUntil));
-                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + " left";
-                tvTimeUnit.setText(timeUnit);
+                timeUnitString = timeUnitString + " left";
                 tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
                 tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
 
             }
             if (timeUntil == 0) {
                 tvAmountTime.setText(String.valueOf(timeUntil));
-                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s left";
-                tvTimeUnit.setText(timeUnit);
+                timeUnitString = timeUnitString + "s left";
+
                 tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
                 tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
 
             }
             if (timeUntil == -1) {
                 tvAmountTime.setText(String.valueOf(Math.abs(timeUntil)));
-                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + " late";
-                tvTimeUnit.setText(timeUnit);
+                timeUnitString = timeUnitString + " late";
+
                 tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.cheekRedDark));
                 tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.cheekRedDark));
             }
             if (timeUntil < -1) {
                 tvAmountTime.setText(String.valueOf(Math.abs(timeUntil)));
-                String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s late";
-                tvTimeUnit.setText(timeUnit);
+                timeUnitString = timeUnitString +"s late";
+
                 tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.cheekRedDark));
                 tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.cheekRedDark));
             }
+            tvTimeUnit.setText(timeUnitString);
 
             btnDetails.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -60,9 +60,9 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setContentIntent(landingPendingIntent)
                 .setAutoCancel(true)
-                .addAction(R.mipmap.small_purple_cockatiel, "Yes, now", yesPendingIntent)
-                .addAction(R.mipmap.small_purple_cockatiel, "Yes, earlier", yesEarlierPendingIntent)
-                .addAction(R.mipmap.small_purple_cockatiel, "No", noPendingIntent)
+                .addAction(R.mipmap.small_purple_cockatiel, "Did it now", yesPendingIntent)
+                .addAction(R.mipmap.small_purple_cockatiel, "Did it earlier", yesEarlierPendingIntent)
+                .addAction(R.mipmap.small_purple_cockatiel, "Remind me again", noPendingIntent)
                 .setDeleteIntent(noPendingIntent);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
@@ -76,13 +76,14 @@ public class NotificationReceiver extends BroadcastReceiver {
      */
     public void createButtonIntents(int taskId) {
         Intent yesIntent = new Intent(context, ButtonReceiver.class);
-        yesIntent.putExtra("action", "yesNow");
+        yesIntent.putExtra("action", "didItNow");
         yesIntent.putExtra("taskId", taskId);
         yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         yesPendingIntent = PendingIntent.getBroadcast(context, 200 + taskId, yesIntent, PendingIntent.FLAG_ONE_SHOT);
 
         Intent yesEarlierIntent = new Intent(context, DetailActivity.class);
         yesEarlierIntent.putExtra("taskId", taskId);
+        yesEarlierIntent.putExtra("action", "didItEarlier");
         yesEarlierIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         yesEarlierPendingIntent = PendingIntent.getActivity(context, taskId + 1000, yesEarlierIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 

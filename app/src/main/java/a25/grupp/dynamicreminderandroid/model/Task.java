@@ -25,14 +25,13 @@ public class Task implements Comparable<Object>, Serializable {
     private Notification nextNotification;
 
 
-    public Task()
-    {
-        setPossibleHours(8,22);
+    public Task() {
+        setPossibleHours(8, 22);
     }
 
     public Task(int taskId) {
         id = taskId;
-        setPossibleHours(8,22);
+        setPossibleHours(8, 22);
     }
 
     public Task(String title, String info, TimeSpan preferredInterval, TimeSpan maximum, PossibleTime possibleTimeForExecution) {
@@ -41,7 +40,7 @@ public class Task implements Comparable<Object>, Serializable {
         this.preferredInterval = preferredInterval;
         this.maximum = maximum;
         this.possibleTimeForExecution = possibleTimeForExecution;
-        setPossibleHours(8,22);
+        setPossibleHours(8, 22);
         markAsDoneNow();
     }
 
@@ -99,20 +98,18 @@ public class Task implements Comparable<Object>, Serializable {
         return nextNotification;
     }
 
-    private String[] getQuestionHappy()
-    {
+    private String[] getQuestionHappy() {
         String[] happyQuestion = {"Isn't this the perfect time to",
-            "Sunshine, maybe it's time to",
-            "Can you please make time to",
-            "It's wonderful if you can make time to",
-            "Wow, isn't it time for you to",
-            "Friendly reminder, have you remembered to"};
+                "Sunshine, maybe it's time to",
+                "Can you please make time to",
+                "It's wonderful if you can make time to",
+                "Wow, isn't it time for you to",
+                "Friendly reminder, have you remembered to"};
 
         return happyQuestion;
     }
 
-    private String[] getQuestionsSerious()
-    {
+    private String[] getQuestionsSerious() {
         String[] seriousQuestion = {"Have you remembered to",
                 "Isn't it time for you to",
                 "Another reminder, have you remembered to",
@@ -212,10 +209,11 @@ public class Task implements Comparable<Object>, Serializable {
 
     /**
      * return
+     *
      * @return
      */
     public TimeSpan getTimeUntil() {
-        TimeUnit timeUnit = TimeUnit.day;
+        TimeUnit timeUnit = preferredInterval.getTimeUnit();
         int time = preferredInterval.getTime();
 
         int timeUntil = -5;
@@ -224,25 +222,34 @@ public class Task implements Comparable<Object>, Serializable {
         if (lastPerformed == null) {
             timeUntil = time;
         } else {
-
-            //calculates the time left of the task and returns it in the unit specified in preferredInterval.
             int timeUntilMINUTES = getMinutesUntil();
-          timeUnit = preferredInterval.getTimeUnit();
+
+            if (timeUntilMINUTES <= 60 * 23) {
+                timeUnit = TimeUnit.hour;
+            } else if (timeUntilMINUTES <= 60 * 24 * 6 && timeUnit.equals(TimeUnit.week)) {
+                timeUnit = TimeUnit.day;
+            } else if (timeUntilMINUTES <= 60 * 24 * 29 && (timeUnit.equals(TimeUnit.month) || timeUnit.equals(TimeUnit.year))) {
+                timeUnit = TimeUnit.day;
+            } else if (timeUntilMINUTES <= 60 * 24 * 364 && timeUnit.equals(TimeUnit.year)) {
+                timeUnit = TimeUnit.month;
+            }
+            //calculates the time left of the task and returns it in the unit specified in preferredInterval.
+
             switch (timeUnit) {
                 case hour:
-                    timeUntil = timeUntilMINUTES / 60;
+                    timeUntil = (timeUntilMINUTES -1) / 60 +1 ;
                     break;
                 case day:
-                    timeUntil = timeUntilMINUTES / (24 * 60);
+                    timeUntil = (timeUntilMINUTES -1)  / (24 * 60) +1;
                     break;
                 case week:
-                    timeUntil = timeUntilMINUTES / (7 * 24 * 60);
+                    timeUntil = (timeUntilMINUTES -1) / (7 * 24 * 60) +1;
                     break;
                 case month:
-                    timeUntil = timeUntilMINUTES / (30 * 24 * 60);
+                    timeUntil = (timeUntilMINUTES -1) / (30 * 24 * 60) +1;
                     break;
                 case year:
-                    timeUntil = timeUntilMINUTES / (365 * 24 * 60);
+                    timeUntil = (timeUntilMINUTES -1) / (365 * 24 * 60) +1;
                     break;
             }
 
@@ -271,17 +278,17 @@ public class Task implements Comparable<Object>, Serializable {
         long millisecondsUntil = 0;
         if (timeUntilMINUTES > 0) {
             millisecondsUntil = timeUntilMINUTES * 60000;
-            millisecondsThen = millisecondsNOW + millisecondsUntil; }
-        else {
+            millisecondsThen = millisecondsNOW + millisecondsUntil;
+        } else {
             millisecondsUntil = intervalGroups();
             millisecondsThen = millisecondsNOW + millisecondsUntil;
-           // millisecondsThen = millisecondsNOW + 1000 * 60; //TODO lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
+            // millisecondsThen = millisecondsNOW + 1000 * 60; //TODO lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
         }
         date.setTime(millisecondsThen);
         System.out.println("Task getDateForNotification date = " + date);
-        boolean possible  =possibleTimeForExecution.getPossibleHours().isInInterval(date);
+        boolean possible = possibleTimeForExecution.getPossibleHours().isInInterval(date);
         System.out.println("Task : possible? " + possible);
-        if(!possible) {
+        if (!possible) {
             date = adjustToPossibleTime(date, millisecondsUntil / (1000 * 60 * 60));
         }
         System.out.println("Task getDateForNotification adjusted date = " + date);
@@ -289,11 +296,11 @@ public class Task implements Comparable<Object>, Serializable {
     }
 
     private Date adjustToPossibleTime(Date date, long hoursUntilNotification) {
-       // System.out.println("Task adjustPossibleTime possibleTime = " + possibleTimeForExecution);
-           Date adjustedDate =  possibleTimeForExecution.changeToReasonableTime(date, hoursUntilNotification);
+        // System.out.println("Task adjustPossibleTime possibleTime = " + possibleTimeForExecution);
+        Date adjustedDate = possibleTimeForExecution.changeToReasonableTime(date, hoursUntilNotification);
         //System.out.println("Task adjustPossibleTime = " + adjustedDate);
 
-           return  adjustedDate;
+        return adjustedDate;
     }
 
     public long intervalGroups() {
@@ -304,7 +311,7 @@ public class Task implements Comparable<Object>, Serializable {
         } else if (intervalInMinutes >= 120 && intervalInMinutes <= 240) { //between 2h and 4h
             nextInterval = 30 * 60000; //30m in milliseconds
         } else if (intervalInMinutes >= 240 && intervalInMinutes <= 1440) { //between 4h and 1d
-                nextInterval = 60 * 60000; //1h in milliseconds
+            nextInterval = 60 * 60000; //1h in milliseconds
         } else if (intervalInMinutes >= 1441 && intervalInMinutes <= 4320) { //between 1d and 3d
             nextInterval = 180 * 60000; //2h in milliseconds
         } else if (intervalInMinutes >= 4321 && intervalInMinutes <= 8640) { //between 3d and 6d

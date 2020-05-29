@@ -124,8 +124,15 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("DefaultLocale")
     private void start(final int taskId) {
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
-        notificationManagerCompat.cancel(taskId);
+
+        String action = getIntent().getStringExtra("action");
+        if(action!=null) {
+            System.out.println("Detail - getExtra - action = " + action);
+            if (action.equals("didItEarlier")) {
+                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+                notificationManagerCompat.cancel(taskId);
+            }
+        }
 
         final Spinner dropDownPosStart = findViewById(R.id.posStartTime);
         ArrayAdapter<CharSequence> adapterStart = ArrayAdapter.createFromResource(this, R.array.availableHours, R.layout.custom_spinner);

@@ -28,7 +28,7 @@ public class ButtonReceiver extends BroadcastReceiver {
         String action = intent.getStringExtra("action");
         int taskId = intent.getIntExtra("taskId", 0);
         if (action != null) {
-            if (action.equals("yesNow")) {
+            if (action.equals("didItNow")) {
                 System.out.println("NotificationREceiver - yeNow btn clicked");
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
                 notificationManagerCompat.cancel(taskId);
@@ -38,7 +38,7 @@ public class ButtonReceiver extends BroadcastReceiver {
                         Toast.LENGTH_LONG)
                         .show();
             } else if (action.equals("no")) {
-                System.out.println("NotificationREceiver - no btn clicked");
+                System.out.println("NotificationReceiver - no btn clicked");
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
                 notificationManagerCompat.cancel(taskId);
                 remindAgain(taskId);
