@@ -71,29 +71,31 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     /**
      * This method creates the pending intent of the buttons in the notification
+     *
      * @param taskId is the unique id of the task that the notification belongs to
      */
     public void createButtonIntents(int taskId) {
         Intent yesIntent = new Intent(context, ButtonReceiver.class);
         yesIntent.putExtra("action", "yesNow");
         yesIntent.putExtra("taskId", taskId);
-        yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        yesPendingIntent = PendingIntent.getBroadcast(context, 200 + taskId, yesIntent,PendingIntent.FLAG_ONE_SHOT);
+        yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        yesPendingIntent = PendingIntent.getBroadcast(context, 200 + taskId, yesIntent, PendingIntent.FLAG_ONE_SHOT);
 
         Intent yesEarlierIntent = new Intent(context, DetailActivity.class);
         yesEarlierIntent.putExtra("taskId", taskId);
         yesEarlierIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        yesEarlierPendingIntent = PendingIntent.getActivity(context, taskId+1000, yesEarlierIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        yesEarlierPendingIntent = PendingIntent.getActivity(context, taskId + 1000, yesEarlierIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Intent noIntent = new Intent(context, ButtonReceiver.class);
         noIntent.putExtra("action", "no");
         noIntent.putExtra("taskId", taskId);
         noIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        noPendingIntent = PendingIntent.getBroadcast(context, 300+taskId, noIntent, PendingIntent.FLAG_ONE_SHOT);
+        noPendingIntent = PendingIntent.getBroadcast(context, 300 + taskId, noIntent, PendingIntent.FLAG_ONE_SHOT);
     }
 
     /**
      * This method chose a random greeting out of an array
+     *
      * @return A string for the title in the notification
      */
     public String randomGreeting() {
