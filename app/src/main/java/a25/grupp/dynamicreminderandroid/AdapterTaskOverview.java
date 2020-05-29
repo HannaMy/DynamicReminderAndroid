@@ -24,7 +24,7 @@ import static a25.grupp.dynamicreminderandroid.R.layout;
 /**
  * Adapts the data in to tle list view in the overview in mainActivity
  *
- * @author Hanna My Jansson, Minna Röriksson
+ * @author Hanna My Jansson, Minna Röriksson, Cornelia Sköld
  * @version 1.0
  */
 
@@ -77,12 +77,13 @@ public class AdapterTaskOverview extends ArrayAdapter {
     }
 
     /**
-     * Returns a message to be recieved when a task is done
+     * Returns a message to be received when a task is performed
+     *
      * @return a random message
      */
-    public String getToastMessage(){
+    public String getToastMessage() {
         String[] toastMessages = {"Great job!", "You're doing great!", "Well done!", "Keep up the good work!"
-                ,"Way to go!", "Fantastic work!", "Wow! Nice work", "Terrific!", "Good for you!",
+                , "Way to go!", "Fantastic work!", "Wow! Nice work", "Terrific!", "Good for you!",
                 "You should be proud!", "That's awesome!", "Keep it up!"};
         Random rand = new Random();
         int randomIndex = rand.nextInt(12);
@@ -114,37 +115,39 @@ public class AdapterTaskOverview extends ArrayAdapter {
             tvInterval.setText(taskArray[position].getPreferredInterval().toString());
             tvTitle.setText(taskArray[position].getTitle());
 
-            //setText and setTextColor for the TextViews displaying how much time it is left until the task is scheduled
             int timeUntil = taskArray[position].getTimeUntil().getTime();
-            if (timeUntil > 1){
+            if (timeUntil > 1) {
                 tvAmountTime.setText(String.valueOf(timeUntil));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s left";
                 tvTimeUnit.setText(timeUnit);
                 tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
                 tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
 
-            } if (timeUntil == 1){
+            }
+            if (timeUntil == 1) {
                 tvAmountTime.setText(String.valueOf(timeUntil));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + " left";
                 tvTimeUnit.setText(timeUnit);
                 tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
                 tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
 
-            } if (timeUntil == 0){
+            }
+            if (timeUntil == 0) {
                 tvAmountTime.setText(String.valueOf(timeUntil));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s left";
                 tvTimeUnit.setText(timeUnit);
                 tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
                 tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.colorDarkDark));
 
-            }if (timeUntil == -1){
+            }
+            if (timeUntil == -1) {
                 tvAmountTime.setText(String.valueOf(Math.abs(timeUntil)));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + " late";
                 tvTimeUnit.setText(timeUnit);
                 tvAmountTime.setTextColor(mainActivity.getResources().getColor(color.cheekRedDark));
                 tvTimeUnit.setTextColor(mainActivity.getResources().getColor(color.cheekRedDark));
             }
-            if (timeUntil < -1){
+            if (timeUntil < -1) {
                 tvAmountTime.setText(String.valueOf(Math.abs(timeUntil)));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s late";
                 tvTimeUnit.setText(timeUnit);
@@ -173,8 +176,6 @@ public class AdapterTaskOverview extends ArrayAdapter {
                             .show();
                 }
             });
-
-
         } else {
             System.out.println("Adapter: getView " + position);
             tvAmountTime.setText(String.valueOf(times[position]));
@@ -190,16 +191,14 @@ public class AdapterTaskOverview extends ArrayAdapter {
                     mainActivity.startActivity(detail);
                 }
             });
-
         }
         return taskListItem;
     }
 
-
     /**
      * Updating the list with tasks
      */
-    private void updateList(){
+    private void updateList() {
         this.notifyDataSetChanged();
     }
 }
