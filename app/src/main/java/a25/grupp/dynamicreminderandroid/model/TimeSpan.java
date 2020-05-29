@@ -43,6 +43,7 @@ public class TimeSpan implements Serializable {
                 break;
 
         }
+        System.out.println("TimeSpan - getInMinutes() - unit: " + timeUnit + " hela intervallet i minuter: " + minutes);
         return minutes;
 
         //TODO

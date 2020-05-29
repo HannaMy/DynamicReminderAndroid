@@ -195,15 +195,16 @@ public class Task implements Comparable<Object>, Serializable {
     public int getMinutesUntil() {
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
-        //dateNow.compareTo(lastPerformed);//Gör väl inget?
 
         long millisecondsNOW = dateNow.getTime();
         long millisecondsDONE = lastPerformed.getTime();
+        System.out.println("Task " + id + " - getMinutesUntil() - lastpreformed date: " + lastPerformed);
         long millisecondsDIFFERENCE = millisecondsNOW - millisecondsDONE;
         long minutesDIFFERENCE = millisecondsDIFFERENCE / 60000;
 
         int preferredIntervalInMinutes = preferredInterval.getInMinutes();
         int timeUntilMINUTES = (int) (preferredIntervalInMinutes - minutesDIFFERENCE);
+        System.out.println("Task " + id + " - getMinutesUntil() - timeUntil in minutes: " + timeUntilMINUTES);
         return timeUntilMINUTES;
     }
 
@@ -224,36 +225,58 @@ public class Task implements Comparable<Object>, Serializable {
         } else {
             int timeUntilMINUTES = getMinutesUntil();
 
-            if (timeUntilMINUTES <= 60 * 23) {
+            if (timeUntilMINUTES <= 60 * 23 && timeUntilMINUTES >= -60 * 23) {
                 timeUnit = TimeUnit.hour;
-            } else if (timeUntilMINUTES <= 60 * 24 * 6 && timeUnit.equals(TimeUnit.week)) {
+            } else if (timeUntilMINUTES <= 60 * 24 * 6 && timeUntilMINUTES > -60 * 24 * 7 && timeUnit.equals(TimeUnit.week)) {
                 timeUnit = TimeUnit.day;
-            } else if (timeUntilMINUTES <= 60 * 24 * 29 && (timeUnit.equals(TimeUnit.month) || timeUnit.equals(TimeUnit.year))) {
+            } else if (timeUntilMINUTES <= 60 * 24 * 29 && timeUntilMINUTES > -60 * 24 * 30 && (timeUnit.equals(TimeUnit.month) || timeUnit.equals(TimeUnit.year))) {
                 timeUnit = TimeUnit.day;
-            } else if (timeUntilMINUTES <= 60 * 24 * 364 && timeUnit.equals(TimeUnit.year)) {
+            } else if (timeUntilMINUTES <= 60 * 24 * 364 && timeUntilMINUTES > -60 * 24 * 365 && timeUnit.equals(TimeUnit.year)) {
                 timeUnit = TimeUnit.month;
             }
             //calculates the time left of the task and returns it in the unit specified in preferredInterval.
 
-            switch (timeUnit) {
-                case hour:
-                    timeUntil = (timeUntilMINUTES -1) / 60 +1 ;
-                    break;
-                case day:
-                    timeUntil = (timeUntilMINUTES -1)  / (24 * 60) +1;
-                    break;
-                case week:
-                    timeUntil = (timeUntilMINUTES -1) / (7 * 24 * 60) +1;
-                    break;
-                case month:
-                    timeUntil = (timeUntilMINUTES -1) / (30 * 24 * 60) +1;
-                    break;
-                case year:
-                    timeUntil = (timeUntilMINUTES -1) / (365 * 24 * 60) +1;
-                    break;
+            if (timeUntilMINUTES < 0) {
+
+                switch (timeUnit) {
+                    case hour:
+                        timeUntil = timeUntilMINUTES / 60 ;
+                        break;
+                    case day:
+                        timeUntil = timeUntilMINUTES/(24 * 60);
+                        break;
+                    case week:
+                        timeUntil = timeUntilMINUTES  / (7 * 24 * 60);
+                        break;
+                    case month:
+                        timeUntil = timeUntilMINUTES  / (30 * 24 * 60) ;
+                        break;
+                    case year:
+                        timeUntil = timeUntilMINUTES  / (365 * 24 * 60) ;
+                        break;
+                }
+            } else {
+
+                switch (timeUnit) {
+                    case hour:
+                        timeUntil = (timeUntilMINUTES - 1) / 60 + 1;
+                        break;
+                    case day:
+                        timeUntil = (timeUntilMINUTES - 1) / (24 * 60) + 1;
+                        break;
+                    case week:
+                        timeUntil = (timeUntilMINUTES - 1) / (7 * 24 * 60) + 1;
+                        break;
+                    case month:
+                        timeUntil = (timeUntilMINUTES - 1) / (30 * 24 * 60) + 1;
+                        break;
+                    case year:
+                        timeUntil = (timeUntilMINUTES - 1) / (365 * 24 * 60) + 1;
+                        break;
+                }
             }
 
-
+            System.out.println("Task " + id + " - getTimeUntil() - timeUntil in minutes: " + timeUntilMINUTES + " time Until: " + timeUntil + " " + timeUnit);
             //TODO
         }
 
@@ -272,26 +295,30 @@ public class Task implements Comparable<Object>, Serializable {
         int timeUntilMINUTES = getMinutesUntil();
         Calendar cal = Calendar.getInstance();
         Date dateNow = cal.getTime();
+        System.out.println("Task \"+ id +\" - getDateForNotification - date now: " + dateNow);
         long millisecondsNOW = dateNow.getTime();
 
         long millisecondsThen = 0;
         long millisecondsUntil = 0;
         if (timeUntilMINUTES > 0) {
-            millisecondsUntil = timeUntilMINUTES * 60000;
+
+            millisecondsUntil = (long) timeUntilMINUTES * 60000;
+            System.out.println("Task " + id + " - getDateForNotification - TID KVAR");
             millisecondsThen = millisecondsNOW + millisecondsUntil;
         } else {
+            System.out.println("Task " + id + " - getDateForNotification - TID ÖVERSKRIDEN");
             millisecondsUntil = intervalGroups();
             millisecondsThen = millisecondsNOW + millisecondsUntil;
             // millisecondsThen = millisecondsNOW + 1000 * 60; //TODO lägger på en minut på tiden som är nu för att lättare kunna debugga, SKA vara 1 h eller dynamiskt
         }
         date.setTime(millisecondsThen);
-        System.out.println("Task getDateForNotification date = " + date);
+        System.out.println("Task " + id + " - getDateForNotification date = " + date);
         boolean possible = possibleTimeForExecution.getPossibleHours().isInInterval(date);
         System.out.println("Task : possible? " + possible);
         if (!possible) {
             date = adjustToPossibleTime(date, millisecondsUntil / (1000 * 60 * 60));
         }
-        System.out.println("Task getDateForNotification adjusted date = " + date);
+        System.out.println("Task " + id + " - getDateForNotification adjusted date = " + date);
         return date;
     }
 
