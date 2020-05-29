@@ -115,7 +115,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
             tvTitle.setText(taskArray[position].getTitle());
 
             //setText and setTextColor for the TextViews displaying how much time it is left until the task is scheduled
-            int timeUntil = taskArray[position].getTimeUntil();
+            int timeUntil = taskArray[position].getTimeUntil().getTime();
             if (timeUntil > 1){
                 tvAmountTime.setText(String.valueOf(timeUntil));
                 String timeUnit = taskArray[position].getPreferredInterval().getTimeUnit().toString() + "s left";

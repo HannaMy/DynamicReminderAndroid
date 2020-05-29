@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * This class represents a task
  *
- * @author Anni Johansson, Minna Röriksson
+ * @author Anni Johansson, Minna Röriksson, Hanna My Jansson
  * @version 1.0
  */
 public class Task implements Comparable<Object>, Serializable {
@@ -210,8 +210,12 @@ public class Task implements Comparable<Object>, Serializable {
         return timeUntilMINUTES;
     }
 
-    public int getTimeUntil() {
-
+    /**
+     * return
+     * @return
+     */
+    public TimeSpan getTimeUntil() {
+        TimeUnit timeUnit = TimeUnit.day;
         int time = preferredInterval.getTime();
 
         int timeUntil = -5;
@@ -223,8 +227,8 @@ public class Task implements Comparable<Object>, Serializable {
 
             //calculates the time left of the task and returns it in the unit specified in preferredInterval.
             int timeUntilMINUTES = getMinutesUntil();
-
-            switch (preferredInterval.getTimeUnit()) {
+          timeUnit = preferredInterval.getTimeUnit();
+            switch (timeUnit) {
                 case hour:
                     timeUntil = timeUntilMINUTES / 60;
                     break;
@@ -246,8 +250,9 @@ public class Task implements Comparable<Object>, Serializable {
             //TODO
         }
 
+        TimeSpan interval = new TimeSpan(timeUntil, timeUnit);
 
-        return timeUntil;
+        return interval;
     }
 
     /**

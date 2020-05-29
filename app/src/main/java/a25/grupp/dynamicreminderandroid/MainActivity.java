@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 TimeSpan timeSpan = task.getPreferredInterval();
                 if (timeSpan != null) {
                     intervalInfos[i] = task.getPreferredInterval().toString();
-                    times[i] = task.getTimeUntil();
+                    times[i] = task.getTimeUntil().getTime();
                     timeUnits[i] = "time unit";
                 }
 
