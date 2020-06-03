@@ -256,6 +256,44 @@
                 app:layout_constraintStart_toEndOf="@+id/posStartTime"
                 app:layout_constraintTop_toBottomOf="@+id/tvAvailable" />
 
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toTopOf="@+id/tvLastPreformedText"
+                app:layout_constraintEnd_toStartOf="@+id/tvAnd"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/posStartTime"
+                app:layout_constraintTop_toTopOf="@+id/tvAnd"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_arrow_down_black_24dp" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="150dp"
+                app:layout_constraintBottom_toTopOf="@+id/etNotes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dropDown_timeUnit"
+                app:layout_constraintTop_toBottomOf="@+id/etTitle"
+                app:srcCompat="@drawable/ic_arrow_down_black_24dp" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="17dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnCalendarLastPreformed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/posEndTime"
+                app:layout_constraintTop_toBottomOf="@+id/etNotes"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_arrow_down_black_24dp" />
+
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
