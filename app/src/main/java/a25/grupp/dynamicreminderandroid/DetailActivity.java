@@ -239,6 +239,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     public void cancel() {
         Intent cancel = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(cancel);
+        finish();
     }
 
     public void calendar() {
@@ -294,6 +295,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
 
         Intent delete = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(delete);
+        finish();
 
         Toast.makeText(this,
                 "Task deleted!",
@@ -406,7 +408,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
             }
 
             startActivity(save);
-
+            finish();
             Toast.makeText(this,
                     "Task saved!",
                     Toast.LENGTH_LONG)
