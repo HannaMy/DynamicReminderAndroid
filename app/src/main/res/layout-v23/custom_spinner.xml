@@ -6,6 +6,8 @@
     android:fontFamily="sans-serif-condensed"
     android:paddingStart="4dp"
     android:paddingLeft="4dp"
+    android:paddingEnd="4dp"
+    android:paddingRight="4dp"
     android:textColor="@color/colorDarkDark"
     android:textSize="15sp" />
 
