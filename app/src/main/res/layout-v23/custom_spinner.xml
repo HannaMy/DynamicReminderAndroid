@@ -8,6 +8,7 @@
     android:paddingLeft="4dp"
     android:paddingEnd="4dp"
     android:paddingRight="4dp"
+    android:background="@color/colorLightLight"
     android:textColor="@color/colorDarkDark"
     android:textSize="15sp" />
 
