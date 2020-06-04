@@ -17,6 +17,7 @@
     <style name="DoneButton" parent="android:Widget.Button"><item name="android:background">@drawable/custom_done</item></style>
     <style name="ButtonStyle" parent="android:Widget.Button"> <item name="android:background">@drawable/custom_btn</item> </style>
     <style name="Widget.App.Spinner" parent="@style/Widget.AppCompat.Spinner">
+        <item name="overlapAnchor">true</item>
         <item name="android:background">@drawable/spinner_background</item>
     </style>
 </resources>
