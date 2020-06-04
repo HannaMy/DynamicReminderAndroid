@@ -2,6 +2,7 @@
 <resources>
     <style name="Theme">
         <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="spinnerStyle">@style/Widget.App.Spinner</item>
     </style>
 
 </resources>

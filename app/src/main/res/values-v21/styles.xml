@@ -10,9 +10,13 @@
         <item name="android:colorButtonNormal">@color/colorMediumDark</item>
         <item name="actionMenuTextColor">@color/colorLight</item>
         <item name="titleTextColor">@color/colorLight</item>
+        <item name="spinnerStyle">@style/Widget.App.Spinner</item>
 
     </style>
     <style name="ColoredButton" parent="Widget.AppCompat.Button"> <item name="colorButtonNormal">@color/colorMediumDark</item> </style>
     <style name="DoneButton" parent="android:Widget.Button"><item name="android:background">@drawable/custom_done</item></style>
     <style name="ButtonStyle" parent="android:Widget.Button"> <item name="android:background">@drawable/custom_btn</item> </style>
+    <style name="Widget.App.Spinner" parent="@style/Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/spinner_background</item>
+    </style>
 </resources>
