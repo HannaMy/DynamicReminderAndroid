@@ -22,8 +22,9 @@ public class PossibleTime implements Serializable {
 
     /**
      * Sets the possible dates to the values int the array sent in the parameters.
+     * Not implemented, but has value for further development
      *
-     * @param possibleDates
+     * @param possibleDates boolean array with possible dates
      */
     public void setPossibleDates(boolean[] possibleDates) {
         this.possibleDates.setPossibleDates(possibleDates);
@@ -32,6 +33,7 @@ public class PossibleTime implements Serializable {
     /**
      * sets the possible hours to the interval derived from the two date objects
      * clears all intervals from before
+     * Not implemented, but has value for further development
      *
      * @param from a Date with the right time for the beginning of the interval
      * @param to   a Date with the right time for the end of the interval
@@ -56,17 +58,18 @@ public class PossibleTime implements Serializable {
 
     /**
      * Adds a new interval to the list of possibleTimes
+     * Not implemented, but has value for further development
      *
      * @param from a LocalTime with the right time for the beginning of the interval
      * @param to   a LocalTime with the right time for the end of the interval
      */
     public boolean addPossibleHours(int from, int to) {
-        boolean worked = possibleHours.addInterval(from, to);
-        return worked;
+        return possibleHours.addInterval(from, to);
     }
 
     /**
      * sets the possible weekdays
+     * Not implemented, but has value for further development
      *
      * @param possibleWeekDays a array with booleans representing the possibility to do the task that day. weekday-1 = index. example: tuesday= index 1.
      */
@@ -103,6 +106,7 @@ public class PossibleTime implements Serializable {
 
     /**
      * checks if the chosen interval is correct and possible to choose
+     * Not implemented, but has value for further development
      *
      * @param date a date from the chosen interval
      * @return true if it is possible and false if it is not possible

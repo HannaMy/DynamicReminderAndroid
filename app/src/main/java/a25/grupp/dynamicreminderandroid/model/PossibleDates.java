@@ -1,6 +1,7 @@
 package a25.grupp.dynamicreminderandroid.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -23,9 +24,7 @@ public class PossibleDates implements Serializable {
      */
 
     public void setAllToTrue() {
-        for (int i = 0; i < possibleDates.length; i++) {
-            possibleDates[i] = true;
-        }
+        Arrays.fill(possibleDates, true);
     }
 
     /**
@@ -44,9 +43,11 @@ public class PossibleDates implements Serializable {
      */
     public boolean possibleWhenever() {
         boolean whenever = true;
-        for (int i = 0; i < possibleDates.length; i++) {
-            if (!possibleDates[i])
+        for (boolean possibleDate : possibleDates) {
+            if (!possibleDate) {
                 whenever = false;
+                break;
+            }
         }
         return whenever;
     }
@@ -62,15 +63,12 @@ public class PossibleDates implements Serializable {
      * @return true is it is a possible date
      */
     public boolean possible(Date date) {
-
-        if (possibleWhenever())
+        if (possibleWhenever()) {
             return true;
-
+        }
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int weekday = cal.get(Calendar.DAY_OF_MONTH);
-        if (possibleDates[weekday - 1])
-            return true;
-        return false;
+        return possibleDates[weekday - 1];
     }
 }

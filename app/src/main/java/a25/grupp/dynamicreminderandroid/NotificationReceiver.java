@@ -12,9 +12,11 @@ import android.support.v4.app.NotificationManagerCompat;
 import java.util.Random;
 
 /**
+ * This class creates and generate a notification
  * @author Cornelia Sköld, Hanna My Jansson, Minna Röriksson
- * @version 1.0
+ * @version 1.3
  */
+
 public class NotificationReceiver extends BroadcastReceiver {
     private final String CHANNEL_ID = "channelReminders";
     private int NOTIFICATION_ID;
@@ -95,7 +97,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     }
 
     /**
-     * This method chose a random greeting out of an array
+     * This method choose a random greeting out of an array
      *
      * @return A string for the title in the notification
      */
