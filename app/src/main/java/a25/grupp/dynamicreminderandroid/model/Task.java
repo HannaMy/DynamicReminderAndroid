@@ -13,7 +13,7 @@ import java.util.Random;
  * such as id, title, notes, preferred interval, possible time, last preformed and notifications
  * This class is serializable
  *
- * @author Anni Johansson, Minna Röriksson, Hanna My Jansson, Hanna Ringkvist
+ * @author Anni Johansson, Minna Röriksson, Hanna My Jansson, Hanna Ringkvist, Cornelia Sköld
  * @version 1.3
  */
 public class Task implements Comparable<Object>, Serializable {

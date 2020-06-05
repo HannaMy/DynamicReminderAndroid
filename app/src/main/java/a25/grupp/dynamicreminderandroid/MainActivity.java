@@ -19,7 +19,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeSpan;
 /**
  * This class creates the overview view.
  *
- * @author Hanna My Jansson, Hanna Ringkvist,
+ * @author Hanna My Jansson, Hanna Ringkvist, Cornelia Sköld
  * @version 1.3
  */
 
