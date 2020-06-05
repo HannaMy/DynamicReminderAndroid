@@ -18,7 +18,6 @@ public class TimeSpan implements Serializable {
         this.timeUnit = timeUnit;
     }
 
-
     /**
      * Changes the timeunit to minutes
      * @return a number of how many minutes the interval should be
@@ -45,8 +44,6 @@ public class TimeSpan implements Serializable {
         }
         System.out.println("TimeSpan - getInMinutes() - unit: " + timeUnit + " hela intervallet i minuter: " + minutes);
         return minutes;
-
-        //TODO
     }
 
     public int getTime() {
@@ -65,7 +62,6 @@ public class TimeSpan implements Serializable {
         this.timeUnit = timeUnit;
     }
 
-
     /**
      * Creates a String that explains the interval
      * @return a String that explains the interval
@@ -73,7 +69,5 @@ public class TimeSpan implements Serializable {
     @Override
     public String toString() {
         return "Every " + time + " " + timeUnit;
-
-        //TODO vad skriver man på engelska istället för e i "var 3e dag"?
     }
 }

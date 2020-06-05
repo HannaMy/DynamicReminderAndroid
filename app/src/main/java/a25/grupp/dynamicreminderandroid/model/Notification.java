@@ -6,14 +6,13 @@ import java.util.Date;
 
 /**
  * This class represents a notification
- * @author Minna R�riksson
+ * @author Minna Röriksson
  * @version 1.0
  */
 public class Notification implements Serializable {
     private Task task;
     private Date timeForNotification;
     private String message;
-    private String buttonTitles;
     private Calendar calendarTimeForNotification;
 
 
@@ -23,19 +22,10 @@ public class Notification implements Serializable {
         this.message = message;
         calendarTimeForNotification = Calendar.getInstance();
         calendarTimeForNotification.setTime(timeForNotification);
-        //this.buttonTitles = buttonTitles;
-    }
-
-    public void setTimeForNotification(Date timeForNotification){
-        this.timeForNotification = timeForNotification;
     }
 
     public Date getTimeForNotification() {
         return timeForNotification;
-    }
-
-    public void setMessage(String message){
-
     }
 
     public String getMessage(){
@@ -50,12 +40,5 @@ public class Notification implements Serializable {
         this.calendarTimeForNotification = calendarTimeForNotification;
     }
 
-    public int getNbrOfButtons(){
-        return 0;
-    }
-
-    public String getButtonText(int nbrOfButtons){
-        return null;
-    }
 
 }

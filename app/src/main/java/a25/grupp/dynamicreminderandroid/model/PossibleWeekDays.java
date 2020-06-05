@@ -1,11 +1,13 @@
 package a25.grupp.dynamicreminderandroid.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Stores the weekdays possible, for a task to be done, in an array.
+ *
  * @author Hanna My Jansson
  * @version 1.0
  */
@@ -17,17 +19,13 @@ public class PossibleWeekDays implements Serializable {
         setAllTrue();
     }
 
-
     /**
-     *sets all the booleans in the array to true
+     * sets all the booleans in the array to true
      */
 
-    public void setAllTrue(){
-        for(int i = 0; i< possibleWeekdays.length; i++){
-            possibleWeekdays[i] = true;
-        }
+    public void setAllTrue() {
+        Arrays.fill(possibleWeekdays, true);
     }
-
 
     /**
      * @param possibleWeekdays sets the possible weeksDays
@@ -38,37 +36,36 @@ public class PossibleWeekDays implements Serializable {
 
     /**
      * Returns true if the task is possible to do whenever
+     *
      * @return boolean, true if it is possible
      */
 
-    public boolean possibleWhenever(){
-        if(possibleWeekdays[0]&& possibleWeekdays[1]&& possibleWeekdays[2]&& possibleWeekdays[3]&& possibleWeekdays[4]&& possibleWeekdays[5]&& possibleWeekdays[6])
-            return true;
-        else
-            return false;
+    public boolean possibleWhenever() {
+        return possibleWeekdays[0] && possibleWeekdays[1] && possibleWeekdays[2] && possibleWeekdays[3] && possibleWeekdays[4] && possibleWeekdays[5] && possibleWeekdays[6];
     }
 
-
+    /**
+     * Get method for possible weekdays
+     *
+     * @return a boolean array of possible weekdays
+     */
     public boolean[] getPossibleWeekdays() {
         return possibleWeekdays;
     }
 
     /**
      * Checks if the task is possible to perform at the given date
+     *
      * @param date, the date that we want to preform the task at
      * @return true if the task is possible to perform at the given date
      */
-
-    public boolean possible(Date date){
-        if(possibleWhenever())
+    public boolean possible(Date date) {
+        if (possibleWhenever()) {
             return true;
-
+        }
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int weekday = cal.get(Calendar.DAY_OF_WEEK);
-        if (possibleWeekdays[weekday-1])
-            return true;
-
-        return false;
+        return possibleWeekdays[weekday - 1];
     }
 }
