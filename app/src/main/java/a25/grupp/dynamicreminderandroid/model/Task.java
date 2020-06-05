@@ -53,7 +53,6 @@ public class Task implements Comparable<Object>, Serializable {
         this.title = title;
         this.notes = notes;
         this.preferredInterval = preferredInterval;
-        setPossibleHours(8, 22);
     }
 
     /**
