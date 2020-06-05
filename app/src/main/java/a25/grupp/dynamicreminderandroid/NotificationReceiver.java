@@ -13,7 +13,7 @@ import java.util.Random;
 
 /**
  * This class creates and generate a notification
- * @author Cornelia Sköld, Hanna My Jansson, Minna Röriksson
+ * @author Cornelia Sköld, Hanna My Jansson, Minna Röriksson, Anni Johansson
  * @version 1.3
  */
 

@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * This class represents a notification
- * @author Minna Röriksson
+ * @author Minna Röriksson, Cornelia Sköld
  * @version 1.3
  */
 public class Notification implements Serializable {

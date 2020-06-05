@@ -3,7 +3,7 @@ package a25.grupp.dynamicreminderandroid.model;
 import java.io.Serializable;
 
 /**
- * TimeSpan sets the interval beetween how often a task needs to be done.
+ * TimeSpan sets the interval between how often a task needs to be done.
  *
  * @author Hanna Ringkvist, Hanna My Jansson
  * @version 1.3
