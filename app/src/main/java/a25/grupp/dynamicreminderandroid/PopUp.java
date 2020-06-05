@@ -17,7 +17,7 @@ public class PopUp extends AppCompatDialogFragment {
     /**
      * Creates a popup-window when the user tries to return to the overview-window without saving the task
      *
-     * @param context the Context where the method was called
+     * @param context        the Context where the method was called
      * @param detailActivity the Activity where the pop up origins
      */
     public void returnWithoutSaving(Context context, final DetailActivity detailActivity) {
@@ -34,7 +34,6 @@ public class PopUp extends AppCompatDialogFragment {
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //dialog.cancel();
             }
         });
         AlertDialog alertDialog = builder.create();
@@ -79,7 +78,6 @@ public class PopUp extends AppCompatDialogFragment {
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //dialog.cancel();
             }
         });
         AlertDialog alertDialog = builder.create();
