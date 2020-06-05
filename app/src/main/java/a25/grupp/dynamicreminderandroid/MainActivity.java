@@ -108,8 +108,6 @@ public class MainActivity extends AppCompatActivity {
                     times[i] = task.getTimeUntil().getTime();
                     timeUnits[i] = "time unit";
                 }
-
-                //TODO fixa rätt timeunit
                 taskIds[i] = task.getId();
             }
 
