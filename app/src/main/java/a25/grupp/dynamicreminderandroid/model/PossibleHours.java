@@ -8,7 +8,7 @@ import java.util.Date;
  * Stores the hours possible, for a task to be done, in an array.
  *
  * @author Hanna My Jansson
- * @version 1.0
+ * @version 1.3
  */
 public class PossibleHours implements Serializable {
     private boolean whenever;

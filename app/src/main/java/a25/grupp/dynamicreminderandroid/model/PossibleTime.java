@@ -7,7 +7,7 @@ import java.util.Date;
  * Stores the dates, hours and weekdays possible, for a task to be done, in an array.
  *
  * @author Hanna My Jansson
- * @version 1.0
+ * @version 1.3
  */
 public class PossibleTime implements Serializable {
     private PossibleHours possibleHours;
