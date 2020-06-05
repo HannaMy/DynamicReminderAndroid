@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatDialogFragment;
  * that the user needs to be warned about, or does something that is not possible to do
  *
  * @author Minna Röriksson, Hanna Ringkvist
+ * @version 1.3
  */
 
 public class PopUp extends AppCompatDialogFragment {
