@@ -10,26 +10,29 @@ import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
 
 /**
+ * Handles the actions from the notifications.
+ *
  * @author Hanna My Jansson, Cornelia Sköld
+ * @version 1.3
  */
 public class ButtonReceiver extends BroadcastReceiver {
     TaskRegister taskRegister;
 
     /**
-     * This method handles the actions from the notification
+     * This method handles the actions from the notification.
      *
-     * @param context is the context from where the notification was created
-     * @param intent  is the intent created by the action in the notification
+     * @param context The context from where the notification was created
+     * @param intent  The intent created by the action in the notification
      */
     @Override
     public void onReceive(Context context, Intent intent) {
         taskRegister = TaskRegister.getInstance(context);
-        System.out.println("ButtonReceiver");
         String action = intent.getStringExtra("action");
         int taskId = intent.getIntExtra("taskId", 0);
+
         if (action != null) {
             if (action.equals("didItNow")) {
-                System.out.println("NotificationREceiver - yeNow btn clicked");
+                System.out.println("NotificationREceiver - Did it now btn clicked");
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
                 notificationManagerCompat.cancel(taskId);
                 markAsDone(taskId);
@@ -38,7 +41,7 @@ public class ButtonReceiver extends BroadcastReceiver {
                         Toast.LENGTH_LONG)
                         .show();
             } else if (action.equals("no")) {
-                System.out.println("NotificationReceiver - no btn clicked");
+                System.out.println("NotificationReceiver - Remind me again btn clicked");
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
                 notificationManagerCompat.cancel(taskId);
                 remindAgain(taskId);
@@ -52,9 +55,9 @@ public class ButtonReceiver extends BroadcastReceiver {
     }
 
     /**
-     * This method mark the task that belongs to the notification as performed now
+     * Marks the {@link Task} that belongs to the notification as performed now
      *
-     * @param taskId is the task that the notification belongs to
+     * @param taskId the id of the {@link Task} that the notification belongs to
      */
     private void markAsDone(int taskId) {
         Task task = taskRegister.getTaskWithId(taskId);
@@ -62,9 +65,9 @@ public class ButtonReceiver extends BroadcastReceiver {
     }
 
     /**
-     * This method mark the task that belongs to the notification as not performed
+     * Marks the {@link Task} that belongs to the notification as not performed
      *
-     * @param taskId is the task that the notification belongs to
+     * @param taskId the id of the {@link Task} that the notification belongs to
      */
     private void remindAgain(int taskId) {
         Task task = taskRegister.getTaskWithId(taskId);
