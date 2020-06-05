@@ -11,12 +11,12 @@ import java.util.HashMap;
 /**
  * This class represents a register where all saved tasks a stored
  *
- * @author Hanna My Jansson
+ * @author Hanna My Jansson, Anni Johansson
  * @version 1.3
  */
 public class TaskRegister implements Serializable {
     private HashMap<Integer, Task> taskHashMap;
-    private static final long serialVersionUID = 655296850; //g�r s� att man kan l�sa fr�n filen
+    private static final long serialVersionUID = 655296850;
     private int lastId;
     private static TaskRegister register;
 
@@ -27,14 +27,13 @@ public class TaskRegister implements Serializable {
         taskHashMap = new HashMap();
         lastId = 0;
 
-
     }
 
     /**
-     * loads the taskregister from file
+     * Loads the taskregister from file
+     *
      * @param context
      */
-
     private void loadTaskRegister(Context context) {
         try {
             FileHandler fileHandler = new FileHandler(context);
@@ -45,7 +44,7 @@ public class TaskRegister implements Serializable {
             } else {
 
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -53,11 +52,12 @@ public class TaskRegister implements Serializable {
 
     /**
      * Creates a new task register if one does not already exist and returns it
+     *
      * @param context the context of the activity calling the method
      * @return the task register
      */
     public static TaskRegister getInstance(Context context) {
-        if(register == null) {
+        if (register == null) {
             register = new TaskRegister();
             register.loadTaskRegister(context);
         }
@@ -65,8 +65,9 @@ public class TaskRegister implements Serializable {
     }
 
     /**
-     * Sets the lasId which keeps track of which ids has been used
+     * Sets the lastId which keeps track of which ids has been used
      * only used when loading a saved file
+     *
      * @param lastId the value it is to be set to
      */
     public void setLastId(int lastId) {
@@ -77,14 +78,15 @@ public class TaskRegister implements Serializable {
      * Adds the task to the task register
      * it only adds the task if it is not null
      * also saves the taskregister to file
-     * @param task the task that is to be added
+     *
+     * @param task    the task that is to be added
      * @param context the context of the activity that adds the task
      */
     public void addTask(Task task, Context context) {
         if (task != null) {
             FileHandler fileHandler = new FileHandler(context);
             int id = generateId();
-            if(task.getId()==0) {
+            if (task.getId() == 0) {
                 task.setID(id);
             }
             taskHashMap.put(task.getId(), task);
@@ -94,6 +96,7 @@ public class TaskRegister implements Serializable {
 
     /**
      * removes the task with the task id
+     *
      * @param taskId tha id of the task that is to be removed
      */
     public void removeWithId(int taskId) {
@@ -102,9 +105,10 @@ public class TaskRegister implements Serializable {
 
     /**
      * saves the taskRegister to file
+     *
      * @param context the context of the activity calling for the save
      */
-    public void saveRegister(Context context){
+    public void saveRegister(Context context) {
         FileHandler fileHandler = new FileHandler(context);
         fileHandler.saveToFile(this);
     }
@@ -112,6 +116,7 @@ public class TaskRegister implements Serializable {
 
     /**
      * Returns the highest value of a id generated
+     *
      * @return the highest value of a id used in any task
      */
     public int getBiggestID() {
@@ -120,6 +125,7 @@ public class TaskRegister implements Serializable {
 
     /**
      * Returns the size of the taskregister
+     *
      * @return the sise of the taskregister
      */
     public int getSize() {
@@ -128,6 +134,7 @@ public class TaskRegister implements Serializable {
 
     /**
      * finds the task with that id in tha hashmap and returnes it
+     *
      * @param taskId the id of the task
      * @return the task with that task id, returns null if the task could not be found
      */
@@ -138,6 +145,7 @@ public class TaskRegister implements Serializable {
 
     /**
      * returns the next id and adds 1 to the lastId variable
+     *
      * @return a id that has not been used yet
      */
     private int generateId() {
@@ -147,6 +155,7 @@ public class TaskRegister implements Serializable {
 
     /**
      * Returns the hashmap of the taskregister
+     *
      * @return the hashmap of the taskregister
      */
     public HashMap<Integer, Task> getTaskHashMap() {
@@ -155,6 +164,7 @@ public class TaskRegister implements Serializable {
 
     /**
      * Sets the hashmap of the taskregister
+     *
      * @param taskHashMap the hashMap that is to be set to the register
      */
     public void setTaskHashMap(HashMap<Integer, Task> taskHashMap) {
@@ -163,6 +173,7 @@ public class TaskRegister implements Serializable {
 
     /**
      * creates an array with all task in
+     *
      * @return the array with all tasks
      */
     public Task[] getTaskArray() {
@@ -179,11 +190,11 @@ public class TaskRegister implements Serializable {
         Arrays.sort(taskArray, new Comparator<Task>() {
             @Override
             public int compare(Task first, Task second) {
-                    return first.getMinutesUntil() - second.getMinutesUntil();
-                }
+                return first.getMinutesUntil() - second.getMinutesUntil();
+            }
         });
 
-        for (int i = 0; i < taskArray.length; i++){
+        for (int i = 0; i < taskArray.length; i++) {
             System.out.println("TaskRegister efter sortering minutes until: " + taskArray[i].getMinutesUntil());
         }
 
@@ -192,7 +203,8 @@ public class TaskRegister implements Serializable {
     }
 
     /**
-     *  Creates a string with all tasks
+     * Creates a string with all tasks
+     *
      * @return the string with all tasks
      */
     public String toString() {

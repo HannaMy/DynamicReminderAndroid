@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Keeps track o a intervall with a startTime, from and a endtime, to
+ * Keeps track of an interval with a startTime, from and an endtime, to
  *
  * @author Hanna My Jansson
  * @version 1.3
