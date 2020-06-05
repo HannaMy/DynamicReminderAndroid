@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Creates a menu button for deleting in the toolbar
      *
-     * @param menu
-     * @return
+     * @param menu a standard menu object
+     * @return always returns true
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,12 +92,21 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
                 this.recreate();
                 return super.onOptionsItemSelected(item);
 
     }
 
+
+    /**
+     *
+     */
     private void initiateAdapter() {
 
        /* FileHandler fh =  new FileHandler(this);
