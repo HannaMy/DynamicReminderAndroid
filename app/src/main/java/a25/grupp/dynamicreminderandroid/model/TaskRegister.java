@@ -12,7 +12,7 @@ import java.util.HashMap;
  * This class represents a register where all saved tasks a stored
  *
  * @author Hanna My Jansson
- * @version 1.0
+ * @version 1.3
  */
 public class TaskRegister implements Serializable {
     private HashMap<Integer, Task> taskHashMap;

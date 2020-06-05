@@ -8,7 +8,7 @@ import java.util.Date;
  * Keeps track o a intervall with a startTime, from and a endtime, to
  *
  * @author Hanna My Jansson
- * @version 1.0
+ * @version 1.3
  */
 public class TimeInterval implements Serializable {
     private int from;
