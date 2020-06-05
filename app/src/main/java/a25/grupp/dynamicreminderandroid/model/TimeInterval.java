@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * Keeps track o a intervall with a startTime, from and a endtime, to
+ *
  * @author Hanna My Jansson
  * @version 1.0
  */
@@ -19,20 +20,22 @@ public class TimeInterval implements Serializable {
 
     /**
      * Changes the interval to the given parameters from och to.
+     *
      * @param from the beginning of the interval
-     * @param to the end of the interval
+     * @param to   the end of the interval
      */
     public void setInterval(int from, int to) {
-        if (from<to) {
+        if (from < to) {
             this.from = from;
             this.to = to;
         } else {
-            System.out.println("TimeInterval rad51: false" );
+            System.out.println("TimeInterval rad51: false");
         }
     }
 
     /**
      * Get method for from variable
+     *
      * @return hours from
      */
     public int getFrom() {
@@ -41,6 +44,7 @@ public class TimeInterval implements Serializable {
 
     /**
      * Get method for to variable
+     *
      * @return hours to
      */
     public int getTo() {
@@ -49,6 +53,7 @@ public class TimeInterval implements Serializable {
 
     /**
      * Checks if the date is in the interval
+     *
      * @param date the date to be checked
      * @return true if the given date is in the given time Interval
      */
@@ -70,8 +75,8 @@ public class TimeInterval implements Serializable {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int hour = cal.get(Calendar.HOUR);
-        int hoursUntil = from-hour;
-        if(hoursUntil<0){
+        int hoursUntil = from - hour;
+        if (hoursUntil < 0) {
             hoursUntil += 24;
         }
         return hoursUntil;
@@ -88,8 +93,8 @@ public class TimeInterval implements Serializable {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int hour = cal.get(Calendar.HOUR);
-        int hoursBefore = hour-(to-1);
-        if(hoursBefore<0){
+        int hoursBefore = hour - (to - 1);
+        if (hoursBefore < 0) {
             hoursBefore += 24;
         }
         return hoursBefore;
