@@ -20,6 +20,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeSpan;
  * This class creates the overview view.
  *
  * @author Hanna My Jansson, Hanna Ringkvist,
+ * @version 1.3
  */
 
 public class MainActivity extends AppCompatActivity {

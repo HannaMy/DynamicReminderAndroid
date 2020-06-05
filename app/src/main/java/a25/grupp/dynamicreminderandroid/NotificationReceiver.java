@@ -16,6 +16,7 @@ import java.util.Random;
  * @author Cornelia Sköld, Hanna My Jansson, Minna Röriksson
  * @version 1.3
  */
+
 public class NotificationReceiver extends BroadcastReceiver {
     private final String CHANNEL_ID = "channelReminders";
     private int NOTIFICATION_ID;
@@ -26,7 +27,6 @@ public class NotificationReceiver extends BroadcastReceiver {
     private PendingIntent yesEarlierPendingIntent;
     private PendingIntent noPendingIntent;
     private int taskId;
-
 
     /**
      * This method creates a notification that it will broadcast at a given time
@@ -71,7 +71,6 @@ public class NotificationReceiver extends BroadcastReceiver {
         notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
     }
 
-
     /**
      * This method creates the pending intent of the buttons in the notification
      *
@@ -96,7 +95,6 @@ public class NotificationReceiver extends BroadcastReceiver {
         noIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         noPendingIntent = PendingIntent.getBroadcast(context, 300 + taskId, noIntent, PendingIntent.FLAG_ONE_SHOT);
     }
-
 
     /**
      * This method choose a random greeting out of an array
