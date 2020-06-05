@@ -396,7 +396,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
             } else {
                 TaskRegister taskRegister = TaskRegister.getInstance(getBaseContext());
                 task = taskRegister.getTaskWithId(selectedTaskId);
-                task.setInfo(info);
+                task.setNotes(info);
                 task.setTitle(title);
                 task.setPreferredInterval(preferredInterval);
                 task.setPossibleTimeForExecution(possibleTime);
@@ -471,7 +471,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
             }
 
             EditText editTextInfo = findViewById(R.id.etNotes);
-            editTextInfo.setText(task.getInfo());
+            editTextInfo.setText(task.getNotes());
             //possiblehour
             Spinner dropDownPosEnd = findViewById(R.id.posEndTime);
             Spinner dropDownPosStart = findViewById(R.id.posStartTime);
