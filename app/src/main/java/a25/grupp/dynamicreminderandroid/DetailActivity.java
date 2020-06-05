@@ -93,7 +93,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     }
 
     /**
-     * On click listener for the delete button. Shows a po-up dialog for delete confirmation.
+     * On click listener for the delete button. Shows a pop-up dialog for delete confirmation.
      *
      * @param item The menu item which has been clicked.
      * @return True if the user clicks on "Yes" in the pop-up, else false.
