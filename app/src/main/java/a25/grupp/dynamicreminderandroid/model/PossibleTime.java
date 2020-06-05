@@ -64,8 +64,7 @@ public class PossibleTime implements Serializable {
      * @param to   a LocalTime with the right time for the end of the interval
      */
     public boolean addPossibleHours(int from, int to) {
-        boolean worked = possibleHours.addInterval(from, to);
-        return worked;
+        return possibleHours.addInterval(from, to);
     }
 
     /**
