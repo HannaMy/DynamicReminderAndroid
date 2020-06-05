@@ -6,7 +6,7 @@ import java.io.Serializable;
  * TimeSpan sets the interval beetween how often a task needs to be done.
  *
  * @author Hanna Ringkvist, Hanna My Jansson
- * @version 1.0
+ * @version 1.3
  */
 
 public class TimeSpan implements Serializable {

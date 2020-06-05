@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * This class represents a notification
  * @author Minna Röriksson
- * @version 1.0
+ * @version 1.3
  */
 public class Notification implements Serializable {
     private Task task;
