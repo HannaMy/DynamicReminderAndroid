@@ -11,8 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+
+import java.util.Objects;
+
 import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
+import a25.grupp.dynamicreminderandroid.model.TimeSpan;
 
 /**
  * This class creates the overview view.
@@ -73,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Puts all the saved tasks in a list view in the overview view
+     * Puts all the saved tasks in an listview in the overview view
      */
     private void initiateAdapter() {
         String[] titles;
