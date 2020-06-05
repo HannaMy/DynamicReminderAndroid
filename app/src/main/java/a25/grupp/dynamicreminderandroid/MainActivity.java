@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,37 +78,18 @@ public class MainActivity extends AppCompatActivity {
      * Puts all the saved tasks in an listview in the overview view
      */
     private void initiateAdapter() {
-        //Temporary data
-        String[] titles = {"Water Plants", "Dance", "Clean Bathroom", "Call Hilda"};
-        String[] intervalInfos = {"Every 5 days", "Every 3 day", "Every 1 week", "Every 5 weeks"};
-        int[] times = {4, 2, 1, 4};
-        String[] timeUnits = {"Days left", "Days left", "Weeks left", "Weeks left"};
-        int[] taskIds = {1, 2, 3, 4};
-
+        String[] titles;
         TaskRegister taskRegister = TaskRegister.getInstance(this);
-
         Task[] taskArray = taskRegister.getTaskArray();
-
         AdapterTaskOverview adapterTaskOverview;
 
         if (taskArray.length > 0) {
             int size = taskArray.length;
             titles = new String[size];
-            intervalInfos = new String[size];
-            times = new int[size];
-            timeUnits = new String[size];
-            taskIds = new int[size];
 
             for (int i = 0; i < taskArray.length; i++) {
                 Task task = taskArray[i];
                 titles[i] = task.getTitle();
-                TimeSpan timeSpan = task.getPreferredInterval();
-                if (timeSpan != null) {
-                    intervalInfos[i] = task.getPreferredInterval().toString();
-                    times[i] = task.getTimeUntil().getTime();
-                    timeUnits[i] = "time unit";
-                }
-                taskIds[i] = task.getId();
             }
 
             //Listview
