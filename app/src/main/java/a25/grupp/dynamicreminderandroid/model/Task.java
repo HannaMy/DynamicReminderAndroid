@@ -46,7 +46,7 @@ public class Task implements Comparable<Object>, Serializable {
      * also sets a default value for possible hours
      *
      * @param title             the desired title
-     * @param notes             teh notes for the task
+     * @param notes             the notes for the task
      * @param preferredInterval the interval the user wants to have
      */
     public Task(String title, String notes, TimeSpan preferredInterval) {
@@ -56,7 +56,7 @@ public class Task implements Comparable<Object>, Serializable {
     }
 
     /**
-     * Changes time for the variabel lastPerformed to the current time.
+     * Changes time for the variable lastPerformed to the current time.
      */
     public void markAsDoneNow() {
         Calendar cal = Calendar.getInstance();
