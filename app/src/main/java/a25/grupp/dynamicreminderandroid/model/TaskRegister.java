@@ -61,13 +61,11 @@ public class TaskRegister implements Serializable {
             register = new TaskRegister();
             register.loadTaskRegister(context);
         }
-
         return register;
     }
 
-
     /**
-     * Sets the lasId witch keeps track of witch ids has been used
+     * Sets the lasId which keeps track of which ids has been used
      * only used when loading a saved file
      * @param lastId the value it is to be set to
      */
@@ -92,7 +90,6 @@ public class TaskRegister implements Serializable {
             taskHashMap.put(task.getId(), task);
             fileHandler.saveToFile(this);
         }
-
     }
 
     /**
@@ -101,14 +98,6 @@ public class TaskRegister implements Serializable {
      */
     public void removeWithId(int taskId) {
         taskHashMap.remove(taskId);
-    }
-
-    /**
-     * Removes the task
-     * @param task the task that is to be removed
-     */
-    public void removeTask(Task task) {
-        taskHashMap.remove(task);
     }
 
     /**
@@ -187,14 +176,12 @@ public class TaskRegister implements Serializable {
                 counter++;
             }
         }
-
         Arrays.sort(taskArray, new Comparator<Task>() {
             @Override
             public int compare(Task first, Task second) {
                     return first.getMinutesUntil() - second.getMinutesUntil();
                 }
         });
-
 
         for (int i = 0; i < taskArray.length; i++){
             System.out.println("TaskRegister efter sortering minutes until: " + taskArray[i].getMinutesUntil());
@@ -219,6 +206,4 @@ public class TaskRegister implements Serializable {
         str += "\n--------------------------------";
         return str;
     }
-
-
 }
