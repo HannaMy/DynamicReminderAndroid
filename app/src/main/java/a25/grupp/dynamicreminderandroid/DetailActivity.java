@@ -301,7 +301,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                 "Task deleted!",
                 Toast.LENGTH_LONG)
                 .show();
-
     }
 
     /**
@@ -324,7 +323,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
             e.printStackTrace();
         }
         if (intervalAmount != 0) {
-
             //Log.i("DetailActivity", "The preferred interval is: " + "" + intervalAmount);
         }
 
@@ -385,7 +383,6 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                 }
                 task.setLastPerformed(lastPerformed);
                 task.setNextNotification();
-
 
                 //System.out.println(" lastperformed =" + lastPerformed);
                 TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
