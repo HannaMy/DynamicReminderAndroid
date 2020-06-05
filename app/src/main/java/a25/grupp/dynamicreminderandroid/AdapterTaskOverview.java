@@ -23,18 +23,13 @@ import static a25.grupp.dynamicreminderandroid.R.id;
 import static a25.grupp.dynamicreminderandroid.R.layout;
 
 /**
- * Adapts the data in to tle list view in the overview in mainActivity
+ * Adapts the data in to the list view in the overview in {@link MainActivity}
  *
  * @author Hanna My Jansson, Minna Röriksson, Cornelia Sköld
- * @version 1.0
+ * @version 1.3
  */
 
 public class AdapterTaskOverview extends ArrayAdapter {
-    private String[] titles;
-    private String[] intervalInfos;
-    private int[] times;
-    private String[] timeUnits;
-    private int[] taskIds;
     private Activity mainActivity;
     private Task[] taskArray;
 
@@ -46,26 +41,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
      */
     public AdapterTaskOverview(@NonNull Context context, String[] titles) {
         super(context, layout.task_list_item, id.tvTitle, titles);
-        System.out.println("adaper: construct");
         this.mainActivity = (MainActivity) context;
-    }
-
-    /**
-     * Updates the list with data
-     *
-     * @param titles       of the tasks
-     * @param intervalInfo of the tasks
-     * @param times        of the tasks
-     * @param timeUnits    of the tasks
-     * @param taskIds      of the tasks
-     */
-    public void updateListData(String[] titles, String[] intervalInfo, int[] times, String[] timeUnits, int[] taskIds) {
-        System.out.println("Adapter: update");
-        this.titles = titles;
-        this.intervalInfos = intervalInfo;
-        this.times = times;
-        this.taskIds = taskIds;
-        this.timeUnits = timeUnits;
     }
 
     /**
@@ -161,7 +137,6 @@ public class AdapterTaskOverview extends ArrayAdapter {
                 public void onClick(View v) {
                     Intent detail = new Intent(mainActivity, DetailActivity.class);
                     detail.putExtra("taskId", taskArray[position].getId());
-                    System.out.println("put extra taskid " + taskArray[position].getId());
                     mainActivity.startActivity(detail);
                 }
             });
@@ -178,28 +153,9 @@ public class AdapterTaskOverview extends ArrayAdapter {
                 }
             });
         } else {
-            System.out.println("Adapter: getView " + position);
-            tvAmountTime.setText(String.valueOf(times[position]));
-            tvInterval.setText(intervalInfos[position]);
-            tvTitle.setText(titles[position]);
-            tvTimeUnit.setText(timeUnits[position]);
-
-            btnDetails.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent detail = new Intent(mainActivity, DetailActivity.class);
-                    detail.putExtra("taskId", taskIds[position]);
-                    mainActivity.startActivity(detail);
-                }
-            });
+            System.err.println("AdapterTaskOverview - rad 157 - problem with loading taskregister to adapter");
         }
         return taskListItem;
     }
 
-    /**
-     * Updating the list with tasks
-     */
-    private void updateList() {
-        this.notifyDataSetChanged();
-    }
 }
