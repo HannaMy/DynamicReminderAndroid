@@ -26,21 +26,6 @@ public class Task implements Comparable<Object>, Serializable {
     private Date lastPerformed;
     private Notification nextNotification;
 
-    public Task(int taskId) {
-        id = taskId;
-        setPossibleHours(8, 22);
-    }
-
-    public Task(String title, String notes, TimeSpan preferredInterval, TimeSpan maximum, PossibleTime possibleTimeForExecution) {
-        this.title = title;
-        this.notes = notes;
-        this.preferredInterval = preferredInterval;
-        this.maximum = maximum;
-        this.possibleTimeForExecution = possibleTimeForExecution;
-        setPossibleHours(8, 22);
-        markAsDoneNow();
-    }
-
     /**
      * constructs a task with a title, notes and preferredInterval
      * also sets a default value for possible hours
