@@ -27,26 +27,20 @@ public class PossibleHours implements Serializable {
      *
      * @param from, the beginning of the interval
      * @param to,   object then end of the interval
-     * @return true if it added the interval, otherwise false.
      */
-    public boolean addInterval(Date from, Date to) {
-
-        if (freeIntervalIndex >= MAX_NBR_OF_INTERVALS)
-            return false;
-
+    public void addInterval(Date from, Date to) {
+        if (freeIntervalIndex >= MAX_NBR_OF_INTERVALS) {
+            return;
+        }
         Calendar cal = Calendar.getInstance();
         cal.setTime(from);
-        int fromHour = cal.get(Calendar.HOUR);
-        int timeFrom = fromHour;
+        int timeFrom = cal.get(Calendar.HOUR);
 
         cal.setTime(to);
-        int toHour = cal.get(Calendar.HOUR);
-        int timeTo = toHour;
+        int timeTo = cal.get(Calendar.HOUR);
 
         intervals[freeIntervalIndex].setInterval(timeFrom, timeTo);
-
         whenever = false;
-        return true;
     }
 
     public TimeInterval getPossibleTimeInterval() {
