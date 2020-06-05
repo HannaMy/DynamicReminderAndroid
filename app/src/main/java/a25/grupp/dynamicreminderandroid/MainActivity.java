@@ -25,6 +25,10 @@ import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
 import a25.grupp.dynamicreminderandroid.model.TimeSpan;
 
+/**
+ *
+ * @author Hanna My Jansson
+ */
 public class MainActivity extends AppCompatActivity {
 
     private UpdateThread updateThread;
