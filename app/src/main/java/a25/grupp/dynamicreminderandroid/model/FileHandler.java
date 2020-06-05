@@ -13,7 +13,7 @@ import java.io.ObjectOutputStream;
 /**
  * Stores the data on file
  *
- * @author Minna Röriksson, Hanna My Jansson
+ * @author Minna Röriksson, Hanna My Jansson, Cornelia Sköld
  * @version 1.1
  */
 
@@ -26,23 +26,21 @@ public class FileHandler {
     }
 
     /**
-     * saves a taskregister object to a file
+     * Saves a TaskRegister object to a file
      *
      * @param taskRegister the object that is to be saved
      */
 
-    public void saveToFile(TaskRegister taskRegister) { //Eventuellt måste en lägga till en Context också
+    public void saveToFile(TaskRegister taskRegister) {
         try {
             FileOutputStream fos = context.openFileOutput("taskRegisterFile", Context.MODE_PRIVATE);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
             ObjectOutputStream oos = new ObjectOutputStream(bos);
             oos.writeObject(taskRegister);
             oos.flush();
-
             oos.close();
             bos.close();
             fos.close();
-            // System.out.println("FileHandler: taskregister written: " + taskRegister.toString());
         } catch (FileNotFoundException e) {
             System.out.println("FileHandler: File not found");
             e.printStackTrace();
@@ -52,17 +50,15 @@ public class FileHandler {
     }
 
     /**
-     * reads a taskregister object from a file
+     * Reads a TaskRegister object from a file
      *
-     * @return the taskregister from the file
+     * @return the TaskRegister from the file
      */
     public TaskRegister readFromFile() {
         try {
             FileInputStream fis = context.openFileInput("taskRegisterFile");
-            //BufferedInputStream bis = new BufferedInputStream(fis);
             ObjectInputStream ois = new ObjectInputStream(fis);
             taskRegister = (TaskRegister) ois.readObject();
-           // System.out.println("FileHandler: Task read: " + taskRegister.toString());
             fis.close();
             ois.close();
         } catch (FileNotFoundException e) {
@@ -73,5 +69,4 @@ public class FileHandler {
         }
         return taskRegister;
     }
-
 }
