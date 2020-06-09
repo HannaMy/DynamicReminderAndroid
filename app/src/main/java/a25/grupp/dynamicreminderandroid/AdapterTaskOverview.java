@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.Random;
 
 import a25.grupp.dynamicreminderandroid.model.Task;
+import a25.grupp.dynamicreminderandroid.model.TaskRegister;
 import a25.grupp.dynamicreminderandroid.model.TimeUnit;
 
 import static a25.grupp.dynamicreminderandroid.R.color;
@@ -32,6 +33,7 @@ import static a25.grupp.dynamicreminderandroid.R.layout;
 public class AdapterTaskOverview extends ArrayAdapter {
     private Activity mainActivity;
     private Task[] taskArray;
+    private Context context;
 
     /**
      * Constructor
@@ -42,6 +44,7 @@ public class AdapterTaskOverview extends ArrayAdapter {
     public AdapterTaskOverview(@NonNull Context context, String[] titles) {
         super(context, layout.task_list_item, id.tvTitle, titles);
         this.mainActivity = (MainActivity) context;
+        this.context = context;
     }
 
     /**
@@ -146,6 +149,8 @@ public class AdapterTaskOverview extends ArrayAdapter {
                 public void onClick(View v) {
                     taskArray[position].markAsDoneNow();
                     mainActivity.recreate();
+                    TaskRegister taskRegister = TaskRegister.getInstance(context);
+                    taskRegister.saveRegister(context);
                     Toast.makeText(mainActivity.getApplicationContext(),
                             getToastMessage(),
                             Toast.LENGTH_LONG)

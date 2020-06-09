@@ -14,7 +14,7 @@ import java.util.Random;
  * This class is serializable
  *
  * @author Anni Johansson, Minna Röriksson, Hanna My Jansson, Hanna Ringkvist, Cornelia Sköld
- * @version 1.3
+ * @version 1.4
  */
 public class Task implements Comparable<Object>, Serializable {
     private int id;
@@ -48,6 +48,7 @@ public class Task implements Comparable<Object>, Serializable {
         Date dateNow = cal.getTime();
         lastPerformed = dateNow;
         setNextNotification();
+
     }
 
     /**
@@ -73,8 +74,13 @@ public class Task implements Comparable<Object>, Serializable {
             questions = getQuestionsSerious();
         }
         Random rand = new Random();
-        int randomIndex = rand.nextInt(5);
+        int randomIndex = rand.nextInt(questions.length);
         String randomPhase = questions[randomIndex];
+        while((randomPhase.length() + title.length()) > 40 && (title.length() < 25)){
+             randomIndex = rand.nextInt(questions.length);
+             randomPhase = questions[randomIndex];
+        }
+
         String message = randomPhase + " " + title + "?";
         nextNotification = new Notification(this, timeForNotification, message);
         return nextNotification;
@@ -86,12 +92,18 @@ public class Task implements Comparable<Object>, Serializable {
      * @return String[]
      */
     private String[] getQuestionHappy() {
-        String[] happyQuestion = {"Isn't this the perfect time to",
+        String[] happyQuestion = {
+                "Isn't this the perfect time to",
                 "Sunshine, maybe it's time to",
                 "Can you please make time to",
                 "It's wonderful if you can make time to",
                 "Wow, isn't it time for you to",
-                "Friendly reminder, have you remembered to"};
+                "Friendly reminder, have you remembered to",
+                "It is time to",
+                "Lovely day to",
+                "Have you remembered to",
+                "Today is the day to",
+                "how´s it going with the task to"};
 
         return happyQuestion;
     }
@@ -224,13 +236,13 @@ public class Task implements Comparable<Object>, Serializable {
             timeUntil = time;
         } else {
             int timeUntilMINUTES = getMinutesUntil();
-            if (timeUntilMINUTES <= 60 * 23 && timeUntilMINUTES >= -60 * 23) {
+            if (timeUntilMINUTES < 60 * 24 && timeUntilMINUTES > -60 * 24) {
                 timeUnit = TimeUnit.hour;
-            } else if (timeUntilMINUTES <= 60 * 24 * 6 && timeUntilMINUTES > -60 * 24 * 7 && timeUnit.equals(TimeUnit.week)) {
+            } else if (timeUntilMINUTES < 60 * 24 * 7 && timeUntilMINUTES > -60 * 24 * 7 && timeUnit.equals(TimeUnit.week)) {
                 timeUnit = TimeUnit.day;
-            } else if (timeUntilMINUTES <= 60 * 24 * 29 && timeUntilMINUTES > -60 * 24 * 30 && (timeUnit.equals(TimeUnit.month) || timeUnit.equals(TimeUnit.year))) {
+            } else if (timeUntilMINUTES < 60 * 24 * 30 && timeUntilMINUTES > -60 * 24 * 30 && (timeUnit.equals(TimeUnit.month) || timeUnit.equals(TimeUnit.year))) {
                 timeUnit = TimeUnit.day;
-            } else if (timeUntilMINUTES <= 60 * 24 * 364 && timeUntilMINUTES > -60 * 24 * 365 && timeUnit.equals(TimeUnit.year)) {
+            } else if (timeUntilMINUTES < 60 * 24 * 365 && timeUntilMINUTES > -60 * 24 * 365 && timeUnit.equals(TimeUnit.year)) {
                 timeUnit = TimeUnit.month;
             }
 
