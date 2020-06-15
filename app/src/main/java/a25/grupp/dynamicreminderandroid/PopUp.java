@@ -110,7 +110,7 @@ public class PopUp extends AppCompatDialogFragment {
      *
      * @param context
      */
-    public boolean toLongTitle(final Context context, final int taskId, final DetailActivity detailActivity ) {
+    public void toLongTitle(final Context context, final int taskId, final DetailActivity detailActivity ) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("To long title");
         builder.setMessage("Your title might be a little bit long. Sometimes just the beginning will be shown. Do you wish to save anyway?");
@@ -128,7 +128,7 @@ public class PopUp extends AppCompatDialogFragment {
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-        return saveTrue;
+
     }
 
     /**
