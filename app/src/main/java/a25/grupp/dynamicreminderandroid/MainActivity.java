@@ -1,8 +1,15 @@
 package a25.grupp.dynamicreminderandroid;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,8 +19,10 @@ import android.view.View;
 import android.widget.ListView;
 
 
+import java.util.Calendar;
 import java.util.Objects;
 
+import a25.grupp.dynamicreminderandroid.model.Notification;
 import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
 import a25.grupp.dynamicreminderandroid.model.TimeSpan;
@@ -26,7 +35,7 @@ import a25.grupp.dynamicreminderandroid.model.TimeSpan;
  */
 
 public class MainActivity extends AppCompatActivity {
-
+private AdapterTaskOverview adapterTaskOverview;
     /**
      * Method is called when the activity is created.
      *
@@ -49,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         initiateAdapter();
+        initiateRefresh();
     }
 
     /**
@@ -71,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
      * @return returns a value depending on the parent
      */
     public boolean onOptionsItemSelected(MenuItem item) {
-        this.recreate();
+        //this.recreate(); försöker få det smidigare -- Hanna My
+        adapterTaskOverview.notifyDataSetChanged();
         return super.onOptionsItemSelected(item);
 
     }
@@ -83,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         String[] titles;
         TaskRegister taskRegister = TaskRegister.getInstance(this);
         Task[] taskArray = taskRegister.getTaskArray();
-        AdapterTaskOverview adapterTaskOverview;
+
 
         if (taskArray.length > 0) {
             int size = taskArray.length;
@@ -105,6 +116,19 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("empty");
         }
     }
+
+    private void initiateRefresh(){
+        final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapterTaskOverview.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+    }
+
 }
 
 

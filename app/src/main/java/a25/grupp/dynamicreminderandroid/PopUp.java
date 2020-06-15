@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatDialogFragment;
 
+import java.sql.Date;
+
 /**
  * this class creates a PopUp window when a user tries to do something in the application
  * that the user needs to be warned about, or does something that is not possible to do
@@ -102,6 +104,31 @@ public class PopUp extends AppCompatDialogFragment {
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+    /**
+     * Creates a popup-window when the user tries to save a task without adding a title to the task
+     *
+     * @param context
+     */
+    public boolean toLongTitle(final Context context, final int taskId, final DetailActivity detailActivity ) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("To long title");
+        builder.setMessage("Your title might be a little bit long. Sometimes just the beginning will be shown. Do you wish to save anyway?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+              detailActivity.saveTaskOverride(taskId);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        return saveTrue;
     }
 
     /**

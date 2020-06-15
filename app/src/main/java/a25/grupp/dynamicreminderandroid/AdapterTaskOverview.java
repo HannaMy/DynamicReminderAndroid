@@ -1,8 +1,13 @@
 package a25.grupp.dynamicreminderandroid;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,8 +18,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.Random;
 
+import a25.grupp.dynamicreminderandroid.model.Notification;
 import a25.grupp.dynamicreminderandroid.model.Task;
 import a25.grupp.dynamicreminderandroid.model.TaskRegister;
 import a25.grupp.dynamicreminderandroid.model.TimeUnit;
@@ -148,7 +155,8 @@ public class AdapterTaskOverview extends ArrayAdapter {
                 @Override
                 public void onClick(View v) {
                     taskArray[position].markAsDoneNow();
-                    mainActivity.recreate();
+                    notifyDataSetChanged();
+                    addNotification(mainActivity,taskArray[position].getNextNotification(),taskArray[position].getId());
                     TaskRegister taskRegister = TaskRegister.getInstance(context);
                     taskRegister.saveRegister(context);
                     Toast.makeText(mainActivity.getApplicationContext(),
@@ -163,4 +171,44 @@ public class AdapterTaskOverview extends ArrayAdapter {
         return taskListItem;
     }
 
+
+    /**
+     * This method creates an intent for a scheduled {@link Notification} using a {@link Calendar ) object.
+     *
+     * @param context      The context
+     * @param notification The selected notificaiton to be scheduled.
+     * @param taskId       The id of the {@link Task} connected to the {@link Notification}
+     */
+    private void addNotification(Context context, Notification notification, int taskId) {
+        Calendar nextNotification = notification.getCalendarTimeForNotification();
+        Intent intent = new Intent(context, NotificationReceiver.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("message", notification.getMessage());
+        intent.putExtra("taskId", taskId);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mainActivity.getApplicationContext(), taskId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) mainActivity.getSystemService(Context.ALARM_SERVICE);
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, nextNotification.getTimeInMillis(), pendingIntent);
+        System.out.println("Time until next notification = " + nextNotification.getTimeInMillis());
+        createNotificationChannel();
+    }
+
+    /**
+     * Checks if the device runs on Android 8.0 and above (Oreo) and then creates the notification channel for
+     * the notifications in the category of reminders.
+     */
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String CHANNEL_ID = "channelReminders";
+            CharSequence name = "Reminders channel";
+            String description = "Includes all the reminders";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            notificationChannel.setDescription(description);
+
+            NotificationManager notificationManager = (NotificationManager) mainActivity.getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+    }
 }

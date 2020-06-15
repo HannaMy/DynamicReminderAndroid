@@ -330,8 +330,10 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         } else if (intervalAmount == 0) {
             PopUp popUp = new PopUp();
             popUp.invalidInterval(DetailActivity.this);
+        } else if (title.length() > 18) {
+            PopUp popUp = new PopUp();
+            popUp.toLongTitle(DetailActivity.this, taskId, this);
         } else {
-
             // Creates a new {@link Task} if the task id is 0 or else updates the existing one with the information from the detail view.
             if (selectedTaskId <= 0) {
                 task = new Task(title, info, preferredInterval);
@@ -370,6 +372,105 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                     .show();
         }
     }
+
+    /**
+     * The {@link Task} is saved with all the data from the details view.
+     * This method does ot check for the data to be correct
+     *
+     * @param taskId The id for the {@link Task}.
+     */
+    public void saveTaskOverride(int taskId) {
+        Task task = null;
+        int selectedTaskId = taskId;
+
+        EditText editTextTitle = findViewById(R.id.etTitle);
+        String title = editTextTitle.getText().toString();
+
+        //Gets the number of the preferred interval
+        int intervalAmount = 0;
+        try {
+            EditText editTextInterval = findViewById(R.id.etTimeInterval);
+            intervalAmount = Integer.parseInt(editTextInterval.getText().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Gets the correct TimeUnit from the dropdown menu.
+        Spinner dropDownTU = findViewById(R.id.dropDown_timeUnit);
+        TimeUnit timeUnit = TimeUnit.hour;
+
+        TextView textView = (TextView) dropDownTU.getSelectedView();
+        String result = textView.getText().toString();
+
+        switch (result) {
+            case "hours":
+                timeUnit = TimeUnit.hour;
+                break;
+            case "days":
+                timeUnit = TimeUnit.day;
+                break;
+            case "weeks":
+                timeUnit = TimeUnit.week;
+                break;
+            case "months":
+                timeUnit = TimeUnit.month;
+                break;
+            case "years":
+                timeUnit = TimeUnit.year;
+                break;
+        }
+
+        // Gets the notes
+        EditText editTextInfo = findViewById(R.id.etNotes);
+        String info = editTextInfo.getText().toString();
+        TimeSpan preferredInterval = new TimeSpan(intervalAmount, timeUnit);
+
+        // Handles possibleTime depending on choices in dropdown menus
+        PossibleTime possibleTime = new PossibleTime();
+        possibleTime.setPossibleHours(possibleStartTime, possibleEndTime);
+
+        // Checks if title and interval are correct or else shows pop-up dialogs accordingly
+        Intent save = new Intent(DetailActivity.this, MainActivity.class);
+
+        // Creates a new {@link Task} if the task id is 0 or else updates the existing one with the information from the detail view.
+        if (selectedTaskId <= 0) {
+            task = new Task(title, info, preferredInterval);
+            task.setPossibleTimeForExecution(possibleTime);
+
+            if (lastPerformed == null) {
+                Calendar calendar = Calendar.getInstance();
+                lastPerformed = calendar.getTime();
+            }
+            task.setLastPerformed(lastPerformed);
+            task.setNextNotification();
+
+            TaskRegister.getInstance(getBaseContext()).addTask(task, getBaseContext());
+            int id = task.getId();
+            addNotification(getApplicationContext(), task.getNextNotification(), id);
+
+        } else {
+            TaskRegister taskRegister = TaskRegister.getInstance(getBaseContext());
+            task = taskRegister.getTaskWithId(selectedTaskId);
+            task.setNotes(info);
+            task.setTitle(title);
+            task.setPreferredInterval(preferredInterval);
+            task.setPossibleTimeForExecution(possibleTime);
+            task.setLastPerformed(lastPerformed);
+            task.setNextNotification();
+            addNotification(getApplicationContext(), task.getNextNotification(), taskId);
+            taskRegister.saveRegister(DetailActivity.this);
+            Log.i("tag", "Size of taskregister: " + "" + TaskRegister.getInstance(getBaseContext()).getSize());
+        }
+
+        startActivity(save);
+        finish();
+        Toast.makeText(this,
+                "Task saved!",
+                Toast.LENGTH_LONG)
+                .show();
+
+    }
+
 
     /**
      * Gets the task id from the intent and returns it.
