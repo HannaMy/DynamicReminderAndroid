@@ -247,7 +247,7 @@ public class Task implements Comparable<Object>, Serializable {
             }
 
             //calculates the time left of the task and returns it in the unit specified in preferredInterval.
-            if (timeUntilMINUTES < 0) {
+            if (timeUntilMINUTES <= 0) {
                 switch (timeUnit) {
                     case hour:
                         timeUntil = timeUntilMINUTES / 60;

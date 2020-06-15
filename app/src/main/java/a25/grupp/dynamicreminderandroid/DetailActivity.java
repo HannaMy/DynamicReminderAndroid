@@ -250,7 +250,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         Calendar cal = Calendar.getInstance();
-                        cal.set(year, month, dayOfMonth, hourOfDay, minute);
+                        cal.set(year, month, dayOfMonth, hourOfDay, minute,0);
                         lastPerformed = cal.getTime();
                         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy \n HH:mm");
                         String strDate = formatDate.format(lastPerformed);
